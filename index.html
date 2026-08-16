@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0f172a">
 <link rel="manifest" href="manifest.webmanifest">
-<title>Futbolcu Gelişim v31</title>
+<title>Futbolcu Gelişim V33</title>
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#f3f5f7;color:#111827}
 .app{max-width:520px;margin:auto;min-height:100vh;padding-bottom:78px}
@@ -271,47 +271,93 @@ textarea{width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius
 <meta name="apple-mobile-web-app-title" content="Futbolcu Gelişim">
 
 
-<style id="v32-motion-style">
-.motionDemo{margin:14px 0 8px;background:#07111f;border-radius:18px;overflow:hidden;box-shadow:0 8px 24px #0002;border:1px solid #1e3552}
-.motionTop{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:10px 12px;background:#0b1728}
-.motionTag{font-size:11px;font-weight:800;letter-spacing:.04em;padding:6px 9px;border-radius:999px;background:#17304e;color:#e8f3ff}
-.motionTag.ok{background:#123d2c;color:#bff5d6}
-.motionPitch{position:relative;aspect-ratio:16/9;background:linear-gradient(90deg,#155f39,#176b40);overflow:hidden}
-.motionPitch:before{content:"";position:absolute;inset:7%;border:2px solid #ffffffaa;border-radius:6px}
-.motionPitch:after{content:"";position:absolute;left:50%;top:7%;bottom:7%;border-left:2px solid #ffffff88}
-.mPlayer,.mBall,.mCone,.mTarget{position:absolute;z-index:3;transform:translate(-50%,-50%)}
-.mPlayer{width:30px;height:30px;border-radius:50%;background:#f7d046;border:4px solid #10223b;box-shadow:0 3px 8px #0007}
-.mPlayer:after{content:"";position:absolute;width:12px;height:18px;background:#f7d046;left:5px;top:25px;border-radius:5px}
-.mBall{width:15px;height:15px;border-radius:50%;background:white;border:2px solid #111;box-shadow:0 2px 5px #0008}
-.mCone{width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:18px solid #ff7a18}
-.mTarget{width:28px;height:28px;border:3px dashed #fff;border-radius:50%}
-.mArrow{position:absolute;height:3px;background:#fff9;transform-origin:left center;z-index:2}
-.mArrow:after{content:"";position:absolute;right:-2px;top:-5px;border-left:9px solid #fff9;border-top:6px solid transparent;border-bottom:6px solid transparent}
-@keyframes ballLR{0%,100%{left:43%;top:58%}50%{left:57%;top:58%}}
-@keyframes ballSole{0%{left:54%;top:60%}50%{left:46%;top:66%}100%{left:54%;top:60%}}
-@keyframes ballInOut{0%,100%{left:44%;top:62%}25%{left:52%;top:55%}50%{left:59%;top:63%}75%{left:51%;top:69%}}
-@keyframes ballV{0%{left:58%;top:62%}45%{left:48%;top:70%}100%{left:39%;top:54%}}
-@keyframes slalomBall{0%{left:20%;top:66%}25%{left:38%;top:43%}50%{left:54%;top:67%}75%{left:70%;top:43%}100%{left:84%;top:62%}}
-@keyframes passBall{0%{left:28%;top:62%}48%{left:78%;top:52%}52%{left:78%;top:52%}100%{left:28%;top:62%}}
-@keyframes oneTouch{0%{left:25%;top:60%}50%{left:74%;top:60%}100%{left:25%;top:60%}}
-@keyframes feetMove{0%,100%{left:30%;top:63%}50%{left:70%;top:63%}}
-@keyframes sideMove{0%,100%{left:35%;top:58%}50%{left:65%;top:58%}}
-@keyframes burstMove{0%{left:24%;top:64%}100%{left:78%;top:42%}}
-@keyframes changeMove{0%{left:20%;top:65%}48%{left:52%;top:48%}100%{left:78%;top:68%}}
-@keyframes ballSprint{0%{left:23%;top:64%}100%{left:80%;top:43%}}
-.motionDemo.play .inside{animation:ballLR 1.25s ease-in-out infinite}
-.motionDemo.play .sole{animation:ballSole 1.4s ease-in-out infinite}
-.motionDemo.play .inout{animation:ballInOut 1.7s ease-in-out infinite}
-.motionDemo.play .vdrag{animation:ballV 1.5s ease-in-out infinite}
-.motionDemo.play .slalom{animation:slalomBall 3s linear infinite}
-.motionDemo.play .pass{animation:passBall 1.7s ease-in-out infinite}
-.motionDemo.play .onetouch{animation:oneTouch 1.2s linear infinite}
-.motionDemo.play .feet{animation:feetMove 1.8s ease-in-out infinite}
-.motionDemo.play .side{animation:sideMove 1.4s ease-in-out infinite}
-.motionDemo.play .burst{animation:burstMove 1.7s ease-in-out infinite}
-.motionDemo.play .change{animation:changeMove 2.1s ease-in-out infinite}
-.motionDemo.play .ballsprint{animation:ballSprint 2s linear infinite}
-.motionHint{padding:9px 12px 12px;color:#c7d5e7;font-size:12px;background:#0b1728}
+<style id="v33-ui">
+:root{--v33bg:#050b12;--v33card:#0b1622;--v33card2:#101d2b;--v33line:#26394b;--v33green:#77e21d;--v33muted:#9fb0c1}
+body{background:var(--v33bg);color:#f5f8fb}
+.app{max-width:560px;background:linear-gradient(180deg,#06101a 0,#050b12 100%)}
+header{background:linear-gradient(160deg,#07111d,#0b1b2b);border-radius:0 0 24px 24px;border-bottom:1px solid #1d3448}
+.brand{letter-spacing:.02em}.sub{color:#a9bac9}
+.hero{background:linear-gradient(145deg,#101e2c,#0d1722);border:1px solid #26394b}
+main{padding:0 14px}
+.card{background:var(--v33card);color:#f5f8fb;border:1px solid var(--v33line);box-shadow:0 9px 30px #0005}
+.small{color:var(--v33muted)}
+.secondary{background:#162536;color:#e7edf4;border:1px solid #2a4155}
+button{background:#172536}.trainerGenerate,.proGenerate{background:linear-gradient(90deg,#4fbf12,#87e52d);color:#081206}
+.pill{background:#17361e;color:#9df153;border:1px solid #315e2e}
+.bar{background:#253443}.bar span{background:linear-gradient(90deg,#4fbf12,#8be52f)}
+.exercise{border-bottom-color:#243445}.adaptiveBadge{color:#94ec55}
+.nav{background:#07101a;border-top-color:#22374a}.nav button{color:#8799aa}.nav button.active{color:var(--v33green)}
+.step{background:#101d2a}.step.active{outline-color:var(--v33green);background:#132718}
+.info{color:#eaf0f6}.good{background:#11281b}.bad{background:#32171d}.tip{background:#12243a}
+input,select{background:#0b1622;color:#fff;border-color:#304255}
+.tag{background:#203d16;color:#9bef54}
+.adaptiveHero{border-color:#315b2a;background:linear-gradient(145deg,#0d1b26,#11251a)}
+.progressExplain,.testHero,.aiHero,.trainerHero{border-color:#2d4559}
+.homeV33Intro{padding:17px;border-radius:18px;background:linear-gradient(120deg,#102315,#0b1724);border:1px solid #345b2a;margin-bottom:14px}
+.homeV33Intro h2{margin:4px 0 6px;font-size:24px}.homeV33Intro p{margin:0;color:#aebccb;line-height:1.45}
+.homeQuick{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+.homeQuick button{min-height:88px;text-align:left;background:#0f1b28;border:1px solid #26394b}
+.homeQuick b{display:block;font-size:15px;margin:4px 0}.homeQuick span{font-size:26px}
+.homePlanSummary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.homePlanSummary div{background:#0e1b28;border:1px solid #20364a;border-radius:14px;padding:10px;text-align:center}
+.homePlanSummary b{display:block;color:#8ce73b;font-size:17px}.homePlanSummary small{color:#91a5b7}
+#workouts{display:none!important}
+.libraryHead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:16px 0 10px}
+.libraryHead h2{margin:0}
+.libraryFilters{display:flex;gap:7px;overflow:auto;padding:2px 0 10px;scrollbar-width:none}
+.libraryFilters button{white-space:nowrap;background:#101d2a;border:1px solid #26394b;color:#d8e2eb;padding:9px 12px}
+.libraryFilters button.active{background:#285414;color:#a9f56c;border-color:#5a9e32}
+.libraryGrid{display:grid;grid-template-columns:1fr;gap:12px}
+.libraryCard{overflow:hidden;border-radius:18px;background:#0b1622;border:1px solid #2b4053}
+.libraryVisual{height:150px;position:relative;overflow:hidden;background:linear-gradient(#79a8cf 0 46%,#237243 46% 100%)}
+.libraryVisual:after{content:"";position:absolute;left:7%;right:7%;bottom:17%;height:2px;background:#ffffff75;box-shadow:0 -52px #ffffff25}
+.libHeroPlayer{position:absolute;left:28%;bottom:22px;font-size:66px;filter:drop-shadow(0 7px 5px #0007);transform:rotate(-7deg)}
+.libHeroBall{position:absolute;left:54%;bottom:29px;font-size:27px;filter:drop-shadow(0 5px 4px #0007)}
+.libHeroExtra{position:absolute;right:7%;bottom:28px;font-size:44px}
+.libraryCardBody{padding:13px}.libraryCardTitle{display:flex;justify-content:space-between;gap:10px;align-items:start}
+.libraryCardTitle b{font-size:17px}.libraryCardTitle span{color:#8ce73b;font-size:12px;white-space:nowrap}
+.libraryTags{display:flex;gap:5px;flex-wrap:wrap;margin:8px 0}
+.libraryTags em{font-style:normal;font-size:10px;padding:5px 7px;background:#122336;color:#9eb3c4;border-radius:99px}
+.libraryOpen{width:100%;background:linear-gradient(90deg,#4dbb12,#7cdb26);color:#071107}
+.libraryEmpty{text-align:center;padding:25px;color:#9fb0c1}
+.v33Scene{margin:14px 0 10px;height:350px;border-radius:20px;position:relative;overflow:hidden;border:1px solid #345267;background:linear-gradient(#82afd3 0 48%,#247344 48%);box-shadow:0 12px 32px #0007}
+.v33Scene:before{content:"";position:absolute;inset:49% 4% 4%;border:2px solid #ffffff69;border-radius:6px}
+.v33Scene .sceneLabel{top:10px;left:10px;background:#07111de8;border:1px solid #355067}
+.v33Scene .sceneBadge{background:#5ecb17;color:#071107}
+.v33Scene .coach{top:72px;transform:translateX(-50%) scale(1.12)}
+.v33Scene .ball{bottom:46px}
+.v33Scene .wall{right:18px;bottom:51px;width:34px;height:170px}
+.v33Scene .cone{bottom:48px}
+.v33Scene .caption{background:#061019df;border:1px solid #355067}
+.v33Scene .targetGoal{position:absolute;right:20px;bottom:52px;width:100px;height:80px;border:5px solid #e7edf4;border-bottom:0;z-index:2}
+.v33Scene .defender{position:absolute;right:19%;bottom:54px;font-size:76px;z-index:3;filter:drop-shadow(0 6px 6px #0008)}
+.v33Scene .directionPath{position:absolute;left:20%;right:17%;bottom:84px;border-top:4px dashed #fff;transform:rotate(-8deg);opacity:.85;z-index:3}
+.v33Scene .directionPath:after{content:"➤";position:absolute;right:-10px;top:-20px;font-size:32px;color:#8be52f}
+.v33Scene.vdrag .ball{animation:v33VBall 1.7s infinite ease-in-out}.v33Scene.vdrag .legR{animation:v33VLeg 1.7s infinite ease-in-out}
+.v33Scene.rightpass .ball{animation:v33PassRight 1.45s infinite ease-in-out}.v33Scene.rightpass .legR{animation:kick 1.45s infinite}
+.v33Scene.leftpass .ball{animation:v33PassLeft 1.45s infinite ease-in-out}.v33Scene.leftpass .legL{animation:v33LeftKick 1.45s infinite}
+.v33Scene.controlpass .ball{animation:v33Control 1.8s infinite ease-in-out}.v33Scene.controlpass .coach{animation:v33ControlBody 1.8s infinite ease-in-out}
+.v33Scene.onetouch .ball{animation:v33OneTouch 1.2s infinite linear}.v33Scene.onetouch .legR{animation:kick 1.2s infinite}
+.v33Scene.inside .ball{animation:insideBall 1.15s infinite ease-in-out}.v33Scene.inside .legL{animation:insideL 1.15s infinite ease-in-out}.v33Scene.inside .legR{animation:insideR 1.15s infinite ease-in-out}
+.v33Scene.sole .ball{animation:soleBall 1.35s infinite ease-in-out}.v33Scene.sole .legL{animation:soleL 1.35s infinite ease-in-out}.v33Scene.sole .legR{animation:soleR 1.35s infinite ease-in-out}
+.v33Scene.inout .ball{animation:inoutBall 1.05s infinite ease-in-out}.v33Scene.inout .legR{animation:inoutLeg 1.05s infinite ease-in-out}
+.v33Scene.slalom .coach{animation:v33SlalomBody 2.8s infinite ease-in-out}.v33Scene.slalom .ball{animation:v33SlalomBall 2.8s infinite ease-in-out}
+.v33Scene.sidefeet .coach{animation:sideBody 1.2s infinite ease-in-out}.v33Scene.sidefeet .legL{animation:sideL .6s infinite alternate}.v33Scene.sidefeet .legR{animation:sideR .6s infinite alternate}
+.v33Scene.ready .coach{top:94px;animation:readyBounce 1.2s infinite ease-in-out}.v33Scene.ready .torso{transform:rotate(18deg)}
+.v33Scene.burst .coach{animation:burstRun 1.5s infinite cubic-bezier(.2,.7,.2,1)}.v33Scene.burst .legL{animation:runL .32s infinite alternate}.v33Scene.burst .legR{animation:runR .32s infinite alternate}
+.v33Scene.change .coach{animation:changeDir 2s infinite ease-in-out}.v33Scene.change .legL{animation:runL .34s infinite alternate}.v33Scene.change .legR{animation:runR .34s infinite alternate}
+.v33Scene.ballsprint .coach{animation:ballSprintBody 1.7s infinite ease-in-out}.v33Scene.ballsprint .ball{animation:ballSprintBall 1.7s infinite ease-in-out}
+@keyframes v33VBall{0%{transform:translate(55px,0)}42%{transform:translate(0,35px)}100%{transform:translate(-58px,-10px)}} 
+@keyframes v33VLeg{0%,100%{transform:rotate(-5deg)}42%{transform:rotate(-28deg)}65%{transform:rotate(18deg)}}
+@keyframes v33PassRight{0%{transform:translateX(-38px)}52%{transform:translate(160px,-32px)}100%{transform:translateX(-38px)}}
+@keyframes v33PassLeft{0%{transform:translateX(35px)}52%{transform:translate(160px,-28px)}100%{transform:translateX(35px)}}
+@keyframes v33LeftKick{0%,100%{transform:rotate(5deg)}35%{transform:rotate(32deg)}60%{transform:rotate(-12deg)}}
+@keyframes v33Control{0%{transform:translate(155px,-25px)}46%{transform:translate(5px,0)}68%{transform:translate(-18px,8px)}100%{transform:translate(145px,-25px)}}
+@keyframes v33ControlBody{0%,100%{transform:translateX(-50%) rotate(0)}50%{transform:translateX(-50%) rotate(-6deg)}}
+@keyframes v33OneTouch{0%{transform:translateX(-40px)}50%{transform:translateX(165px)}100%{transform:translateX(-40px)}}
+@keyframes v33SlalomBody{0%{left:25%}25%{left:40%}50%{left:54%}75%{left:68%}100%{left:80%}}
+@keyframes v33SlalomBall{0%{left:23%;transform:translateY(0)}25%{left:39%;transform:translateY(-26px)}50%{left:54%;transform:translateY(18px)}75%{left:68%;transform:translateY(-23px)}100%{left:81%;transform:translateY(10px)}}
+@media(max-width:390px){.v33Scene{height:320px}.homeQuick{grid-template-columns:1fr 1fr}.libraryVisual{height:135px}}
 </style>
 
 </head>
@@ -371,37 +417,64 @@ textarea{width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius
 </header>
 
 <main>
+
 <section id="home" class="page active">
-<div class="card adaptiveHero">
-  <div class="row">
-    <div>
-      <div class="tag">BUGÜNÜN PROGRAMI</div>
-      <h2 style="margin:8px 0 2px">Sana Göre Hazırlandı</h2>
-      <div class="small" id="planDesc"></div>
+  <div class="homeV33Intro">
+    <div class="tag">FUTBOLCU GELİŞİM V33</div>
+    <h2>Bugünkü gelişimine odaklan.</h2>
+    <p>Ana sayfa artık sade. İstersen kişisel programını başlat, istersen Antrenmanlar bölümünden çalışmanı kendin seç.</p>
+    <div class="homeQuick">
+      <button onclick="openTrainingLibrary()"><span>⚽</span><b>Antrenmanlar</b><small>Tüm çalışma kütüphanesi</small></button>
+      <button onclick="show('player',document.querySelector('.nav button:nth-child(1)'))"><span>👤</span><b>Oyuncu Profilim</b><small>Yaş, mevki ve bilgiler</small></button>
     </div>
-    <span class="pill" id="todayProgressionPill">Temel</span>
   </div>
-  <div id="adaptiveReason" class="adaptiveReason"></div>
-  <div class="sessionStructure" id="sessionStructure"></div>
-  <div id="workouts"></div>
-  <button class="trainerGenerate" onclick="startAdaptiveToday()">▶ Bugünkü Antrenmanı Başlat</button>
-</div>
 
-<div class="card">
-  <div class="row"><div><h2 style="margin:0">⚡ Bugün nasılsın?</h2><div class="small">Programın yoğunluğu buna göre değişir.</div></div><span class="pill" id="readinessBadge">Normal</span></div>
-  <div class="readinessGrid">
-    <button onclick="setReadiness('fresh')">🟢 Dinç</button>
-    <button onclick="setReadiness('normal')">🟡 Normal</button>
-    <button onclick="setReadiness('tired')">🔴 Yorgun</button>
+  <div class="card adaptiveHero">
+    <div class="row">
+      <div>
+        <div class="tag">BUGÜNÜN KİŞİSEL PROGRAMI</div>
+        <h2 style="margin:8px 0 2px">Sana Göre Hazırlandı</h2>
+        <div class="small" id="planDesc"></div>
+      </div>
+      <span class="pill" id="todayProgressionPill">Temel</span>
+    </div>
+    <div id="adaptiveReason" class="adaptiveReason"></div>
+    <div class="homePlanSummary">
+      <div><b id="homeDrillCount">3</b><small>çalışma</small></div>
+      <div><b id="homeMainMinutes">0</b><small>ana bölüm</small></div>
+      <div><b id="homeTotalMinutes">0</b><small>toplam dk</small></div>
+    </div>
+    <div class="sessionStructure" id="sessionStructure"></div>
+    <div id="workouts"></div>
+    <button class="trainerGenerate" onclick="startAdaptiveToday()">▶ Kişisel Programı Başlat</button>
+    <div class="small" style="margin-top:9px">Çalışma isimleri ana ekranda gösterilmez; program başladığında sırayla açılır.</div>
   </div>
-  <div id="readinessNote" class="small" style="margin-top:8px"></div>
-</div>
 
-<div class="card progressExplain">
-  <h2>📈 Gelişim Yolun</h2>
-  <div class="progressSteps" id="progressSteps"></div>
-  <div class="small" id="progressExplainText"></div>
-</div>
+  <div class="card">
+    <div class="row"><div><h2 style="margin:0">⚡ Bugün nasılsın?</h2><div class="small">Programın yoğunluğu buna göre değişir.</div></div><span class="pill" id="readinessBadge">Normal</span></div>
+    <div class="readinessGrid">
+      <button onclick="setReadiness('fresh')">🟢 Dinç</button>
+      <button onclick="setReadiness('normal')">🟡 Normal</button>
+      <button onclick="setReadiness('tired')">🔴 Yorgun</button>
+    </div>
+    <div id="readinessNote" class="small" style="margin-top:8px"></div>
+  </div>
+
+  <div class="card progressExplain">
+    <h2>📈 Gelişim Yolun</h2>
+    <div class="progressSteps" id="progressSteps"></div>
+    <div class="small" id="progressExplainText"></div>
+  </div>
+</section>
+
+<section id="library" class="page">
+  <div class="libraryHead">
+    <div><div class="tag">TÜM KÜTÜPHANE</div><h2>Antrenmanlar</h2></div>
+    <span class="pill" id="libraryCount">16 çalışma</span>
+  </div>
+  <div class="small" style="margin-bottom:10px">Kategoriyi seç, istediğin çalışmayı aç ve hareketleri adım adım uygula.</div>
+  <div class="libraryFilters" id="libraryFilters"></div>
+  <div class="libraryGrid" id="libraryGrid"></div>
 </section>
 
 <section id="detail" class="page"><div class="card">
@@ -796,7 +869,7 @@ textarea{width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius
 
 </main>
 
-<div class="nav" id="nav"><div class="navin"><button class="active" onclick="show('home',this)">🏠<br>Ana</button><button onclick="show('player',this)">👤<br>Oyuncum</button><button onclick="show('growth',this)">📈<br>Gelişim</button><button onclick="show('coach',this)">🤖<br>Koç</button><button onclick="show('pro',this)">⭐<br>PRO</button></div></div>
+<div class="nav" id="nav"><div class="navin"><button class="active" onclick="show('home',this)">🏠<br>Ana</button><button onclick="openTrainingLibrary(this)">⚽<br>Antrenmanlar</button><button onclick="show('growth',this)">📈<br>Gelişim</button><button onclick="show('coach',this)">🤖<br>Koç</button><button onclick="show('pro',this)">⭐<br>PRO</button></div></div>
 </div>
 
 <script>
@@ -1012,6 +1085,9 @@ function renderAdaptiveHome(){
  const wu=ageWarmup(s.age).reduce((a,b)=>a+b.mins,0);
  const cd=cooldownBlock(s.age).reduce((a,b)=>a+b.mins,0);
  const main=currentHomeIndices.reduce((a,i)=>a+plan[i].mins,0);
+ if(document.getElementById('homeDrillCount'))homeDrillCount.textContent=currentHomeIndices.length;
+ if(document.getElementById('homeMainMinutes'))homeMainMinutes.textContent=main+' dk';
+ if(document.getElementById('homeTotalMinutes'))homeTotalMinutes.textContent=(wu+main+cd)+' dk';
  if(document.getElementById('sessionStructure'))sessionStructure.innerHTML=
   `<div class="structureBox"><b>🔥 Isınma</b><span>${wu} dk</span></div><div class="structureBox"><b>⚽ Ana bölüm</b><span>${main} dk</span></div><div class="structureBox"><b>🧘 Soğuma</b><span>${cd} dk</span></div>`;
  workouts.innerHTML=currentHomeIndices.map(i=>{
@@ -1028,6 +1104,61 @@ function startAdaptiveToday(){
  renderAdaptiveHome();
  const next=currentHomeIndices.find(i=>!s.done.includes(i));
  openWorkout(next===undefined?currentHomeIndices[0]:next);
+}
+
+
+const LIBRARY_CATEGORIES=[
+ {id:'all',label:'Tümü'},
+ {id:'teknik',label:'Top Hakimiyeti'},
+ {id:'pas',label:'Pas'},
+ {id:'dar',label:'Dar Alan'},
+ {id:'hiz',label:'Sürat'},
+ {id:'1v1',label:'1v1 & Maç'},
+ {id:'duran',label:'Duran Top'}
+];
+let libraryFilter='all';
+function libraryGroup(w){
+ const t=w.tags||[];
+ if(t.includes('duran_top'))return 'duran';
+ if(t.includes('dar_alan')||w.name.includes('2v2')||w.name.includes('3v3'))return 'dar';
+ if(t.includes('hiz')||t.includes('reaksiyon')||t.includes('ceviklik'))return 'hiz';
+ if(t.includes('1v1')||t.includes('savunma')||t.includes('bitiricilik'))return '1v1';
+ if(t.includes('pas')||t.includes('oyun_gorusu')||t.includes('ilk_kontrol'))return 'pas';
+ return 'teknik';
+}
+function visualExtras(w){
+ const g=libraryGroup(w);
+ if(g==='pas')return '🧱';
+ if(g==='dar')return '🔵🟡';
+ if(g==='hiz')return '🚩';
+ if(g==='1v1')return '🧍';
+ if(g==='duran')return '🥅';
+ return '🔶';
+}
+function renderTrainingLibrary(){
+ const f=document.getElementById('libraryFilters'),g=document.getElementById('libraryGrid');
+ if(!f||!g)return;
+ f.innerHTML=LIBRARY_CATEGORIES.map(c=>`<button class="${libraryFilter===c.id?'active':''}" onclick="setLibraryFilter('${c.id}')">${c.label}</button>`).join('');
+ const rows=plan.map((w,i)=>({w,i})).filter(x=>libraryFilter==='all'||libraryGroup(x.w)===libraryFilter);
+ if(document.getElementById('libraryCount'))libraryCount.textContent=rows.length+' çalışma';
+ g.innerHTML=rows.length?rows.map(({w,i})=>`
+  <div class="libraryCard">
+   <div class="libraryVisual">
+    <div class="libHeroPlayer">🏃</div><div class="libHeroBall">⚽</div><div class="libHeroExtra">${visualExtras(w)}</div>
+   </div>
+   <div class="libraryCardBody">
+    <div class="libraryCardTitle"><b>${w.icon} ${w.name}</b><span>${w.mins} dk · +${w.xp} XP</span></div>
+    <div class="libraryTags">${(w.tags||[]).slice(0,4).map(t=>`<em>${t.replaceAll('_',' ')}</em>`).join('')}</div>
+    <div class="small">${w.steps.length} aşama · Her aşamada farklı hareket gösterimi ve teknik ipucu.</div>
+    <button class="libraryOpen" onclick="openWorkout(${i})">Çalışmayı Aç</button>
+   </div>
+  </div>`).join(''):`<div class="libraryEmpty">Bu kategoride çalışma bulunamadı.</div>`;
+}
+function setLibraryFilter(id){libraryFilter=id;renderTrainingLibrary()}
+function openTrainingLibrary(btn){
+ showRaw('library');renderTrainingLibrary();
+ document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));
+ const target=btn||document.querySelectorAll('.nav button')[1];if(target)target.classList.add('active');
 }
 
 function ageWarmup(age){
@@ -1819,13 +1950,13 @@ function shareFeedback(){
  const type=(fbType.value||'Sorun').trim();
  const text=(fbText.value||'').trim();
  if(!text){alert('Kısa bir açıklama yaz.');return}
- const msg=`⚽ Futbolcu Gelişim V32 Test Geri Bildirimi\nKonu: ${type}\nDetay: ${text}\nSürüm: V32`;
+ const msg=`⚽ Futbolcu Gelişim V33 Test Geri Bildirimi\nKonu: ${type}\nDetay: ${text}\nSürüm: V33`;
  if(navigator.share)navigator.share({title:'Futbolcu Gelişim Test',text:msg});
  else navigator.clipboard?.writeText(msg).then(()=>alert('Geri bildirim kopyalandı.'));
 }
 
 function exportMyData(){
- const payload=JSON.stringify({exportedAt:new Date().toISOString(),app:'Futbolcu Gelişim',version:'v32',data:s},null,2);
+ const payload=JSON.stringify({exportedAt:new Date().toISOString(),app:'Futbolcu Gelişim',version:'v33',data:s},null,2);
  const blob=new Blob([payload],{type:'application/json'});const url=URL.createObjectURL(blob);
  const a=document.createElement('a');a.href=url;a.download='futbolcu-gelisim-verilerim.json';a.click();URL.revokeObjectURL(url);
 }
@@ -2043,57 +2174,47 @@ const stageVideoPages={
 'change':{title:'Yön Değiştirme',url:'https://www.pexels.com/video/football-players-practicing-6077698/'},
 'ballsprint':{title:'Topla Sprint',url:'https://www.pexels.com/video/man-training-soccer-on-a-soccer-field-7187046/'}
 };
-function sceneHTML(type,title){
- const labels={
-  inside:'Ayak İçi Dokunuş',sole:'Taban Çekme',inout:'İç-Dış Dokunuş',vdrag:'V Çekiş',
-  slalom:'Slalom',rightpass:'Sağ Ayak Pas',leftpass:'Sol Ayak Pas',controlpass:'Kontrol + Pas',
-  onetouch:'Tek Dokunuş',fastfeet:'Hızlı Ayak',sidefeet:'Yan Adım',doublefeet:'Çift Ayak',
-  crossfeet:'Çapraz Adım',ready:'Hazır Pozisyon',burst:'Patlayıcı Çıkış',change:'Yön Değiştirme',
-  ballsprint:'Topla Sprint'
+function sceneHTML(type,title,workoutName=''){
+ const map={
+  inside:'AYAK İÇİ KONTROL',sole:'TABAN ÇEKME',inout:'İÇ-DIŞ DOKUNUŞ',vdrag:'V ÇEKİŞ',
+  slalom:'SLALOM',rightpass:'SAĞ AYAK PAS',leftpass:'SOL AYAK PAS',controlpass:'KONTROL + PAS',
+  onetouch:'TEK DOKUNUŞ',sidefeet:'YAN ADIM',ready:'HAZIR POZİSYON',burst:'PATLAYICI ÇIKIŞ',
+  change:'YÖN DEĞİŞTİRME',ballsprint:'TOPLA SPRINT'
  };
- const label=labels[type]||title||'Hareket';
- let objects='<div class="mPlayer" style="left:50%;top:48%"></div>';
- let cls=type;
- if(['rightpass','leftpass','controlpass'].includes(type)){
-   cls='pass';
-   objects='<div class="mPlayer" style="left:23%;top:50%"></div><div class="mBall pass" style="left:28%;top:62%"></div><div class="mTarget" style="left:80%;top:50%"></div>';
- } else if(type==='onetouch'){
-   objects='<div class="mPlayer" style="left:20%;top:48%"></div><div class="mBall onetouch" style="left:25%;top:60%"></div><div class="mTarget" style="left:78%;top:58%"></div>';
- } else if(type==='slalom'){
-   objects='<div class="mPlayer" style="left:16%;top:53%"></div><div class="mBall slalom" style="left:20%;top:66%"></div>'+
-   '<div class="mCone" style="left:34%;top:48%"></div><div class="mCone" style="left:50%;top:66%"></div><div class="mCone" style="left:66%;top:48%"></div>';
- } else if(['fastfeet','doublefeet','crossfeet'].includes(type)){
-   cls='feet';
-   objects='<div class="mPlayer feet" style="left:30%;top:63%"></div>'+
-   '<div style="position:absolute;left:24%;right:24%;top:45%;height:38%;border:2px solid #fff8;background:repeating-linear-gradient(90deg,transparent 0 11%,#fff8 11% 12%)"></div>';
- } else if(type==='sidefeet'){
-   cls='side'; objects='<div class="mPlayer side" style="left:35%;top:58%"></div><div class="mCone" style="left:25%;top:72%"></div><div class="mCone" style="left:75%;top:72%"></div>';
- } else if(type==='ready'){
-   objects='<div class="mPlayer" style="left:38%;top:58%;transform:translate(-50%,-50%) rotate(-12deg)"></div><div class="mArrow" style="left:47%;top:55%;width:30%;transform:rotate(-12deg)"></div>';
- } else if(type==='burst'){
-   objects='<div class="mPlayer burst" style="left:24%;top:64%"></div><div class="mCone" style="left:20%;top:74%"></div><div class="mCone" style="left:82%;top:42%"></div>';
- } else if(type==='change'){
-   objects='<div class="mPlayer change" style="left:20%;top:65%"></div><div class="mCone" style="left:52%;top:52%"></div><div class="mCone" style="left:80%;top:72%"></div>';
- } else if(type==='ballsprint'){
-   objects='<div class="mPlayer" style="left:19%;top:52%"></div><div class="mBall ballsprint" style="left:23%;top:64%"></div><div class="mCone" style="left:84%;top:45%"></div>';
- } else {
-   objects+='<div class="mBall '+cls+'" style="left:54%;top:60%"></div>';
- }
- return `<div class="motionDemo play">
-   <div class="motionTop"><span class="motionTag">${label.toUpperCase()}</span><span class="motionTag ok">DOĞRU HAREKET ANİMASYONU</span></div>
-   <div class="motionPitch">${objects}</div>
-   <div class="motionHint">▶ ${title||label} hareketinin saha üstü animasyonu. Her aşama kendi hareket anahtarına göre ayrı gösterilir.</div>
- </div>`;
+ const player=`<div class="coach">
+   <div class="hair"></div><div class="head3d"></div><div class="neck"></div>
+   <div class="torso"></div><div class="stripe1"></div><div class="stripe2"></div>
+   <div class="arm armL"></div><div class="arm armR"></div><div class="short"></div>
+   <div class="leg legL"><div class="sock"></div><div class="boot"></div></div>
+   <div class="leg legR"><div class="sock"></div><div class="boot"></div></div>
+  </div>`;
+ let extras='';
+ if(type==='slalom')extras='<div class="cone" style="left:24%"></div><div class="cone" style="left:42%"></div><div class="cone" style="left:60%"></div><div class="cone" style="left:78%"></div>';
+ if(['rightpass','leftpass','controlpass','onetouch'].includes(type))extras='<div class="wall"></div><div class="directionPath"></div>';
+ if(type==='burst')extras='<div class="startline"></div><div class="finishline"></div>';
+ if(type==='change')extras='<div class="cone" style="left:33%"></div><div class="cone" style="left:67%"></div>';
+ if(type==='ballsprint')extras='<div class="cone" style="right:11%"></div><div class="directionPath"></div>';
+ if(type==='ready'||type==='sidefeet')extras='<div class="cone" style="left:23%"></div><div class="cone" style="right:23%"></div>';
+ if(type==='vdrag'||workoutName.includes('1v1'))extras+='<div class="defender">🧍</div>';
+ if(workoutName.includes('Bitiricilik')||workoutName.includes('Duran Top')||workoutName.includes('Orta +'))extras+='<div class="targetGoal"></div>';
+ if(workoutName.includes('2v2')||workoutName.includes('3v3'))extras+='<div class="defender">🧍</div><div class="cone" style="left:18%"></div><div class="cone" style="right:18%"></div>';
+ return `<div class="v33Scene ${type}">
+   <div class="sceneLabel">${map[type]||title}</div><div class="sceneBadge">HAREKETLİ GÖSTERİM</div>
+   ${player}<div class="ball"></div>${extras}
+   <div class="caption">${title}</div>
+  </div>
+  <div class="videoHint">👀 Bu aşama kendi hareket animasyonuna sahiptir. Önizleme numaralarıyla diğer aşamaları da görebilirsin.</div>`;
 }
 function toggleScene(){
  const v=document.getElementById('drillVideo');
  if(!v)return;
  if(v.paused){v.play();}else{v.pause();}
 }
-function openWorkout(i){active=i;stepIndex=0;clearInterval(timerId);running=false;stepFinished=false;scenePlaying=true;let w=plan[i];total=w.steps.reduce((a,b)=>a+b[1],0);remaining=w.steps[0][1];dtitle.textContent=w.icon+' '+w.name;dmeta.textContent=w.mins+' dk · '+w.steps.length+' aşama · +'+w.xp+' XP';draw();head.style.display='none';nav.style.display='none';showRaw('detail')}
+let workoutOrigin='home';
+function openWorkout(i){workoutOrigin=document.getElementById('library')?.classList.contains('active')?'library':'home';active=i;stepIndex=0;clearInterval(timerId);running=false;stepFinished=false;scenePlaying=true;let w=plan[i];total=w.steps.reduce((a,b)=>a+b[1],0);remaining=w.steps[0][1];dtitle.textContent=w.icon+' '+w.name;dmeta.textContent=w.mins+' dk · '+w.steps.length+' aşama · +'+w.xp+' XP';draw();head.style.display='none';nav.style.display='none';showRaw('detail')}
 function draw(){
  let w=plan[active],q=w.steps[stepIndex];
- sceneSlot.innerHTML=sceneHTML(q[6],q[0]);
+ sceneSlot.innerHTML=sceneHTML(q[6],q[0],w.name);
  previewNav.innerHTML=`<div class="previewNote">Aşamaları önceden görebilirsin; bu sadece önizlemedir, ilerlemeyi tamamlamaz.</div><div class="previewNav">${
    w.steps.map((x,i)=>`<button class="${i===stepIndex?'active':''}" onclick="previewStep(${i})">${i+1}</button>`).join('')
  }</div>`;
@@ -2103,7 +2224,7 @@ function draw(){
 }
 function previewStep(i){
  let w=plan[active],q=w.steps[i];
- sceneSlot.innerHTML=sceneHTML(q[6],q[0]);
+ sceneSlot.innerHTML=sceneHTML(q[6],q[0],w.name);
  previewNav.querySelectorAll('button').forEach((b,idx)=>b.classList.toggle('active',idx===i));
  techniqueBox.innerHTML=`<div class="info good"><b>✅ Doğru yapılış</b><div class="small">${q[3]}</div></div><div class="info bad"><b>❌ Sık yapılan hata</b><div class="small">${q[4]}</div></div><div class="info tip"><b>💡 Koç ipucu</b><div class="small">${q[5]}</div></div>`;
 }
@@ -2111,10 +2232,10 @@ function updateTimer(){let m=Math.floor(remaining/60),sec=remaining%60;timer.tex
 function toggleTimer(){if(stepFinished)return;if(running){running=false;clearInterval(timerId);updateTimer();return}running=true;updateTimer();timerId=setInterval(()=>{remaining--;if(remaining<=0){remaining=0;clearInterval(timerId);running=false;stepFinished=true;updateTimer()}else updateTimer()},1000)}
 function nextStep(){if(!stepFinished)return;let w=plan[active];if(stepIndex<w.steps.length-1){stepIndex++;remaining=w.steps[stepIndex][1];stepFinished=false;scenePlaying=true;draw();return}if(!s.done.includes(active)){s.done.push(active);s.xp+=w.xp;s.totalE++;s.totalM+=w.mins;save()}steps.innerHTML=`<div class="complete">🏆 Antrenman tamamlandı! +${w.xp} XP</div><div class="sessionFeedbackBox"><h3>Bu antrenman nasıldı?</h3><div class="readinessGrid"><button onclick="finishBasicWorkout('easy')">Kolay</button><button onclick="finishBasicWorkout('normal')">Normal</button><button onclick="finishBasicWorkout('hard')">Zor</button></div><div class="small" style="margin-top:8px">Cevabın bir sonraki programın progresyonunu etkiler.</div></div>`;sceneSlot.innerHTML='';techniqueBox.innerHTML='';startBtn.disabled=true;nextBtn.disabled=true}
 function finishBasicWorkout(level){saveSessionDifficulty(level);backHome();render();}
-function backHome(){clearInterval(timerId);running=false;head.style.display='block';nav.style.display='flex';showRaw('home')}
+function backHome(){clearInterval(timerId);running=false;head.style.display='block';nav.style.display='flex';if(workoutOrigin==='library'){showRaw('library');renderTrainingLibrary();document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.nav button')[1]?.classList.add('active')}else{showRaw('home')}}
 function saveProfile(){s.name=pname.value.trim()||'Yeni Oyuncu';s.age=+page.value||12;s.pos=ppos.value;s.done=[];save();render();alert('Profil ve plan güncellendi.')}
 function show(id,b){showRaw(id);document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active')}
 function showRaw(id){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');scrollTo(0,0)}
-render();renderProPlan();initCoach();initTrainerHistory();if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js'));
+render();renderTrainingLibrary();renderProPlan();initCoach();initTrainerHistory();if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js'));
 </script>
 </body></html>

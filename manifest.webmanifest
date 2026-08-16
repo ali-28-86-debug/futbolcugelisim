@@ -2,9 +2,10 @@
   "name": "Futbolcu Gelişim",
   "short_name": "Futbolcu Gelişim",
   "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#0f172a",
+  "background_color": "#050b12",
+  "theme_color": "#07111d",
   "icons": [
     {
       "src": "icon-192.png",
