@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0f172a">
 <link rel="manifest" href="manifest.webmanifest">
-<title>Futbolcu Gelişim v30</title>
+<title>Futbolcu Gelişim v31</title>
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#f3f5f7;color:#111827}
 .app{max-width:520px;margin:auto;min-height:100vh;padding-bottom:78px}
@@ -518,7 +518,7 @@ textarea{width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius
  </div>
  <div class="card">
   <h2>ℹ️ Sürüm</h2>
-  <div class="settingsRow"><span>Futbolcu Gelişim</span><b>v30Final Test</b></div>
+  <div class="settingsRow"><span>Futbolcu Gelişim</span><b>v27 Final Test</b></div>
  </div>
 </section>
 
@@ -756,34 +756,77 @@ textarea{width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius
 </div>
 
 <script>
-const K='futbolcu_v30';
+const K='futbolcu_v31';
 let old=JSON.parse(localStorage.getItem('futbolcu_v20')||'null')||JSON.parse(localStorage.getItem('futbolcu_v19')||'null')||JSON.parse(localStorage.getItem('futbolcu_v18')||'null')||JSON.parse(localStorage.getItem('futbolcu_v17')||'null')||JSON.parse(localStorage.getItem('futbolcu_v16')||'null')||JSON.parse(localStorage.getItem('futbolcu_v15')||'null')||JSON.parse(localStorage.getItem('futbolcu_v14')||'null')||JSON.parse(localStorage.getItem('futbolcu_v13')||'null')||JSON.parse(localStorage.getItem('futbolcu_v12_2')||'null')||JSON.parse(localStorage.getItem('futbolcu_v12_1')||'null')||JSON.parse(localStorage.getItem('futbolcu_v12')||'null')||JSON.parse(localStorage.getItem('futbolcu_v11')||'null')||JSON.parse(localStorage.getItem('futbolcu_v10')||'null')||JSON.parse(localStorage.getItem('futbolcu_v9')||'null')||JSON.parse(localStorage.getItem('futbolcu_v8')||'null')||JSON.parse(localStorage.getItem('futbolcu_v7')||'null');
-let s=JSON.parse(localStorage.getItem(K)||'null')||JSON.parse(localStorage.getItem('futbolcu_v29')||'null')||JSON.parse(localStorage.getItem('futbolcu_v28')||'null')||JSON.parse(localStorage.getItem('futbolcu_v27_1')||'null')||JSON.parse(localStorage.getItem('futbolcu_v27')||'null')||JSON.parse(localStorage.getItem('futbolcu_v26')||'null')||old||{name:'Yeni Oyuncu',age:12,pos:'Orta Saha',xp:0,done:[],totalE:0,totalM:0,days:1,pro:false};
+let s=JSON.parse(localStorage.getItem(K)||'null')||JSON.parse(localStorage.getItem('futbolcu_v30')||'null')||JSON.parse(localStorage.getItem('futbolcu_v29')||'null')||JSON.parse(localStorage.getItem('futbolcu_v28')||'null')||JSON.parse(localStorage.getItem('futbolcu_v27_1')||'null')||JSON.parse(localStorage.getItem('futbolcu_v27')||'null')||JSON.parse(localStorage.getItem('futbolcu_v26')||'null')||old||{name:'Yeni Oyuncu',age:12,pos:'Orta Saha',xp:0,done:[],totalE:0,totalM:0,days:1,pro:false};
 if(!s.proPlan)s.proPlan=null;if(!s.streak)s.streak=1;if(!s.coachHistory)s.coachHistory=[];if(!s.coachPlan)s.coachPlan=[];if(!s.teamCoachHistory)s.teamCoachHistory=[];if(!s.teamPlans)s.teamPlans=[];if(!s.testResults)s.testResults=[];
 
 function st(name,sec,desc,good,bad,tip,anim){return [name,sec,desc,good,bad,tip,anim]}
 const plan=[
-{icon:'⚽',name:'Top Hakimiyeti',mins:10,xp:50,steps:[
-st('Ayak içi dokunuş',120,'Sağ ve sol ayağın içiyle küçük ve seri dokunuşlar yap.','Top ayağından yarım metreden fazla açılmasın.','Sadece güçlü ayağı kullanmak.','Her 5-6 dokunuşta başını kaldır.','inside'),
-st('Taban çekme',120,'Topu sağ ve sol tabanla yanlara çek.','Dizler hafif kırık, merkez alçak.','Dik durup topu kaçırmak.','Önce yavaş, sonra ritmi artır.','sole'),
-st('İç-dış dokunuş',120,'Aynı ayakla iç-dış dokunuş yap.','Dokunuşlar kısa ve kontrollü.','Topa sürekli bakmak.','60 sn sağ, 60 sn sol.','inout'),
-st('Slalom',120,'5 koni veya şişe arasında slalom yap.','Konilere yakın dön.','Topu çok öne atmak.','Son 30 sn hızlan.','slalom'),
-st('Serbest kombinasyon',120,'V çekiş, iç-dış ve yön değişimini birleştir.','Hareketleri bilinçli bağla.','Tek hareketi sürekli tekrar etmek.','Hayali rakip belirle.','vdrag')]},
-{icon:'🎯',name:'Duvar Pası',mins:10,xp:50,steps:[
-st('Sağ ayak pas',150,'Ayağın içiyle kontrollü duvar pası.','Destek ayağı hedefe baksın.','Topun altına vurmak.','Duvarda hedef belirle.','rightpass'),
-st('Sol ayak pas',150,'Sol ayakla tekrar.','Aynı tekniği koru.','Güç için tekniği bozmak.','Kısa mesafeden başla.','leftpass'),
-st('Kontrol + pas',150,'Kontrol et ve pas ver.','Kontrolü pas yönüne al.','Topu ayağın altında öldürmek.','Kontrol ayağını değiştir.','controlpass'),
-st('Tek dokunuş',150,'Tek dokunuş pas.','Topun geliş hızını kullan.','Her topa aynı güçle vurmak.','10 paslık seri hedefle.','onetouch')]},
-{icon:'🏃',name:'Koordinasyon',mins:5,xp:30,steps:[
-st('Hızlı ayak',75,'Koordinasyon merdiveninde kısa ve seri adımlar.','Ayaklar hafif ve dizler kırık.','Topuklara basmak.','Her kutuya iki hızlı temas.','fastfeet'),
-st('Yan adım',75,'Merdiven üzerinde sağa-sola seri yan adım.','Kalça alçak, gövde dengeli.','Ayakları birbirine dolamak.','Başını yukarıda tut.','sidefeet'),
-st('Çapraz adım',75,'Ayakları kontrollü biçimde çaprazlayarak ilerle.','Ritmi ve dengeyi koru.','Çok büyük adım atmak.','Önce yavaş öğren.','crossfeet'),
-st('Topla koordinasyon',75,'İki ayakla ritmik koordinasyon çalış.','Adımlar kısa ve kontrollü olsun.','Ritmi bozmak.','Önce yavaş, sonra hızlan.','doublefeet')]},
-{icon:'💨',name:'Sürat',mins:10,xp:50,steps:[
-st('Hazır pozisyon',120,'Sprint öncesi öne eğik atletik çıkış pozisyonu al.','Ağırlık ayak önünde, dizler kırık.','Dik ve geride beklemek.','İlk adımı öne saldırır gibi at.','ready'),
-st('5 metre çıkış',180,'Başlangıç çizgisinden topsuz patlayıcı sprint yap.','İlk üç adım kısa ve güçlü.','İlk adımda hemen doğrulmak.','Tekrarlar arasında tam dinlen.','burst'),
-st('Yön değiştir + sprint',150,'Koniye yaklaş, keskin yön değiştir ve tekrar hızlan.','Dönüşte ağırlık merkezini alçalt.','Dönüşte dik kalmak.','Sağ ve solu eşit çalış.','change'),
-st('Topla sprint',150,'Topu koşu yoluna öne bırakıp yüksek hızda sür.','Boş alanda topu 2-3 metre öne aç.','Sprintte topu ayağa yapıştırmak.','3 uzun dokunuş + hızlan.','ballsprint')]}
+{icon:'⚽',name:'Yakın Top Kontrolü',mins:8,xp:45,tags:['teknik','ilk_kontrol','zayif'],steps:[
+st('Seri kısa dokunuş',120,'İki ayağın içi ve dışıyla topu vücuduna yakın tut.','Baş yukarı kalkabilsin, dokunuşlar kısa olsun.','Topa sürekli bakmak.','Her 4-5 dokunuşta çevre kontrolü yap.','inside'),
+st('Yönlü ilk kontrol',120,'Gelen topu ilk dokunuşta boş alana taşı.','İlk temas sonraki hareketi hazırlasın.','Topu ayağın altında durdurmak.','Sağ ve sol ayağı sırayla kullan.','controlpass'),
+st('Baskı çıkışı',120,'Hayali rakip yaklaşırken ilk dokunuşla yön değiştir.','Vücudunu top ile rakip arasına koy.','Aynı yöne dönmek.','Kontrolden önce omuz üstü bakış yap.','change')]},
+{icon:'🪄',name:'1v1 Adam Eksiltme',mins:10,xp:60,tags:['teknik','1v1','kanat','forvet'],steps:[
+st('Vücut çalımı',150,'Rakibi bir yöne inandırıp diğer yöne patlayıcı çık.','Çalım sonrası ilk iki adım hızlansın.','Hareketten sonra yavaş kalmak.','Rakibin ağırlık verdiği ayağı oku.','change'),
+st('İç-dış geçiş',150,'İç dokunuş tehdidinden dış dokunuşla rakibi geç.','Top geçiş yönünde bir adım öne açılsın.','Topu ayağın altında tutmak.','Çalımı ceza alanı yönüne bağla.','inout'),
+st('Çalım + sprint',150,'Hareketi yaptıktan sonra 5-8 metre hızlan.','İlk dokunuş boş alana olsun.','Çalımı yaptıktan sonra durmak.','Maçta çalımın amacı rakibi geçip avantaj yaratmaktır.','ballsprint')]},
+{icon:'🔀',name:'Yön Değiştirme',mins:8,xp:50,tags:['teknik','ceviklik','1v1'],steps:[
+st('İç ayak kesme',120,'Koni önünde iç ayakla keskin yön değiştir.','Dönüşte ağırlık merkezini alçalt.','Dik gövdeyle dönmek.','Dönüşten önce kısa fren adımı kullan.','change'),
+st('Taban V dönüşü',120,'Topu tabanla geri çekip diğer ayağa aktar.','Top vücudun altında kalsın.','Topu çok geriye çekmek.','Hareketten çıkar çıkmaz hızlan.','vdrag'),
+st('Komutlu yön',120,'Sağ-sol komutuna göre son anda yön seç.','Kararı topa dokunmadan hemen önce ver.','Yönü önceden belirlemek.','Bir partner renk veya yön söylesin.','slalom')]},
+{icon:'👀',name:'Çevre Kontrolü + İlk Dokunuş',mins:9,xp:55,tags:['pas','oyun_gorusu','ilk_kontrol','orta_saha'],steps:[
+st('Omuz kontrolü',135,'Top gelmeden önce iki omuz üzerinden çevreyi tara.','Bakış kısa ve zamanında olsun.','Top geldikten sonra bakmak.','Her pas öncesi en az bir tarama yap.','controlpass'),
+st('Açık vücut kontrolü',135,'Topu yarım dönüş pozisyonunda ileri al.','Kalça oyun alanına açık olsun.','Sırtı tamamen oyuna dönmek.','Uzak ayağınla kontrol et.','controlpass'),
+st('Renk kararı',135,'Kontrolden hemen önce söylenen renkteki kapıya dön.','İlk dokunuş karar yönüne olsun.','Önce kontrol edip sonra karar vermek.','Kararı tek dokunuşa bağla.','change')]},
+{icon:'🎯',name:'Baskı Altında Pas',mins:10,xp:60,tags:['pas','oyun_gorusu','orta_saha','stoper'],steps:[
+st('Kontrol + pas',150,'Duvar veya partnerle iki dokunuş pas yap.','Kontrol pas açısını hazırlasın.','Topu ayağın altında öldürmek.','Pas öncesi hedefe bak.','controlpass'),
+st('Tek dokunuş',150,'Uygun toplarda tek dokunuşla geri oyna.','Geliş hızını kullan.','Her topa gereksiz sert vurmak.','10 temiz paslık seri hedefle.','onetouch'),
+st('Baskı simülasyonu',150,'Pas sonrası hemen yeni açıya çık; hayali rakip baskısından kaç.','Pas verip sabit kalma.','Aynı çizgide beklemek.','Pas + 2-3 metre açı değişimi yap.','rightpass')]},
+{icon:'🧱',name:'Duvar Pası + Kaçış',mins:9,xp:55,tags:['pas','teknik','bek','orta_saha'],steps:[
+st('Ver-kaç temeli',135,'Duvara/partnere pas verip çapraz koşuyla yeni açıya çık.','Pas sonrası hareket hemen başlasın.','Pas verip beklemek.','Koşuyu topun dönüş yolundan çıkar.','rightpass'),
+st('Zayıf ayak ver-kaç',135,'Aynı çalışmayı zayıf ayağınla yap.','Teknik bozulmadan tempo korunsun.','Güç için isabeti kaybetmek.','Mesafeyi önce kısa tut.','leftpass'),
+st('Tek dokunuş kaçış',135,'Tek dokunuş pas sonrası boş alana hızlan.','Vücut bir sonraki koşuya hazır olsun.','Topu izleyip kalmak.','Maçtaki üçüncü adam koşusunu hayal et.','onetouch')]},
+{icon:'🥅',name:'Bitiricilik',mins:10,xp:65,tags:['bitiricilik','forvet','kanat'],steps:[
+st('Köşeye yerleştirme',150,'Topu kontrol edip uzak köşeye kontrollü bitir.','Destek ayağı hedefe baksın.','Sadece güce vurmak.','Önce isabet, sonra hız.','rightpass'),
+st('İlk dokunuş + şut',150,'İlk kontrolü şut açısına al ve gecikmeden bitir.','Kontrol ayağından fazla açılmasın.','Kontrol sonrası ekstra dokunuşlar.','İki dokunuş sınırı koy.','controlpass'),
+st('Karar bitiriciliği',150,'Son anda söylenen sağ/sol köşeye bitir.','Başını kaldırıp kaleciyi hayal et.','Vurmadan önce hedefe hiç bakmamak.','Kararı son iki adımda ver.','change')]},
+{icon:'🦶',name:'Zayıf Ayak Gelişimi',mins:9,xp:60,tags:['zayif','teknik','pas'],steps:[
+st('Zayıf ayak kontrol',135,'Sadece zayıf ayağınla kısa top kontrolü yap.','Ayak bileği kontrollü olsun.','Güçlü ayağa kaçmak.','Kalite düşerse tempoyu azalt.','inside'),
+st('Zayıf ayak pas',135,'Duvar/partnerle zayıf ayak pas serisi yap.','Destek ayağı hedefe dönük olsun.','Ayağın ucuyla vurmak.','20 temiz pas hedefle.','leftpass'),
+st('Zayıf ayak yönlü kontrol',135,'Gelen topu zayıf ayakla sağa-sola yönlendir.','İlk temas oyunu hızlandırsın.','Topu tamamen durdurmak.','Her tekrarda farklı yön seç.','controlpass')]},
+{icon:'💨',name:'Patlayıcı Sürat',mins:8,xp:55,tags:['hiz','ceviklik','bek','kanat','forvet'],steps:[
+st('5 metre çıkış',120,'Atletik pozisyondan 5 metre patlayıcı çık.','İlk üç adım kısa ve güçlü.','Hemen dikleşmek.','Tekrarlar arasında tam dinlen.','burst'),
+st('Reaksiyon çıkışı',120,'Ses veya el işaretiyle aniden sprint başlat.','İlk hareket komuttan sonra olsun.','Komutu tahmin etmek.','Farklı başlangıç pozisyonları kullan.','ready'),
+st('Topla hızlanma',120,'Topu boş alana açıp 8-10 metre hızlan.','Sprintte dokunuş mesafesi uzasın.','Topu ayağa yapıştırmak.','Hızlandıkça topu biraz daha öne bırak.','ballsprint')]},
+{icon:'⚡',name:'Reaksiyon + Çeviklik',mins:7,xp:50,tags:['hiz','reaksiyon','kaleci','ceviklik'],steps:[
+st('Renk reaksiyonu',105,'Renk/numara komutuyla ilgili koniye hızla çık.','İlk adım kararlı olsun.','Komuttan önce hareket etmek.','Partner komutlarını rastgele versin.','burst'),
+st('Yan reaksiyon',105,'Sağ-sol komutunda yan adım ve kısa sprint yap.','Kalça alçak, ayaklar aktif.','Ayakları çaprazlayıp denge kaybetmek.','İlk iki adımı kısa tut.','sidefeet'),
+st('Top reaksiyonu',105,'Bırakılan veya yuvarlanan topa ilk ulaşmaya çalış.','Göz top ve alan arasında olsun.','Sadece topa kilitlenmek.','Başlangıç mesafesini değiştir.','ready')]},
+{icon:'🔷',name:'2v2 Dar Alan Oyunu',mins:12,xp:75,tags:['dar_alan','karar','pas','1v1','mac'],steps:[
+st('2v2 topa sahip olma',180,'Mavi ve sarı iki kişilik takımlarla küçük alanda pas opsiyonu yarat.','Toplu oyuncuya iki açı sunulsun.','Oyuncuların aynı çizgide kalması.','Pas sonrası hemen yeni boşluk bul.','controlpass'),
+st('Kapıya hücum',180,'3 pas sonrası küçük kapılardan birine dripling veya pasla çık.','Baş yukarıda, boş kapıyı erken gör.','Tek kapıya zorlamak.','Rakibin kapattığı tarafın tersini kullan.','change'),
+st('Geçiş oyunu',180,'Top kaybında hemen baskı, kazanımda ilk pas ileri.','İlk 3 saniye hızlı reaksiyon.','Top kaybından sonra durmak.','Maç hızında kısa setler yap.','ballsprint')]},
+{icon:'🔶',name:'3v3 Karar Oyunu',mins:12,xp:80,tags:['dar_alan','karar','oyun_gorusu','mac'],steps:[
+st('3v3 destek açıları',180,'Üçlü takım sürekli üçgen oluşturarak pas açısı yaratır.','Topa yakın iki destek seçeneği olsun.','Topun arkasında saklanmak.','Her pas sonrası üçgeni yeniden kur.','controlpass'),
+st('Yön değiştirme',180,'Bir taraf kapanınca oyunu diğer kapıya çevir.','Karardan önce çevre kontrolü yap.','Kalabalığa zorla girmek.','En az iki seçenek görmeden pas verme.','rightpass'),
+st('Hızlı geçiş',180,'Top kazanılınca 5 saniye içinde hedef kapıya hücum et.','İlk pas güvenli ama ileri niyetli olsun.','Top kazanıp tempoyu düşürmek.','İlk bakışın ileri olsun.','burst')]},
+{icon:'🛡️',name:'Savunma 1v1',mins:9,xp:60,tags:['savunma','stoper','bek','1v1'],steps:[
+st('Yaklaşma açısı',135,'Rakibe kontrollü yaklaş ve onu zayıf tarafa yönlendir.','Son 2 metrede küçük adımlar kullan.','Direkt topa dalmak.','Rakiple kale arasını kapat.','ready'),
+st('Ayna savunması',135,'Rakibin sağ-sol hareketini mesafeyi koruyarak takip et.','Ayaklar aktif, gövde dengeli.','Ayakları çaprazlamak.','Rakibin kalçasını izle.','sidefeet'),
+st('Kazan + çık',135,'Topu kazandıktan sonra ilk pas veya sürüşle baskıdan çık.','Kazanım sonrası başını kaldır.','Topu kazanınca durmak.','Savunma aksiyonunu hücuma bağla.','change')]},
+{icon:'📐',name:'Orta + Son Aksiyon',mins:10,xp:65,tags:['bek','kanat','bitiricilik','pas'],steps:[
+st('Çizgiye iniş',150,'Topla çizgide hızlan ve orta bölgesine gir.','Son dokunuş ortayı hazırlasın.','Topu ayağa fazla yakın tutmak.','Başını kaldırıp hedef bölgeyi gör.','ballsprint'),
+st('Yerden orta',150,'Hedef bölgeye kontrollü yerden pas/orta gönder.','Ayak içiyle hedefe yönlendir.','Rastgele sert vurmak.','Ön direk ve penaltı noktası hedefleri kullan.','rightpass'),
+st('Geriye çıkarma',150,'Son çizgiden geriye doğru uygun açıya pas çıkar.','Pas koşu yoluna gelsin.','Kalabalığın içine kör orta yapmak.','Savunmanın arkasındaki boşluğu hedefle.','controlpass')]},
+{icon:'🚩',name:'Duran Top Tekniği',mins:10,xp:65,tags:['duran_top','pas','bitiricilik'],steps:[
+st('Köşe hedefi',150,'Duran topta belirlediğin hedef bölgeye kontrollü servis yap.','Yaklaşma açın her tekrarda benzer olsun.','Her vuruşta farklı teknik kullanmak.','5 vuruşluk hedef serileri yap.','rightpass'),
+st('Serbest vuruş isabeti',150,'Duvar/hedef üzerinden veya yanından isabet çalış.','Destek ayağı ve gövde açısını sabitle.','Sadece güç düşünmek.','Önce hedefe isabet oranını yükselt.','leftpass'),
+st('Hızlı duran top kararı',150,'Top durduğunda kısa pas mı direkt oyun mu karar ver.','Çevreyi topa gitmeden tara.','Her duran topu aynı kullanmak.','Maç senaryosu belirleyerek uygula.','controlpass')]},
+{icon:'🧤',name:'Kaleci Ayakla Oyun + Reaksiyon',mins:10,xp:70,tags:['kaleci','pas','reaksiyon'],steps:[
+st('İlk kontrol + pas',150,'Geri pası açık vücutla kontrol edip hedefe aktar.','İlk dokunuş baskıdan uzak olsun.','Topu kalenin ortasına doğru kontrol etmek.','Sağ ve sol ayağı kullan.','controlpass'),
+st('Baskı altında çıkış',150,'Hayali forvet baskısında sağ/sol hedefe pas seç.','Karardan önce iki tarafı tara.','Tek hedefe kilitlenmek.','Pas açısını son anda değiştir.','rightpass'),
+st('Kısa reaksiyon',150,'Yakın mesafeden yön komutuna hızlı ayak ve el reaksiyonu ver.','Hazır pozisyonu koru.','Ağırlığı topuklara vermek.','Her tekrarda yeniden set ol.','ready')]}
 ];
 
 let active=null,stepIndex=0,remaining=0,total=0,timerId=null,running=false,stepFinished=false,scenePlaying=true;
@@ -809,9 +852,9 @@ function recentDifficulty(){
  return hard>=2?'down':easy>=2?'up':'normal';
 }
 function progressionLevel(){
- const done=(s.done||[]).length;
+ const done=Number(s.totalE||0);
  const fb=recentDifficulty();
- let level=done<4?1:done<10?2:3;
+ let level=done<6?1:done<18?2:done<35?3:4;
  if(fb==='down')level=Math.max(1,level-1);
  if(fb==='up')level=Math.min(4,level+1);
  return level;
@@ -832,23 +875,23 @@ function enrichDrillForProgression(d){
 }
 
 
-const GOAL_HOME_ORDER={
- teknik:[0,1,2,3],
- hiz:[3,2,0,1],
- pas:[1,0,2,3],
- bitiricilik:[0,3,1,2],
- zayif:[1,0,2,3],
- komple:[0,1,3,2]
+const GOAL_TAGS={
+ teknik:['teknik','1v1','ilk_kontrol','ceviklik'],
+ hiz:['hiz','ceviklik','reaksiyon'],
+ pas:['pas','oyun_gorusu','ilk_kontrol','karar'],
+ bitiricilik:['bitiricilik','forvet','kanat'],
+ zayif:['zayif','teknik','pas'],
+ komple:['teknik','pas','karar','hiz','bitiricilik']
 };
-const POS_HOME_ORDER={
- 'Kaleci':[2,1,3,0],
- 'Stoper':[1,2,0,3],
- 'Bek':[3,0,1,2],
- 'Orta Saha':[1,0,2,3],
- 'Kanat':[0,3,2,1],
- 'Forvet':[0,3,1,2]
+const POS_TAGS={
+ 'Kaleci':['kaleci','reaksiyon','pas'],
+ 'Stoper':['stoper','savunma','pas','ilk_kontrol'],
+ 'Bek':['bek','hiz','savunma','pas'],
+ 'Orta Saha':['orta_saha','pas','oyun_gorusu','karar'],
+ 'Kanat':['kanat','1v1','hiz','bitiricilik'],
+ 'Forvet':['forvet','bitiricilik','1v1','ilk_kontrol']
 };
-let currentHomeIndices=[0,1,2,3];
+let currentHomeIndices=[];
 
 function todayDayName(){
  return ['Pazar','Pazartesi','Salı','Çarşamba','Perşembe','Cuma','Cumartesi'][new Date().getDay()];
@@ -863,20 +906,44 @@ function matchTomorrow(){
 function adaptiveHomeIndices(){
  const goal=s.appSettings?.goal||'komple';
  const pos=s.pos||s.position||'Orta Saha';
- const goalOrder=GOAL_HOME_ORDER[goal]||GOAL_HOME_ORDER.komple;
- const posOrder=POS_HOME_ORDER[pos]||POS_HOME_ORDER['Orta Saha'];
- const score={};
- [...goalOrder,...posOrder].forEach((idx,i)=>{score[idx]=(score[idx]||0)+(8-i);});
- let order=[0,1,2,3].sort((a,b)=>(score[b]||0)-(score[a]||0));
+ const goalTags=GOAL_TAGS[goal]||GOAL_TAGS.komple;
+ const posTags=POS_TAGS[pos]||POS_TAGS['Orta Saha'];
+ const level=progressionLevel();
  const readiness=s.appSettings?.readiness||'normal';
  let count=readiness==='fresh'?4:readiness==='tired'?2:3;
- if(matchTomorrow()){
-   count=Math.min(count,2);
-   order=order.filter(x=>x!==3).concat(order.filter(x=>x===3)); // sprinti maç arifesine bırakma
+ if(matchTomorrow())count=Math.min(count,2);
+
+ const scored=plan.map((w,i)=>{
+   let score=0;
+   (w.tags||[]).forEach(t=>{
+     if(goalTags.includes(t))score+=5;
+     if(posTags.includes(t))score+=7;
+   });
+   if(level>=2 && (w.tags||[]).some(t=>['1v1','ceviklik','dar_alan'].includes(t)))score+=3;
+   if(level>=3 && (w.tags||[]).some(t=>['karar','oyun_gorusu','dar_alan'].includes(t)))score+=5;
+   if(level>=4 && (w.tags||[]).includes('mac'))score+=8;
+   if(matchTomorrow() && (w.tags||[]).some(t=>['hiz','ceviklik'].includes(t)))score-=12;
+   if((s.done||[]).includes(i))score-=20;
+   // deterministic daily rotation so the same player doesn't see the exact same session every day
+   const daySeed=Math.floor(Date.now()/86400000);
+   score+=((i*7+daySeed)%9)/10;
+   return {i,score};
+ }).sort((a,b)=>b.score-a.score);
+
+ const chosen=[];
+ for(const x of scored){
+   const w=plan[x.i];
+   if(chosen.length && chosen.some(j=>{
+     const overlap=(plan[j].tags||[]).filter(t=>(w.tags||[]).includes(t));
+     return overlap.length>=3;
+   })) continue;
+   chosen.push(x.i);
+   if(chosen.length>=count)break;
  }
- // tamamlanmış olanları aynı gün listenin arkasına al
- order=order.sort((a,b)=>(s.done.includes(a)?1:0)-(s.done.includes(b)?1:0));
- return order.slice(0,count);
+ if(chosen.length<count){
+   for(const x of scored){if(!chosen.includes(x.i))chosen.push(x.i);if(chosen.length>=count)break;}
+ }
+ return chosen;
 }
 function adaptiveReasonText(){
  const pos=s.pos||'Orta Saha';
@@ -884,7 +951,7 @@ function adaptiveReasonText(){
  const ready=readinessLabel(s.appSettings?.readiness||'normal');
  const prog=progressionLabel(progressionLevel());
  const focus=positionFocus().slice(0,2).join(' + ');
- let txt=`${pos} mevkiin, ${goal} hedefin ve bugünkü ${ready.toLocaleLowerCase('tr-TR')} durumun birlikte değerlendirildi. Progresyon seviyen: ${prog}. Mevki odağı: ${focus}.`;
+ let txt=`${pos} mevkiin, ${goal} hedefin ve bugünkü ${ready.toLocaleLowerCase('tr-TR')} durumun birlikte değerlendirildi. Progresyon seviyen: ${prog}. Mevki odağı: ${focus}. Bugünkü çalışmalar geniş antrenman havuzundan seçildi; yalnızca sıralama değişmiyor, egzersizlerin kendisi de değişiyor.`;
  if(matchTomorrow())txt+=' Yarın maç günü olduğu için yük azaltıldı ve yoğun sprint geri plana alındı.';
  const fb=recentDifficulty();
  if(fb==='down')txt+=' Son geri bildirimlerin zor olduğu için seviye bir kademe hafifletildi.';
@@ -1714,7 +1781,7 @@ function shareFeedback(){
 }
 
 function exportMyData(){
- const payload=JSON.stringify({exportedAt:new Date().toISOString(),app:'Futbolcu Gelişim',version:'v30',data:s},null,2);
+ const payload=JSON.stringify({exportedAt:new Date().toISOString(),app:'Futbolcu Gelişim',version:'v31',data:s},null,2);
  const blob=new Blob([payload],{type:'application/json'});const url=URL.createObjectURL(blob);
  const a=document.createElement('a');a.href=url;a.download='futbolcu-gelisim-verilerim.json';a.click();URL.revokeObjectURL(url);
 }
