@@ -1,0 +1,11 @@
+# V34 QA
+- PASS — JS syntax
+- PASS — Antrenmanlar ayrı sayfa
+- PASS — 16 çalışma kütüphanesi
+- PASS — ana ekranda çalışma isimleri gizli
+- PASS — kategori filtreleri
+- PASS — hareketli çalışma sahnesi
+- PASS — PWA cache temizleme
+- PASS — service worker unregister
+- PASS — manifest cache-bust
+- PASS — Oyuncu PRO 199 TL / Antrenör PRO 299 TL korunuyor
