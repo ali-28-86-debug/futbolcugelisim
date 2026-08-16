@@ -270,6 +270,50 @@ textarea{width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Futbolcu Gelişim">
 
+
+<style id="v32-motion-style">
+.motionDemo{margin:14px 0 8px;background:#07111f;border-radius:18px;overflow:hidden;box-shadow:0 8px 24px #0002;border:1px solid #1e3552}
+.motionTop{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:10px 12px;background:#0b1728}
+.motionTag{font-size:11px;font-weight:800;letter-spacing:.04em;padding:6px 9px;border-radius:999px;background:#17304e;color:#e8f3ff}
+.motionTag.ok{background:#123d2c;color:#bff5d6}
+.motionPitch{position:relative;aspect-ratio:16/9;background:linear-gradient(90deg,#155f39,#176b40);overflow:hidden}
+.motionPitch:before{content:"";position:absolute;inset:7%;border:2px solid #ffffffaa;border-radius:6px}
+.motionPitch:after{content:"";position:absolute;left:50%;top:7%;bottom:7%;border-left:2px solid #ffffff88}
+.mPlayer,.mBall,.mCone,.mTarget{position:absolute;z-index:3;transform:translate(-50%,-50%)}
+.mPlayer{width:30px;height:30px;border-radius:50%;background:#f7d046;border:4px solid #10223b;box-shadow:0 3px 8px #0007}
+.mPlayer:after{content:"";position:absolute;width:12px;height:18px;background:#f7d046;left:5px;top:25px;border-radius:5px}
+.mBall{width:15px;height:15px;border-radius:50%;background:white;border:2px solid #111;box-shadow:0 2px 5px #0008}
+.mCone{width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:18px solid #ff7a18}
+.mTarget{width:28px;height:28px;border:3px dashed #fff;border-radius:50%}
+.mArrow{position:absolute;height:3px;background:#fff9;transform-origin:left center;z-index:2}
+.mArrow:after{content:"";position:absolute;right:-2px;top:-5px;border-left:9px solid #fff9;border-top:6px solid transparent;border-bottom:6px solid transparent}
+@keyframes ballLR{0%,100%{left:43%;top:58%}50%{left:57%;top:58%}}
+@keyframes ballSole{0%{left:54%;top:60%}50%{left:46%;top:66%}100%{left:54%;top:60%}}
+@keyframes ballInOut{0%,100%{left:44%;top:62%}25%{left:52%;top:55%}50%{left:59%;top:63%}75%{left:51%;top:69%}}
+@keyframes ballV{0%{left:58%;top:62%}45%{left:48%;top:70%}100%{left:39%;top:54%}}
+@keyframes slalomBall{0%{left:20%;top:66%}25%{left:38%;top:43%}50%{left:54%;top:67%}75%{left:70%;top:43%}100%{left:84%;top:62%}}
+@keyframes passBall{0%{left:28%;top:62%}48%{left:78%;top:52%}52%{left:78%;top:52%}100%{left:28%;top:62%}}
+@keyframes oneTouch{0%{left:25%;top:60%}50%{left:74%;top:60%}100%{left:25%;top:60%}}
+@keyframes feetMove{0%,100%{left:30%;top:63%}50%{left:70%;top:63%}}
+@keyframes sideMove{0%,100%{left:35%;top:58%}50%{left:65%;top:58%}}
+@keyframes burstMove{0%{left:24%;top:64%}100%{left:78%;top:42%}}
+@keyframes changeMove{0%{left:20%;top:65%}48%{left:52%;top:48%}100%{left:78%;top:68%}}
+@keyframes ballSprint{0%{left:23%;top:64%}100%{left:80%;top:43%}}
+.motionDemo.play .inside{animation:ballLR 1.25s ease-in-out infinite}
+.motionDemo.play .sole{animation:ballSole 1.4s ease-in-out infinite}
+.motionDemo.play .inout{animation:ballInOut 1.7s ease-in-out infinite}
+.motionDemo.play .vdrag{animation:ballV 1.5s ease-in-out infinite}
+.motionDemo.play .slalom{animation:slalomBall 3s linear infinite}
+.motionDemo.play .pass{animation:passBall 1.7s ease-in-out infinite}
+.motionDemo.play .onetouch{animation:oneTouch 1.2s linear infinite}
+.motionDemo.play .feet{animation:feetMove 1.8s ease-in-out infinite}
+.motionDemo.play .side{animation:sideMove 1.4s ease-in-out infinite}
+.motionDemo.play .burst{animation:burstMove 1.7s ease-in-out infinite}
+.motionDemo.play .change{animation:changeMove 2.1s ease-in-out infinite}
+.motionDemo.play .ballsprint{animation:ballSprint 2s linear infinite}
+.motionHint{padding:9px 12px 12px;color:#c7d5e7;font-size:12px;background:#0b1728}
+</style>
+
 </head>
 <body>
 <div id="onboarding" class="onboarding" style="display:none">
@@ -1775,13 +1819,13 @@ function shareFeedback(){
  const type=(fbType.value||'Sorun').trim();
  const text=(fbText.value||'').trim();
  if(!text){alert('Kısa bir açıklama yaz.');return}
- const msg=`⚽ Futbolcu Gelişim V27 Test Geri Bildirimi\nKonu: ${type}\nDetay: ${text}\nSürüm: V29 Final Release`;
+ const msg=`⚽ Futbolcu Gelişim V32 Test Geri Bildirimi\nKonu: ${type}\nDetay: ${text}\nSürüm: V32`;
  if(navigator.share)navigator.share({title:'Futbolcu Gelişim Test',text:msg});
  else navigator.clipboard?.writeText(msg).then(()=>alert('Geri bildirim kopyalandı.'));
 }
 
 function exportMyData(){
- const payload=JSON.stringify({exportedAt:new Date().toISOString(),app:'Futbolcu Gelişim',version:'v31',data:s},null,2);
+ const payload=JSON.stringify({exportedAt:new Date().toISOString(),app:'Futbolcu Gelişim',version:'v32',data:s},null,2);
  const blob=new Blob([payload],{type:'application/json'});const url=URL.createObjectURL(blob);
  const a=document.createElement('a');a.href=url;a.download='futbolcu-gelisim-verilerim.json';a.click();URL.revokeObjectURL(url);
 }
@@ -2000,14 +2044,46 @@ const stageVideoPages={
 'ballsprint':{title:'Topla Sprint',url:'https://www.pexels.com/video/man-training-soccer-on-a-soccer-field-7187046/'}
 };
 function sceneHTML(type,title){
- const v=stageYoutube[type]||stageYoutube.inside;
- return `<div class="realVideoBox">
-   <div class="videoTop"><span class="videoTag">${v.label.toUpperCase()}</span><span class="videoTag videoGood">UYGULAMA İÇİNDE VİDEO</span></div>
-   <iframe class="ytFrame" src="https://www.youtube-nocookie.com/embed/${v.id}?playsinline=1&rel=0"
-     title="${v.label}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-     allowfullscreen></iframe>
- </div>
- <div class="videoHint">👀 Bu video yalnızca seçtiğin aşamaya ait. İstersen diğer aşamaları aşağıdaki önizleme tuşlarından da hemen görebilirsin.</div>`;
+ const labels={
+  inside:'Ayak İçi Dokunuş',sole:'Taban Çekme',inout:'İç-Dış Dokunuş',vdrag:'V Çekiş',
+  slalom:'Slalom',rightpass:'Sağ Ayak Pas',leftpass:'Sol Ayak Pas',controlpass:'Kontrol + Pas',
+  onetouch:'Tek Dokunuş',fastfeet:'Hızlı Ayak',sidefeet:'Yan Adım',doublefeet:'Çift Ayak',
+  crossfeet:'Çapraz Adım',ready:'Hazır Pozisyon',burst:'Patlayıcı Çıkış',change:'Yön Değiştirme',
+  ballsprint:'Topla Sprint'
+ };
+ const label=labels[type]||title||'Hareket';
+ let objects='<div class="mPlayer" style="left:50%;top:48%"></div>';
+ let cls=type;
+ if(['rightpass','leftpass','controlpass'].includes(type)){
+   cls='pass';
+   objects='<div class="mPlayer" style="left:23%;top:50%"></div><div class="mBall pass" style="left:28%;top:62%"></div><div class="mTarget" style="left:80%;top:50%"></div>';
+ } else if(type==='onetouch'){
+   objects='<div class="mPlayer" style="left:20%;top:48%"></div><div class="mBall onetouch" style="left:25%;top:60%"></div><div class="mTarget" style="left:78%;top:58%"></div>';
+ } else if(type==='slalom'){
+   objects='<div class="mPlayer" style="left:16%;top:53%"></div><div class="mBall slalom" style="left:20%;top:66%"></div>'+
+   '<div class="mCone" style="left:34%;top:48%"></div><div class="mCone" style="left:50%;top:66%"></div><div class="mCone" style="left:66%;top:48%"></div>';
+ } else if(['fastfeet','doublefeet','crossfeet'].includes(type)){
+   cls='feet';
+   objects='<div class="mPlayer feet" style="left:30%;top:63%"></div>'+
+   '<div style="position:absolute;left:24%;right:24%;top:45%;height:38%;border:2px solid #fff8;background:repeating-linear-gradient(90deg,transparent 0 11%,#fff8 11% 12%)"></div>';
+ } else if(type==='sidefeet'){
+   cls='side'; objects='<div class="mPlayer side" style="left:35%;top:58%"></div><div class="mCone" style="left:25%;top:72%"></div><div class="mCone" style="left:75%;top:72%"></div>';
+ } else if(type==='ready'){
+   objects='<div class="mPlayer" style="left:38%;top:58%;transform:translate(-50%,-50%) rotate(-12deg)"></div><div class="mArrow" style="left:47%;top:55%;width:30%;transform:rotate(-12deg)"></div>';
+ } else if(type==='burst'){
+   objects='<div class="mPlayer burst" style="left:24%;top:64%"></div><div class="mCone" style="left:20%;top:74%"></div><div class="mCone" style="left:82%;top:42%"></div>';
+ } else if(type==='change'){
+   objects='<div class="mPlayer change" style="left:20%;top:65%"></div><div class="mCone" style="left:52%;top:52%"></div><div class="mCone" style="left:80%;top:72%"></div>';
+ } else if(type==='ballsprint'){
+   objects='<div class="mPlayer" style="left:19%;top:52%"></div><div class="mBall ballsprint" style="left:23%;top:64%"></div><div class="mCone" style="left:84%;top:45%"></div>';
+ } else {
+   objects+='<div class="mBall '+cls+'" style="left:54%;top:60%"></div>';
+ }
+ return `<div class="motionDemo play">
+   <div class="motionTop"><span class="motionTag">${label.toUpperCase()}</span><span class="motionTag ok">DOĞRU HAREKET ANİMASYONU</span></div>
+   <div class="motionPitch">${objects}</div>
+   <div class="motionHint">▶ ${title||label} hareketinin saha üstü animasyonu. Her aşama kendi hareket anahtarına göre ayrı gösterilir.</div>
+ </div>`;
 }
 function toggleScene(){
  const v=document.getElementById('drillVideo');
