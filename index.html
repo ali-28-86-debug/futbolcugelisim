@@ -429,6 +429,43 @@ button:active{transform:scale(.985)}
 @media(max-width:390px){.infoGridV38{grid-template-columns:1fr}.detailTabs{top:70px}}
 </style>
 
+
+<style id="v39-home">
+body{background:#eef1f4;color:#111827}
+.app{background:#f3f5f7}
+header{background:#ffffff;color:#111827;border-radius:0;padding:16px 18px 14px;border-bottom:1px solid #e5e7eb;box-shadow:0 4px 18px #00000008}
+header .brand{font-size:23px}.sub{color:#667085;opacity:1}
+header .hero{display:none}
+.headerSettings{background:#f2f4f7!important;color:#344054!important;border:1px solid #e4e7ec!important}
+#home{padding-top:4px}
+.homeReadinessV39{background:#fff;border-radius:28px;padding:20px 18px;margin:13px 0;box-shadow:0 8px 22px #1018280a}
+.homeReadinessV39 .top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.homeReadinessV39 h2{margin:0;font-size:25px;line-height:1.1}.homeReadinessV39 p{margin:4px 0 0;color:#667085;font-size:15px}
+.homeReadinessV39 .status{background:#e8f8ef;color:#23804b;border-radius:999px;padding:10px 15px;font-weight:900}
+.homeReadinessV39 .readinessGrid{grid-template-columns:repeat(3,1fr);gap:9px;margin-top:16px}
+.homeReadinessV39 .readinessGrid button{background:#111827;color:#fff;border-radius:18px;min-height:58px;font-size:15px}
+.homeFeaturesV39{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:12px 0 16px}
+.homeFeatureV39{min-height:180px;background:#fff;color:#111827;border:0;border-radius:28px;padding:18px 15px;text-align:left;box-shadow:0 8px 24px #1018280b;display:flex;align-items:center;gap:13px}
+.homeFeatureV39 .emoji{font-size:42px;line-height:1;flex:0 0 48px}
+.homeFeatureV39 .copy{min-width:0}.homeFeatureV39 b{display:block;font-size:19px;line-height:1.08;margin-bottom:6px}
+.homeFeatureV39 small{display:block;color:#667085;font-size:13px;line-height:1.35;font-weight:750}
+.homeFeatureV39:active{transform:scale(.985)}
+.homeMiniProgramV39{background:#fff;border-radius:26px;padding:18px;margin:0 0 16px;box-shadow:0 8px 24px #1018280b}
+.homeMiniProgramV39 .head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.homeMiniProgramV39 h2{font-size:20px;margin:0}.homeMiniProgramV39 .pill{background:#eef9e8;color:#3a7d1e}
+.homeMiniProgramV39 .summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.homeMiniProgramV39 .summary div{background:#f7f8fa;border-radius:15px;padding:11px 8px;text-align:center}
+.homeMiniProgramV39 .summary b{display:block;font-size:18px;color:#111827}.homeMiniProgramV39 .summary small{font-size:11px;color:#667085}
+.homeMiniProgramV39 .primary{width:100%;background:#111827;color:#fff;border-radius:16px}
+.nav{background:#fff;border-top:1px solid #e5e7eb;height:72px}.nav button{color:#667085}.nav button.active{color:#111827}
+#home .card{background:#fff;color:#111827}
+#home .small{color:#667085}
+@media(max-width:380px){
+ .homeFeatureV39{min-height:165px;padding:15px 12px}.homeFeatureV39 .emoji{font-size:36px;flex-basis:42px}.homeFeatureV39 b{font-size:17px}
+ .homeReadinessV39 h2{font-size:22px}.homeReadinessV39 .readinessGrid button{font-size:13px;padding:10px 5px}
+}
+</style>
+
 </head>
 <body>
 <div id="onboarding" class="onboarding" style="display:none">
@@ -487,52 +524,63 @@ button:active{transform:scale(.985)}
 
 <main>
 
+
 <section id="home" class="page active">
-  <div class="v34Hero">
-    <div class="photo"></div><div class="sil">⚽</div>
-    <div class="copy">
-      <div class="tag">FUTBOLCU GELİŞİM</div>
-      <h2>Gelişimini tek yerden yönet.</h2>
-      <p>Kişisel programını başlat veya tüm antrenman kütüphanesinden çalışmanı kendin seç.</p>
+  <div class="homeReadinessV39">
+    <div class="top">
+      <div><h2>⚡ Bugün nasılsın?</h2><p>Yoğunluğu buna göre ayarlayalım.</p></div>
+      <span class="status" id="readinessBadge">Normal</span>
     </div>
-  </div>
-
-  <div class="quickCards">
-    <button class="quickCard" onclick="openTrainingLibrary(this)"><div class="ico">⚽</div><b>Antrenmanlar</b><small>Tüm çalışma kütüphanesi</small></button>
-    <button class="quickCard" onclick="show('coach',document.querySelectorAll('.nav button')[3])"><div class="ico">🤖</div><b>AI Antrenör</b><small>Kişisel öneri ve plan</small></button>
-  </div>
-
-  <div class="card" style="padding:15px">
-    <div class="sectionTitle" style="margin:0 0 10px"><h2>Bugünün Programı</h2><span class="pill" id="todayProgressionPill">Temel</span></div>
-    <div class="small" id="planDesc"></div>
-    <div id="adaptiveReason" class="small" style="margin:9px 0 12px"></div>
-    <div class="statRow">
-      <div class="statBox"><b id="homeDrillCount">3</b><small>çalışma</small></div>
-      <div class="statBox"><b id="homeMainMinutes">0 dk</b><small>ana bölüm</small></div>
-      <div class="statBox"><b id="homeTotalMinutes">0 dk</b><small>toplam</small></div>
-    </div>
-    <div class="sessionStructure" id="sessionStructure" style="margin-top:12px"></div>
-    <div id="workouts" style="display:none"></div>
-    <button class="primary" style="width:100%;margin-top:12px" onclick="startAdaptiveToday()">▶ Kişisel Programı Başlat</button>
-  </div>
-
-  <div class="card" style="padding:15px;margin-top:12px">
-    <div class="sectionTitle" style="margin:0 0 10px"><h2>Bugün nasılsın?</h2><span class="pill" id="readinessBadge">Normal</span></div>
     <div class="readinessGrid">
       <button onclick="setReadiness('fresh')">🟢 Dinç</button>
       <button onclick="setReadiness('normal')">🟡 Normal</button>
       <button onclick="setReadiness('tired')">🔴 Yorgun</button>
     </div>
-    <div id="readinessNote" class="small" style="margin-top:9px"></div>
+    <div id="readinessNote" class="small" style="margin-top:10px"></div>
   </div>
 
-  <div class="card" style="padding:15px;margin-top:12px">
-    <div class="sectionTitle" style="margin:0 0 10px"><h2>Bu Hafta</h2></div>
-    <div class="statRow">
-      <div class="statBox"><b id="statWork">0</b><small>antrenman</small></div>
-      <div class="statBox"><b id="statMin">0</b><small>dakika</small></div>
-      <div class="statBox"><b id="streak">0</b><small>seri</small></div>
+  <div class="homeFeaturesV39">
+    <button class="homeFeatureV39" onclick="openTrainingLibrary(document.querySelectorAll('.nav button')[1])">
+      <span class="emoji">📚</span><span class="copy"><b>Antrenmanlar</b><small>1v1, duran top, şut, pas, savunma ve daha fazlası</small></span>
+    </button>
+    <button class="homeFeatureV39" onclick="openExtra('trainer')">
+      <span class="emoji">🧑‍🏫</span><span class="copy"><b>Antrenör Modu</b><small>Takım antrenmanı oluştur, planla ve kütüphaneyi kullan</small></span>
+    </button>
+    <button class="homeFeatureV39" onclick="openExtra('tests')">
+      <span class="emoji">🧪</span><span class="copy"><b>Performans Testleri</b><small>Sprint, slalom, pas ve şut gelişimini ölç</small></span>
+    </button>
+    <button class="homeFeatureV39" onclick="openExtra('playercard')">
+      <span class="emoji">🪪</span><span class="copy"><b>Oyuncu Kartı</b><small>Hız, pas, dribbling, şut ve zayıf ayak skorları</small></span>
+    </button>
+    <button class="homeFeatureV39" onclick="openExtra('parent')">
+      <span class="emoji">👨‍👩‍👦</span><span class="copy"><b>Veli Raporu</b><small>Aylık gelişim ve antrenman özeti</small></span>
+    </button>
+    <button class="homeFeatureV39" onclick="openExtra('matchday')">
+      <span class="emoji">🏟️</span><span class="copy"><b>Maç Günü</b><small>Maç öncesi ve sonrası özel hazırlık planı</small></span>
+    </button>
+    <button class="homeFeatureV39" onclick="openExtra('club')">
+      <span class="emoji">🏢</span><span class="copy"><b>Kulüp Modu</b><small>Oyuncuları yönet, ödev ata ve takibi kolaylaştır</small></span>
+    </button>
+    <button class="homeFeatureV39" onclick="openExtra('settings')">
+      <span class="emoji">⚙️</span><span class="copy"><b>Ayarlar</b><small>Gizlilik, destek, rol ve cihaz verileri</small></span>
+    </button>
+  </div>
+
+  <div class="homeMiniProgramV39">
+    <div class="head"><h2>Bugünün Kişisel Programı</h2><span class="pill" id="todayProgressionPill">Temel</span></div>
+    <div class="small" id="planDesc" style="margin-top:7px"></div>
+    <div id="adaptiveReason" class="small" style="margin-top:5px"></div>
+    <div class="summary">
+      <div><b id="homeDrillCount">3</b><small>çalışma</small></div>
+      <div><b id="homeMainMinutes">0 dk</b><small>ana bölüm</small></div>
+      <div><b id="homeTotalMinutes">0 dk</b><small>toplam</small></div>
     </div>
+    <div id="sessionStructure" style="display:none"></div><div id="workouts" style="display:none"></div>
+    <button class="primary" onclick="startAdaptiveToday()">▶ Kişisel Programı Başlat</button>
+  </div>
+
+  <div style="display:none">
+    <b id="statWork">0</b><b id="statMin">0</b><b id="streak">0</b>
   </div>
 </section>
 
@@ -623,7 +671,7 @@ button:active{transform:scale(.985)}
 <section id="club" class="page">
  <div class="card clubHero">
   <button class="secondary" onclick="backHomeFromExtra()">← Ana Sayfa</button>
-  <div class="tag" style="margin-top:14px">KULÜP MODU · DEMO</div>
+  <div class="tag" style="margin-top:14px">KULÜP MODU</div>
   <h2>🏟️ Takım & Oyuncu Yönetimi</h2>
   <p>Oyuncu ekle, bireysel ödev ata ve takımın genel gelişimini takip et.</p>
  </div>
@@ -698,20 +746,14 @@ button:active{transform:scale(.985)}
   <div class="small" style="margin-top:10px">Gerçek kullanıcı hesabı açıldığında ayrıca hesap silme ve sunucudaki verileri silme yolu eklenecek.</div>
  </div>
  <div class="card">
-  <h2>🔐 PRO Test Erişimi</h2>
-  <div class="settingsRow"><span>Durum</span><b id="ownerStatus">Kilitli</b></div>
-  <button class="settingsBtn" onclick="openOwnerAccess()">Yönetici erişimini aç</button>
-  <button class="dangerBtn" onclick="lockProAgain()">PRO test erişimini kapat</button>
- </div>
- <div class="card">
   <h2>ℹ️ Sürüm</h2>
-  <div class="settingsRow"><span>Futbolcu Gelişim</span><b>v27 Final Test</b></div>
+  <div class="settingsRow"><span>Futbolcu Gelişim</span><b>V39</b></div>
  </div>
 </section>
 
 <section id="pro" class="page">
 <div class="card proHero">
-  <div class="row"><span class="tag">PRO</span><span class="proPrice">1199 TL / ay</span></div>
+  <div class="row"><span class="tag">PRO</span><span class="proPrice">199 TL / ay</span></div>
   <h2>⚽ Kişisel Futbol Gelişim Programı</h2>
   <p>Mevkine, yaşına ve gelişim hedefine göre 7 günlük antrenman planı oluştur.</p>
 </div>
@@ -898,7 +940,7 @@ button:active{transform:scale(.985)}
   <div class="card aiHero">
     <div class="row">
       <div>
-        <div class="tag">AI ANTRENÖR · DEMO</div>
+        <div class="tag">AI ANTRENÖR</div>
         <h2 style="margin:10px 0 5px">🤖 Futbolcu Koçu</h2>
       </div>
       <span class="pill" id="coachPos">Orta Saha</span>
@@ -928,7 +970,7 @@ button:active{transform:scale(.985)}
       <input id="coachQuestion" placeholder="Örn: Sol ayağımı nasıl geliştiririm?">
       <button onclick="askCoach()">Gönder</button>
     </div>
-    <div class="small">Bu sürüm demo mantığıyla çalışır. Gerçek AI bağlantısını ödeme ve kullanıcı sistemiyle birlikte güvenli sunucu üzerinden ekleyeceğiz.</div>
+    <div class="small">AI Antrenör, profilin ve gelişim verilerine göre öneriler oluşturur.</div>
   </div>
 
   <div class="card">
@@ -943,7 +985,7 @@ button:active{transform:scale(.985)}
 </div>
 
 <script>
-const K='futbolcu_v38';
+const K='futbolcu_v39';
 let old=JSON.parse(localStorage.getItem('futbolcu_v20')||'null')||JSON.parse(localStorage.getItem('futbolcu_v19')||'null')||JSON.parse(localStorage.getItem('futbolcu_v18')||'null')||JSON.parse(localStorage.getItem('futbolcu_v17')||'null')||JSON.parse(localStorage.getItem('futbolcu_v16')||'null')||JSON.parse(localStorage.getItem('futbolcu_v15')||'null')||JSON.parse(localStorage.getItem('futbolcu_v14')||'null')||JSON.parse(localStorage.getItem('futbolcu_v13')||'null')||JSON.parse(localStorage.getItem('futbolcu_v12_2')||'null')||JSON.parse(localStorage.getItem('futbolcu_v12_1')||'null')||JSON.parse(localStorage.getItem('futbolcu_v12')||'null')||JSON.parse(localStorage.getItem('futbolcu_v11')||'null')||JSON.parse(localStorage.getItem('futbolcu_v10')||'null')||JSON.parse(localStorage.getItem('futbolcu_v9')||'null')||JSON.parse(localStorage.getItem('futbolcu_v8')||'null')||JSON.parse(localStorage.getItem('futbolcu_v7')||'null');
 let s=JSON.parse(localStorage.getItem(K)||'null')||JSON.parse(localStorage.getItem('futbolcu_v31')||'null')||JSON.parse(localStorage.getItem('futbolcu_v30')||'null')||JSON.parse(localStorage.getItem('futbolcu_v29')||'null')||JSON.parse(localStorage.getItem('futbolcu_v28')||'null')||JSON.parse(localStorage.getItem('futbolcu_v27_1')||'null')||JSON.parse(localStorage.getItem('futbolcu_v27')||'null')||JSON.parse(localStorage.getItem('futbolcu_v26')||'null')||old||{name:'Yeni Oyuncu',age:12,pos:'Orta Saha',xp:0,done:[],totalE:0,totalM:0,days:1,pro:false};
 if(!s.proPlan)s.proPlan=null;if(!s.streak)s.streak=1;if(!s.coachHistory)s.coachHistory=[];if(!s.coachPlan)s.coachPlan=[];if(!s.teamCoachHistory)s.teamCoachHistory=[];if(!s.teamPlans)s.teamPlans=[];if(!s.testResults)s.testResults=[];
@@ -2371,11 +2413,11 @@ function show(id,b){showRaw(id);document.querySelectorAll('.nav button').forEach
 function showRaw(id){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');scrollTo(0,0)}
 render();renderTrainingLibrary();renderProPlan();initCoach();initTrainerHistory();
 
-const APP_VERSION='v38-20260816-2358';
+const APP_VERSION='v39-20260817-0005';
 (function ensureFreshApp(){
  try{
    const old=localStorage.getItem('fg_app_version'); localStorage.setItem('fg_app_version',APP_VERSION);
-   if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=38').then(r=>r.update()).catch(()=>{}));}
+   if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=39').then(r=>r.update()).catch(()=>{}));}
    if(old && old!==APP_VERSION){const b=document.createElement('div');b.className='updateBanner show';b.innerHTML='<div><b>V36 yüklendi</b><div class="small">Yeni anlatımlı antrenman ekranları hazır.</div></div><button onclick="location.reload()">Aç</button>';document.body.appendChild(b)}
  }catch(e){}
 })();
