@@ -1,0 +1,1977 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f172a">
+<link rel="manifest" href="manifest.webmanifest">
+<title>Futbolcu Gelişim v30</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#f3f5f7;color:#111827}
+.app{max-width:520px;margin:auto;min-height:100vh;padding-bottom:78px}
+header{background:#0f172a;color:#fff;padding:22px 18px;border-radius:0 0 26px 26px}
+.brand{font-size:25px;font-weight:900}.sub{opacity:.72}.hero{background:#182235;padding:18px;border-radius:20px;margin-top:16px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}.level{font-size:36px;font-weight:900}.xp{font-weight:900;color:#27ae60}
+.bar{height:10px;background:#e5e7eb;border-radius:99px;overflow:hidden}.bar span{display:block;height:100%;background:#27ae60}
+main{padding:0 15px}.card{background:#fff;margin:15px 0;border-radius:22px;padding:18px;box-shadow:0 4px 14px #0000000a}
+.exercise{display:flex;align-items:center;gap:10px;padding:13px 0;border-bottom:1px solid #eee}.exercise:last-child{border:0}.ico{font-size:28px;width:42px}
+.grow{flex:1}.name{font-size:18px;font-weight:850}.small{font-size:13px;color:#6b7280}
+button{border:0;border-radius:14px;padding:12px 14px;font-weight:850;background:#111827;color:#fff;font-size:14px}.done{background:#27ae60}.secondary{background:#eef1f4;color:#111827}
+button:disabled{opacity:.45}.pill{background:#e9f8ef;color:#188348;padding:8px 12px;border-radius:99px;font-size:12px;font-weight:800}
+.page{display:none}.page.active{display:block}.nav{position:fixed;bottom:0;left:0;right:0;height:72px;background:#fff;border-top:1px solid #ddd;display:flex;justify-content:center}
+.navin{width:520px;display:grid;grid-template-columns:repeat(5,1fr)}.nav button{background:transparent;color:#6b7280;border-radius:0;padding:6px 2px}.nav button.active{color:#111827}
+.step{padding:14px;border-radius:16px;background:#f7f8fa;margin:10px 0}.step.active{outline:3px solid #27ae60;background:#eefaf3}.step.doneStep{opacity:.55}
+.timer{font-size:52px;font-weight:900;text-align:center;margin:12px 0}
+input,select{width:100%;padding:13px;border:1px solid #ddd;border-radius:12px;margin:6px 0 12px;font-size:16px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{background:#f7f8fa;border-radius:15px;padding:13px}.stat b{display:block;font-size:22px}
+.info{background:#f8fafc;border-radius:15px;padding:14px;margin-top:12px}.good{background:#ecfdf5}.bad{background:#fff1f2}.tip{background:#eff6ff}
+.progressText{text-align:center;font-weight:800;margin-top:8px}.complete{background:#052e16;color:#d1fae5;padding:18px;border-radius:16px;text-align:center;font-weight:800}
+.probox{background:#0f172a;color:#fff;border-radius:20px;padding:18px}.tag{display:inline-block;background:#fde68a;color:#7c5300;border-radius:99px;padding:6px 10px;font-size:11px;font-weight:900}
+.locknote{background:#fff7ed;color:#9a4d0b;padding:12px;border-radius:14px;font-size:13px;margin-top:12px;font-weight:700}
+
+/* v9 scene */
+.scene{margin:14px 0;background:linear-gradient(#dfe6ee 0 61%,#4d9c4d 61%);height:310px;border-radius:18px;position:relative;overflow:hidden;border:1px solid #d9dee5}
+.sceneLabel{position:absolute;top:12px;left:12px;background:#111827;color:white;padding:8px 11px;border-radius:10px;font-size:12px;font-weight:900;z-index:10}
+.sceneBadge{position:absolute;top:12px;right:12px;background:#22c55e;color:white;padding:8px 11px;border-radius:10px;font-size:12px;font-weight:900;z-index:10}
+
+.coach{position:absolute;left:50%;top:48px;transform:translateX(-50%);width:150px;height:210px;z-index:5;transform-origin:50% 85%}
+.neck{position:absolute;left:68px;top:37px;width:17px;height:15px;background:#b97850;border-radius:5px}
+.hair{position:absolute;left:55px;top:0;width:43px;height:19px;background:#241811;border-radius:50% 55% 25% 25%;z-index:3}
+.head3d{position:absolute;left:58px;top:8px;width:38px;height:42px;border-radius:46% 46% 50% 50%;background:linear-gradient(115deg,#e5a775 0 52%,#b87349 53%);box-shadow:inset -5px -2px 0 #a96542}
+.head3d:before{content:"";position:absolute;left:8px;top:17px;width:4px;height:4px;border-radius:50%;background:#1f2937;box-shadow:17px 0 #1f2937}
+.head3d:after{content:"";position:absolute;left:14px;top:29px;width:12px;height:3px;border-radius:50%;background:#7c3f2d}
+.torso{position:absolute;left:38px;top:48px;width:78px;height:76px;clip-path:polygon(16% 0,84% 0,100% 25%,88% 100%,12% 100%,0 25%);background:linear-gradient(90deg,#0b1730,#172b4d 48%,#0b1730);box-shadow:inset 0 -9px #081323}
+.torso:after{content:"10";position:absolute;left:31px;top:24px;color:#fff;font-weight:900;font-size:19px;opacity:.9}
+.stripe1,.stripe2{position:absolute;top:52px;width:3px;height:56px;background:#dbeafe;opacity:.7}.stripe1{left:48px}.stripe2{right:45px}
+.arm{position:absolute;top:54px;width:18px;height:76px;background:linear-gradient(#d89667,#b87349);border-radius:12px;transform-origin:50% 6%;box-shadow:inset -3px 0 #a96542}.armL{left:25px;transform:rotate(13deg)}.armR{right:22px;transform:rotate(-13deg)}
+.short{position:absolute;left:43px;top:118px;width:70px;height:37px;background:linear-gradient(90deg,#081323,#111f38);clip-path:polygon(0 0,100% 0,91% 100%,57% 100%,50% 48%,43% 100%,9% 100%)}
+.leg{position:absolute;top:145px;width:22px;height:72px;background:linear-gradient(90deg,#c78357,#a96542);border-radius:11px;transform-origin:50% 3%}.legL{left:50px}.legR{left:84px}
+.sock{position:absolute;top:38px;width:22px;height:39px;background:linear-gradient(90deg,#f8fafc,#cbd5e1);border-radius:6px}
+.boot{position:absolute;top:66px;left:-2px;width:35px;height:14px;background:#111827;border-radius:9px 14px 5px 5px;transform-origin:5px 7px}
+.ball{position:absolute;left:calc(50% - 21px);bottom:42px;width:42px;height:42px;border-radius:50%;background:radial-gradient(circle at 50% 43%,#111827 0 14%,transparent 15%),radial-gradient(circle at 27% 28%,#111827 0 8%,transparent 9%),radial-gradient(circle at 73% 28%,#111827 0 8%,transparent 9%),#fff;border:2px solid #111827;z-index:7;box-shadow:0 5px 7px #0004}
+.arrow{position:absolute;color:#fff;font-size:42px;font-weight:900;opacity:.92;z-index:6}
+.caption{position:absolute;bottom:10px;left:12px;right:12px;background:#06120ddd;color:white;padding:9px 12px;border-radius:10px;text-align:center;font-size:13px;font-weight:800;z-index:10}
+.cone{position:absolute;bottom:52px;width:22px;height:30px;background:#f97316;clip-path:polygon(50% 0,100% 100%,0 100%);z-index:4}
+.wall{position:absolute;right:24px;bottom:56px;width:28px;height:150px;background:repeating-linear-gradient(0deg,#cbd5e1 0 10px,#94a3b8 10px 20px);border-radius:4px;z-index:3}
+.ladder{position:absolute;left:35px;right:35px;bottom:48px;height:72px;border-left:5px solid #facc15;border-right:5px solid #facc15;background:repeating-linear-gradient(0deg,transparent 0 14px,#facc15 14px 18px);transform:perspective(120px) rotateX(54deg);transform-origin:bottom;z-index:2}
+.startline{position:absolute;left:24px;bottom:52px;width:95px;height:7px;background:#fff;z-index:2}
+.finishline{position:absolute;right:25px;bottom:52px;width:9px;height:145px;background:repeating-linear-gradient(0deg,#fff 0 12px,#111827 12px 24px);z-index:2}
+.sceneControl{width:100%;margin-top:10px;background:#0f172a}
+.pauseAll *{animation-play-state:paused!important}
+
+/* Her egzersizin hareketi ayrı */
+.scene.inside .ball{animation:insideBall 1.15s infinite ease-in-out}.scene.inside .legL{animation:insideL 1.15s infinite ease-in-out}.scene.inside .legR{animation:insideR 1.15s infinite ease-in-out}
+.scene.sole .ball{animation:soleBall 1.35s infinite ease-in-out}.scene.sole .legL{animation:soleL 1.35s infinite ease-in-out}.scene.sole .legR{animation:soleR 1.35s infinite ease-in-out}
+.scene.inout .ball{animation:inoutBall 1.05s infinite ease-in-out}.scene.inout .legR{animation:inoutLeg 1.05s infinite ease-in-out}
+.scene.slalom .coach{animation:slalomCoach 2.1s infinite ease-in-out}.scene.slalom .ball{animation:slalomBall 2.1s infinite ease-in-out}
+.scene.wallpass .ball{animation:wallBall 1.25s infinite linear}.scene.wallpass .legR{animation:kick 1.25s infinite ease-in-out}
+.scene.fastfeet .coach{top:38px}.scene.fastfeet .legL{animation:fastL .34s infinite alternate}.scene.fastfeet .legR{animation:fastR .34s infinite alternate}.scene.fastfeet .armL{animation:armRunL .34s infinite alternate}.scene.fastfeet .armR{animation:armRunR .34s infinite alternate}
+.scene.sidefeet .coach{animation:sideBody 1.2s infinite ease-in-out}.scene.sidefeet .legL{animation:sideL .6s infinite alternate}.scene.sidefeet .legR{animation:sideR .6s infinite alternate}
+.scene.crossfeet .legL{animation:crossL .8s infinite ease-in-out}.scene.crossfeet .legR{animation:crossR .8s infinite ease-in-out}
+.scene.ready .coach{top:78px;animation:readyBounce 1.2s infinite ease-in-out}.scene.ready .torso{transform:rotate(18deg)}.scene.ready .legL{transform:rotate(30deg)}.scene.ready .legR{transform:rotate(-20deg)}.scene.ready .armL{transform:rotate(48deg)}.scene.ready .armR{transform:rotate(-42deg)}
+.scene.burst .coach{animation:burstRun 1.5s infinite cubic-bezier(.2,.7,.2,1)}.scene.burst .legL,.scene.sprintonly .legL{animation:runL .32s infinite alternate}.scene.burst .legR,.scene.sprintonly .legR{animation:runR .32s infinite alternate}.scene.burst .armL,.scene.sprintonly .armL{animation:armRunL .32s infinite alternate}.scene.burst .armR,.scene.sprintonly .armR{animation:armRunR .32s infinite alternate}
+.scene.change .coach{animation:changeDir 2s infinite ease-in-out}.scene.change .legL{animation:runL .34s infinite alternate}.scene.change .legR{animation:runR .34s infinite alternate}
+.scene.ballsprint .coach{animation:ballSprintBody 1.7s infinite ease-in-out}.scene.ballsprint .ball{animation:ballSprintBall 1.7s infinite ease-in-out}.scene.ballsprint .legL{animation:runL .34s infinite alternate}.scene.ballsprint .legR{animation:runR .34s infinite alternate}
+
+.scene.ready .ball,.scene.burst .ball,.scene.change .ball,.scene.sprintonly .ball,.scene.fastfeet .ball,.scene.sidefeet .ball,.scene.crossfeet .ball{display:none}
+
+@keyframes insideBall{0%,100%{transform:translateX(-50px)}50%{transform:translateX(50px)}} @keyframes insideL{0%,100%{transform:rotate(18deg)}50%{transform:rotate(-5deg)}} @keyframes insideR{0%,100%{transform:rotate(5deg)}50%{transform:rotate(-18deg)}}
+@keyframes soleBall{0%,100%{transform:translateX(-45px)}50%{transform:translateX(42px)}} @keyframes soleL{0%,100%{transform:rotate(4deg)}50%{transform:rotate(-25deg)}} @keyframes soleR{0%,100%{transform:rotate(23deg)}50%{transform:rotate(3deg)}}
+@keyframes inoutBall{0%,100%{transform:translateX(-8px)}50%{transform:translateX(48px)}} @keyframes inoutLeg{0%,100%{transform:rotate(-18deg)}50%{transform:rotate(22deg)}}
+@keyframes slalomCoach{0%,100%{transform:translateX(-68%) rotate(-3deg)}50%{transform:translateX(-32%) rotate(3deg)}} @keyframes slalomBall{0%,100%{transform:translateX(-78px)}25%{transform:translateX(-32px)}50%{transform:translateX(18px)}75%{transform:translateX(65px)}}
+@keyframes wallBall{0%{transform:translateX(-48px)}55%{transform:translateX(150px)}100%{transform:translateX(-48px)}} @keyframes kick{0%,100%{transform:rotate(-5deg)}35%{transform:rotate(-32deg)}60%{transform:rotate(12deg)}}
+@keyframes fastL{from{transform:translateY(0) rotate(3deg)}to{transform:translateY(-20px) rotate(-5deg)}} @keyframes fastR{from{transform:translateY(-20px) rotate(5deg)}to{transform:translateY(0) rotate(-3deg)}}
+@keyframes armRunL{from{transform:rotate(42deg)}to{transform:rotate(-34deg)}} @keyframes armRunR{from{transform:rotate(-42deg)}to{transform:rotate(34deg)}}
+@keyframes sideBody{0%,100%{transform:translateX(-72%)}50%{transform:translateX(-28%)}} @keyframes sideL{from{transform:rotate(24deg)}to{transform:rotate(-18deg)}} @keyframes sideR{from{transform:rotate(-24deg)}to{transform:rotate(18deg)}}
+@keyframes crossL{0%,100%{transform:translateX(0) rotate(4deg)}50%{transform:translateX(28px) rotate(-16deg)}} @keyframes crossR{0%,100%{transform:translateX(0) rotate(-4deg)}50%{transform:translateX(-28px) rotate(16deg)}}
+@keyframes readyBounce{0%,100%{transform:translateX(-50%) translateY(0) rotate(-7deg)}50%{transform:translateX(-50%) translateY(4px) rotate(-7deg)}}
+@keyframes burstRun{0%{transform:translateX(-82%) rotate(10deg) scale(.92)}70%,100%{transform:translateX(18%) rotate(2deg) scale(1)}} 
+@keyframes runL{from{transform:rotate(32deg)}to{transform:rotate(-30deg)}} @keyframes runR{from{transform:rotate(-32deg)}to{transform:rotate(30deg)}}
+@keyframes changeDir{0%,100%{transform:translateX(-72%) rotate(-12deg)}45%{transform:translateX(-10%) rotate(14deg)}55%{transform:translateX(-10%) rotate(-14deg)}}
+@keyframes ballSprintBody{0%,100%{transform:translateX(-72%) rotate(5deg)}50%{transform:translateX(-25%) rotate(3deg)}} @keyframes ballSprintBall{0%,100%{transform:translateX(-68px)}50%{transform:translateX(72px)}}
+
+
+.realVideoBox{margin:14px 0 8px;background:#0b1220;border-radius:18px;overflow:hidden;position:relative;box-shadow:0 8px 24px #0002}
+.realVideoBox video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#000}
+.videoTop{position:absolute;left:10px;right:10px;top:10px;display:flex;justify-content:space-between;gap:8px;z-index:2;pointer-events:none}
+.videoTag{background:#0f172ae8;color:#fff;padding:7px 10px;border-radius:10px;font-size:11px;font-weight:900}
+.videoGood{background:#16a34ae8}
+.videoCredit{font-size:11px;color:#6b7280;text-align:center;margin:7px 0 2px}
+.videoHint{background:#ecfdf5;color:#166534;border-radius:13px;padding:11px;margin:9px 0 14px;font-size:13px;font-weight:750}
+
+
+.stagePoster{aspect-ratio:16/9;background:linear-gradient(145deg,#172033,#0b1220);display:flex;flex-direction:column;align-items:center;justify-content:center;color:white;padding:28px;text-align:center}
+.playCircle{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;background:#22c55e;font-size:28px;padding-left:4px;box-shadow:0 10px 30px #0005}
+.stagePosterTitle{font-size:23px;font-weight:950;margin-top:16px}
+.stagePosterSub{font-size:13px;color:#cbd5e1;margin-top:6px}
+.videoOpenBtn{width:100%;border:0;border-radius:15px;padding:15px 12px;background:#0f172a;color:#fff;font-size:15px;font-weight:900;margin:8px 0 4px}
+
+
+.ytFrame{width:100%;aspect-ratio:16/9;border:0;display:block;background:#000}
+
+.ytFrame{width:100%;aspect-ratio:16/9;border:0;display:block;background:#000}
+.previewNav{display:flex;gap:8px;overflow-x:auto;padding:6px 0 2px;margin:8px 0 12px}
+.previewNav button{min-width:44px;padding:10px;background:#e5e7eb;color:#111827;border-radius:12px}
+.previewNav button.active{background:#22c55e;color:#fff}
+.previewNote{font-size:12px;color:#6b7280;margin-bottom:8px}
+
+.proHero{background:linear-gradient(145deg,#0f172a,#172554);color:#fff}
+.proHero p{color:#cbd5e1;line-height:1.45}.proPrice{font-weight:900;color:#fde68a}
+.proGenerate{width:100%;margin-top:5px;background:#22c55e;color:#052e16;font-size:15px}
+.proFeature{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid #eee;font-size:23px}
+.proFeature:last-child{border:0}.proFeature div{font-size:14px}.proFeature b{display:block;font-size:15px}.proFeature span{display:block;color:#6b7280;margin-top:3px;line-height:1.35}
+.proDay{border:1px solid #e5e7eb;border-radius:16px;padding:13px;margin:9px 0;background:#fafafa}
+.proDay.rest{background:#f1f5f9;color:#64748b}.proDayTop{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.proDayTitle{font-weight:900}.proDrills{font-size:13px;color:#4b5563;margin-top:6px;line-height:1.5}
+.proLock{font-size:11px;background:#fde68a;color:#7c5300;border-radius:99px;padding:5px 8px;font-weight:900}
+
+
+.proOpenBtn{margin-top:10px;width:100%;background:#0f172a}
+.proDrillCard{border:1px solid #e5e7eb;border-radius:17px;padding:14px;margin:12px 0;background:#fff}
+.proDrillHead{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:8px}
+.proDrillHead b{font-size:17px}.proMins{font-size:11px;font-weight:900;background:#dcfce7;color:#166534;padding:5px 8px;border-radius:99px}
+.proHow{background:#f8fafc;border-radius:12px;padding:11px;font-size:13px;line-height:1.45;margin:9px 0}
+.proYT{width:100%;aspect-ratio:16/9;border:0;border-radius:13px;background:#000;display:block}
+
+.aiHero{background:linear-gradient(145deg,#081426,#133b5c);color:#fff}
+.aiHero p{color:#cbd5e1;margin-bottom:0}
+.quickGrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.quickGrid button{background:#eef2ff;color:#172554;min-height:74px;text-align:left;font-size:13px;line-height:1.25}
+.coachChat{max-height:420px;overflow:auto;padding:8px 0}
+.msg{padding:11px 13px;border-radius:15px;margin:8px 0;line-height:1.45;font-size:14px;white-space:pre-line}
+.msg.coach{background:#eef6ff;border-bottom-left-radius:5px}
+.msg.user{background:#0f172a;color:#fff;margin-left:35px;border-bottom-right-radius:5px}
+.coachInput{display:flex;gap:8px;margin-top:10px}
+.coachInput input{margin:0;flex:1}
+.coachInput button{white-space:nowrap}
+.coachPlanItem{border:1px solid #e5e7eb;border-radius:15px;padding:12px;margin:9px 0;background:#fafafa}
+.coachPlanItem b{display:block;margin-bottom:4px}
+.intensity{display:inline-block;padding:5px 8px;border-radius:99px;background:#dcfce7;color:#166534;font-size:11px;font-weight:900;margin-top:6px}
+
+
+.homeActions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 15px 18px}
+.homeAction{background:#fff;color:#111827;display:flex;gap:10px;align-items:center;text-align:left;padding:16px;border-radius:18px;box-shadow:0 4px 14px #0000000a}
+.homeAction span{font-size:30px}.homeAction b{display:block;font-size:16px}.homeAction small{display:block;color:#6b7280;margin-top:3px;line-height:1.3}
+.libraryCats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.libCat{border:1px solid #e5e7eb;border-radius:16px;padding:13px;background:#fafafa;cursor:pointer}
+.libCat span{font-size:26px;display:block}.libCat b{display:block;margin-top:7px}.libCat small{display:block;color:#6b7280;margin-top:3px}
+.libDrill{border:1px solid #e5e7eb;border-radius:16px;padding:14px;margin:11px 0;background:#fff}
+.libDrill b{font-size:17px}.libMeta{font-size:12px;color:#6b7280;margin:4px 0 8px}.libHow{background:#f8fafc;border-radius:12px;padding:10px;font-size:13px;line-height:1.45}
+.trainerHero{background:linear-gradient(145deg,#0f172a,#134e4a);color:#fff}.trainerHero p{color:#d1fae5}
+.trainerGenerate{width:100%;background:#14b8a6;color:#042f2e;margin-top:6px}
+.sessionBlock{border-left:5px solid #14b8a6;background:#f8fafc;border-radius:14px;padding:13px 14px;margin:11px 0}
+.sessionTop{display:flex;justify-content:space-between;gap:10px}.sessionTop b{font-size:16px}.sessionMin{font-size:12px;font-weight:900;background:#ccfbf1;color:#115e59;padding:5px 8px;border-radius:99px}
+.setup{font-size:12px;color:#64748b;margin-top:5px}.sessionDesc{font-size:13px;line-height:1.45;margin-top:7px}
+
+
+.trainerBtnRow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.trainerBtnRow button{font-size:12px}
+.trainerSaveBtn{width:100%;margin-top:12px;background:#0f766e}
+.progressNote{display:none;background:#ecfeff;color:#155e75;border-radius:13px;padding:11px;margin:8px 0 13px;font-size:13px;font-weight:700}
+.historyItem{border:1px solid #e5e7eb;border-radius:14px;padding:12px;margin:9px 0}
+.historyTop{display:flex;justify-content:space-between;gap:8px;align-items:center}.historyTitle{font-weight:900}
+.historyMeta{font-size:12px;color:#6b7280;margin-top:4px}.historyStage{font-size:11px;background:#eef2ff;color:#3730a3;padding:4px 7px;border-radius:99px;font-weight:900}
+.loadRow{margin:8px 0}.loadRowTop{display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px}.loadTrack{height:8px;background:#e5e7eb;border-radius:99px;overflow:hidden}.loadFill{height:100%;background:#14b8a6;border-radius:99px}
+
+.demoBtn{width:100%;margin-top:10px;background:#e0f2fe;color:#0c4a6e}
+.demoBox{display:none;margin-top:10px;border-radius:16px;overflow:hidden;background:#0d7a39;border:3px solid #d1fae5;position:relative;aspect-ratio:16/10}
+.demoBox.active{display:block}
+.pitchLine{position:absolute;inset:7%;border:2px solid #ffffffaa;border-radius:4px}
+.pitchMid{position:absolute;left:50%;top:7%;bottom:7%;width:2px;background:#ffffff99}
+.pitchCircle{position:absolute;left:50%;top:50%;width:54px;height:54px;border:2px solid #ffffff99;border-radius:50%;transform:translate(-50%,-50%)}
+.playerDot{position:absolute;width:25px;height:25px;border-radius:50%;border:2px solid #fff;box-shadow:0 3px 8px #0005;z-index:4}
+.playerDot.blue{background:#2563eb}.playerDot.yellow{background:#facc15}
+.ballDot{position:absolute;width:14px;height:14px;border-radius:50%;background:#fff;border:2px solid #111827;z-index:6;box-shadow:0 2px 5px #0005}
+.coneMini{position:absolute;width:13px;height:17px;background:#f97316;clip-path:polygon(50% 0,100% 100%,0 100%);z-index:3}
+.demoLabel{position:absolute;left:10px;top:10px;background:#0f172add;color:#fff;padding:6px 9px;border-radius:9px;font-size:11px;font-weight:900;z-index:8}
+.demoTip{position:absolute;left:10px;right:10px;bottom:8px;background:#0009;color:#fff;padding:6px 9px;border-radius:9px;font-size:11px;text-align:center;z-index:8}
+.route{position:absolute;height:3px;background:#fff7;border-radius:99px;transform-origin:left center;z-index:2}
+@keyframes b1{0%,100%{left:18%;top:30%}50%{left:32%;top:57%}}
+@keyframes b2{0%,100%{left:25%;top:67%}50%{left:38%;top:35%}}
+@keyframes y1{0%,100%{left:66%;top:30%}50%{left:55%;top:52%}}
+@keyframes y2{0%,100%{left:70%;top:66%}50%{left:59%;top:38%}}
+@keyframes ball22{0%{left:24%;top:42%}25%{left:38%;top:63%}50%{left:58%;top:38%}75%{left:69%;top:61%}100%{left:24%;top:42%}}
+@keyframes slalomPlayer{0%{left:12%;top:48%}20%{left:27%;top:32%}40%{left:42%;top:63%}60%{left:57%;top:31%}80%{left:72%;top:63%}100%{left:84%;top:46%}}
+@keyframes slalomBall{0%{left:16%;top:55%}20%{left:31%;top:39%}40%{left:46%;top:69%}60%{left:61%;top:38%}80%{left:76%;top:69%}100%{left:88%;top:53%}}
+@keyframes duelBlue{0%,100%{left:18%;top:50%}50%{left:57%;top:38%}}
+@keyframes duelYellow{0%,100%{left:57%;top:50%}50%{left:43%;top:42%}}
+@keyframes duelBall{0%,100%{left:25%;top:57%}50%{left:64%;top:45%}}
+@keyframes passA{0%,100%{left:20%;top:50%}50%{left:35%;top:50%}}
+@keyframes passB{0%,100%{left:72%;top:50%}50%{left:58%;top:50%}}
+@keyframes passBall{0%,100%{left:29%;top:56%}50%{left:63%;top:56%}}
+@keyframes sprintP{0%{left:12%;top:50%}100%{left:82%;top:50%}}
+@keyframes sprintBall{0%{left:17%;top:58%}100%{left:88%;top:58%}}
+
+
+.weekCard{border:1px solid #dbeafe;border-radius:18px;padding:13px;margin:12px 0;background:#f8fbff}
+.weekHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.weekHead b{font-size:16px}
+.planDay{border-left:4px solid #2563eb;background:#fff;border-radius:12px;padding:11px;margin:8px 0}
+.planDay.match{border-left-color:#ef4444;background:#fff7f7}.planDay.rest{border-left-color:#94a3b8;background:#f8fafc}
+.planDayTop{display:flex;justify-content:space-between;gap:8px}.planDayTop b{font-size:14px}.loadPill{font-size:10px;font-weight:900;padding:4px 7px;border-radius:99px;background:#e0f2fe;color:#075985}
+.planDetail{font-size:12px;color:#64748b;margin-top:5px;line-height:1.4}
+.planOpen{margin-top:8px;background:#eef2ff;color:#3730a3;font-size:12px}
+.savedPlan{border:1px solid #e5e7eb;border-radius:14px;padding:12px;margin:9px 0}.savedPlan b{display:block}.savedPlan span{font-size:12px;color:#64748b}
+
+.testHero{background:linear-gradient(145deg,#172554,#312e81);color:#fff}.testHero p{color:#e0e7ff}
+.devScore{margin:14px 0;padding:15px;border-radius:16px;background:#f0fdf4;text-align:center}.devScore strong{font-size:34px;display:block}.devScore span{font-size:12px;color:#64748b}
+.testMetric{border:1px solid #e5e7eb;border-radius:15px;padding:12px;margin:10px 0}.metricTop{display:flex;justify-content:space-between;gap:10px}.metricTop b{font-size:14px}.metricChange{font-size:12px;font-weight:900}.metricBar{height:9px;background:#e5e7eb;border-radius:99px;overflow:hidden;margin-top:8px}.metricFill{height:100%;background:#22c55e;border-radius:99px}
+.testCoachComment{background:#eef6ff;border-radius:15px;padding:14px;line-height:1.5;font-size:14px}
+.testHistoryItem{display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding:10px 0;font-size:13px}
+
+.playerCardHero{background:linear-gradient(145deg,#111827,#1e3a8a);color:#fff;position:relative}
+.playerOVR{position:absolute;right:18px;top:70px;text-align:center}.playerOVR span{display:block;font-size:46px;font-weight:950}.playerOVR small{font-weight:900;color:#bfdbfe}
+.skillGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:22px;max-width:76%}.skillBox{background:#ffffff14;border:1px solid #ffffff22;border-radius:14px;padding:11px}.skillBox b{font-size:22px;display:block}.skillBox span{font-size:11px;color:#dbeafe}
+.shareLine{margin-top:14px}.shareLine button{background:#fff;color:#111827}
+.badgeGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.badge{border:1px solid #e5e7eb;border-radius:15px;padding:12px;background:#fafafa}.badge .emoji{font-size:26px}.badge b{display:block}.badge small{color:#6b7280}
+.parentHero{background:linear-gradient(145deg,#14532d,#166534);color:#fff}.parentHero p{color:#dcfce7}
+.clubHero{background:linear-gradient(145deg,#3f3f46,#18181b);color:#fff}.clubHero p{color:#e4e4e7}
+.matchHero{background:linear-gradient(145deg,#7c2d12,#9a3412);color:#fff}
+.clubPlayer{border:1px solid #e5e7eb;border-radius:14px;padding:12px;margin:9px 0}.clubTask{background:#f8fafc;border-radius:10px;padding:8px;margin-top:8px;font-size:12px}
+.parentStat{display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding:10px 0}.parentStat:last-child{border:0}
+
+
+.onboarding{position:fixed;inset:0;background:#0f172af5;z-index:9999;display:grid;place-items:center;padding:18px}
+.onboardCard{width:min(100%,430px);background:#fff;border-radius:24px;padding:22px;box-shadow:0 30px 70px #0008}.onboardCard h1{margin:8px 0}.onboardLogo{font-size:48px}.onboardCard p{color:#64748b}
+.minorNotice{background:#fff7ed;color:#9a3412;padding:11px;border-radius:12px;font-size:12px;margin:10px 0}
+.consentLine{display:flex;gap:9px;align-items:flex-start;font-size:13px;margin:12px 0}.consentLine input{width:auto;margin:2px 0}.onboardLinks{text-align:center;margin-top:12px;font-size:12px}.onboardLinks a{color:#1d4ed8}
+.settingsRow{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #eee;padding:12px 0}.settingsRow span{color:#64748b;font-size:13px}.settingsRow div span{display:block;margin-top:3px}
+.settingsBtn,.dangerBtn{width:100%;margin:6px 0}.settingsBtn{background:#eef2ff;color:#312e81}.dangerBtn{background:#fff1f2;color:#be123c}
+
+
+.proGate{position:fixed;inset:0;background:#0f172ad9;z-index:10000;display:block;padding:18px;overflow-y:auto;-webkit-overflow-scrolling:touch}.proGateCard{width:min(100%,420px);background:#fff;border-radius:24px;padding:22px;text-align:center;box-shadow:0 25px 70px #0008;margin:24px auto;max-height:none}.proCrown{font-size:48px}.proPrice{font-size:34px;font-weight:950;color:#111827;margin:8px}.proPrice small{font-size:14px;color:#64748b}.ownerLink{background:transparent;color:#94a3b8;font-size:11px;margin-top:12px;margin-bottom:10px}
+.proLocked{position:relative}.proLocked:after{content:"PRO";position:absolute;right:10px;top:10px;background:#111827;color:#fff;border-radius:99px;padding:4px 7px;font-size:9px;font-weight:900}
+
+textarea{width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:14px;padding:12px;font:inherit;background:#fff;color:#111827}
+.proCompare{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}.proCompare>div{border:1px solid #e5e7eb;border-radius:15px;padding:12px;background:#fafafa}.proCompare b{display:block;margin-bottom:6px}.proCompare span{display:block;font-size:12px;color:#64748b;margin:5px 0}
+
+.warmCard{background:#fff7ed;border-color:#fed7aa}.coolCard{background:#f0fdf4;border-color:#bbf7d0}
+
+.readinessGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.readinessGrid button{font-size:12px;min-height:48px}
+.sessionFeedbackBox{border-top:1px solid #e5e7eb;margin-top:16px;padding-top:14px}
+
+.proCompare3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:650px){.proCompare3{grid-template-columns:1fr}}
+
+.headerSettings{position:absolute;right:22px;top:20px;width:44px;height:44px;border-radius:14px;background:#ffffff18;color:#fff;padding:0;font-size:20px;z-index:5}
+.adaptiveHero{border:1px solid #dbeafe}
+.adaptiveReason{background:#eff6ff;border-radius:14px;padding:11px 12px;margin:12px 0;font-size:12px;line-height:1.45;color:#1e3a8a}
+.sessionStructure{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.structureBox{background:#f8fafc;border:1px solid #e5e7eb;border-radius:13px;padding:9px;text-align:center}
+.structureBox b{display:block;font-size:13px}.structureBox span{font-size:11px;color:#64748b}
+.progressSteps{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:10px 0}
+.progressStep{padding:9px 5px;border-radius:11px;background:#f1f5f9;text-align:center;font-size:10px;font-weight:850;color:#64748b}
+.progressStep.active{background:#dcfce7;color:#166534;border:1px solid #86efac}
+.adaptiveBadge{display:inline-flex;padding:4px 7px;border-radius:99px;background:#eef2ff;color:#3730a3;font-size:10px;font-weight:850;margin-top:4px}
+@media(max-width:420px){.sessionStructure{grid-template-columns:1fr 1fr 1fr}.progressSteps{grid-template-columns:1fr 1fr}}
+</style>
+
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Futbolcu Gelişim">
+
+</head>
+<body>
+<div id="onboarding" class="onboarding" style="display:none">
+ <div class="onboardCard">
+  <div class="onboardLogo">⚽</div>
+  <h1>Futbolcu Gelişim</h1>
+  <p>Başlamadan önce uygulamayı nasıl kullanacağını seç.</p>
+  <label>Ben...</label>
+  <select id="onboardRole"><option value="player">Oyuncuyum</option><option value="parent">Veliyim</option><option value="coach">Antrenörüm</option></select>
+  <label>Ana hedef</label>
+  <select id="onboardGoal"><option value="teknik">Top tekniği</option><option value="hiz">Sürat & çeviklik</option><option value="pas">Pas & oyun görüşü</option><option value="bitiricilik">Şut & bitiricilik</option><option value="komple">Komple gelişim</option></select>
+  <label>Haftada kaç gün çalışacaksın?</label>
+  <select id="onboardDays"><option value="2">2 gün</option><option value="3" selected>3 gün</option><option value="4">4 gün</option><option value="5">5 gün</option></select>
+  <label>Maç günü</label>
+  <select id="onboardMatchDay"><option>Pazar</option><option>Cumartesi</option><option>Cuma</option><option>Maç yok</option></select>
+  <label>Ekipman durumu</label>
+  <select id="onboardEquipment"><option value="full">Top + koni + duvar / alan var</option><option value="ball">Sadece top var</option><option value="noWall">Duvar yok</option><option value="none">Ekipman yok</option></select>
+  <div id="minorNotice" class="minorNotice">13 yaşından küçük oyuncular için kurulumun veli veya sorumlu bir yetişkinle yapılmasını öneriyoruz.</div>
+  <label class="consentLine"><input id="onboardConsent" type="checkbox"> <span>Gizlilik politikasını ve kullanım koşullarını okudum.</span></label>
+  <button class="proGenerate" onclick="finishOnboarding()">Devam Et</button>
+  <div class="onboardLinks"><a href="privacy.html">Gizlilik</a> · <a href="terms.html">Koşullar</a></div>
+ </div>
+</div>
+<div id="proGate" class="proGate" style="display:none">
+ <div class="proGateCard">
+   <div class="proCrown">👑</div>
+   <h2>Futbolcu Gelişim PRO</h2>
+<div class="proCompare proCompare3">
+ <div><b>Ücretsiz</b><span>Temel günlük antrenman</span><span>Temel açıklamalar</span><span>XP & temel takip</span></div>
+ <div><b>Oyuncu PRO · 199 TL/ay</b><span>Kişisel gelişim motoru</span><span>AI Koç</span><span>Performans testleri</span><span>Oyuncu kartı & veli raporu</span><span>Mevki/hedef odaklı progresyon</span></div>
+ <div><b>Antrenör PRO · 299 TL/ay</b><span>Tek takım antrenmanı üretimi</span><span>Haftalık/aylık plan</span><span>Oyuncu sayısına göre uyarlama</span><span>Plan paylaşımı</span><span>Takım progresyonu</span></div>
+</div><div id="proPreviewNotice" class="notice">PRO özelliklerini inceleyebilirsin. Oyuncu PRO için planlanan fiyat 199 TL/ay. Ödeme sistemi Play Store yayınıyla etkinleşecek.</div>
+   <div class="proPrice">199 TL <small>/ ay</small></div>
+   <p>AI Koç, kişisel gelişim planları, gelişmiş oyuncu raporları, haftalık/aylık takım planlama ve antrenör araçları PRO üyelik kapsamındadır.</p>
+   <button class="proGenerate" onclick="showProComingSoon()">PRO'ya Geç</button>
+   <button class="secondary" onclick="closeProGate()">Şimdilik Ücretsiz Devam Et</button>
+   <button class="ownerLink" onclick="openOwnerAccess()">Yönetici erişimi</button>
+ </div>
+</div>
+<div id="ownerGate" class="proGate" style="display:none">
+ <div class="proGateCard">
+  <h2>🔐 Yönetici Erişimi</h2>
+  <p class="small">Bu alan yalnızca uygulama sahibinin test erişimi içindir.</p>
+  <input id="ownerCode" type="password" inputmode="numeric" placeholder="Yönetici kodu">
+  <button class="proGenerate" onclick="unlockOwner()">Kilidi Aç</button>
+  <button class="secondary" onclick="ownerGate.style.display='none'">İptal</button>
+ </div>
+</div>
+<div class="app">
+<header id="head">
+<button class="headerSettings" onclick="openExtra('settings')" aria-label="Ayarlar">⚙️</button>
+<div class="brand">⚽ Futbolcu Gelişim</div><div class="sub">Ne çalışacağını değil, nasıl çalışacağını da gösterir.</div>
+<div class="hero"><div class="row"><b id="heroName">Yeni Oyuncu</b><span class="pill" id="count">0/4</span></div>
+<div class="row" style="margin-top:12px"><div class="level" id="lvl">Seviye 1</div><div class="xp" id="xp">0 / 250 XP</div></div><div class="bar"><span id="xpbar" style="width:0%"></span></div></div>
+</header>
+
+<main>
+<section id="home" class="page active">
+<div class="card adaptiveHero">
+  <div class="row">
+    <div>
+      <div class="tag">BUGÜNÜN PROGRAMI</div>
+      <h2 style="margin:8px 0 2px">Sana Göre Hazırlandı</h2>
+      <div class="small" id="planDesc"></div>
+    </div>
+    <span class="pill" id="todayProgressionPill">Temel</span>
+  </div>
+  <div id="adaptiveReason" class="adaptiveReason"></div>
+  <div class="sessionStructure" id="sessionStructure"></div>
+  <div id="workouts"></div>
+  <button class="trainerGenerate" onclick="startAdaptiveToday()">▶ Bugünkü Antrenmanı Başlat</button>
+</div>
+
+<div class="card">
+  <div class="row"><div><h2 style="margin:0">⚡ Bugün nasılsın?</h2><div class="small">Programın yoğunluğu buna göre değişir.</div></div><span class="pill" id="readinessBadge">Normal</span></div>
+  <div class="readinessGrid">
+    <button onclick="setReadiness('fresh')">🟢 Dinç</button>
+    <button onclick="setReadiness('normal')">🟡 Normal</button>
+    <button onclick="setReadiness('tired')">🔴 Yorgun</button>
+  </div>
+  <div id="readinessNote" class="small" style="margin-top:8px"></div>
+</div>
+
+<div class="card progressExplain">
+  <h2>📈 Gelişim Yolun</h2>
+  <div class="progressSteps" id="progressSteps"></div>
+  <div class="small" id="progressExplainText"></div>
+</div>
+</section>
+
+<section id="detail" class="page"><div class="card">
+<button class="secondary" onclick="backHome()">← Geri</button><h2 id="dtitle"></h2><div id="dmeta" class="small"></div>
+<div id="sceneSlot"></div>
+<div class="timer" id="timer">00:00</div><div class="bar"><span id="tbar" style="width:0%"></span></div><div class="progressText" id="progressText"></div>
+<div id="previewNav"></div><div id="steps"></div>
+<div class="row"><button id="startBtn" onclick="toggleTimer()">▶ Antrenmana Başla</button><button id="nextBtn" class="secondary" onclick="nextStep()" disabled>Sonraki Adım</button></div>
+<div id="lockNote" class="locknote">⏱️ Bu aşamanın süresi bitmeden sonraki adıma geçemezsin.</div><div id="techniqueBox"></div>
+</div></section>
+
+<section id="player" class="page"><div class="card"><h2>👤 Oyuncum</h2><label>Ad</label><input id="pname"><label>Yaş</label><input id="page" type="number" min="6" max="25">
+<label>Mevki</label><select id="ppos"><option>Kaleci</option><option>Stoper</option><option>Bek</option><option>Orta Saha</option><option>Kanat</option><option>Forvet</option></select>
+<button style="width:100%" onclick="saveProfile()">Kaydet ve Planı Güncelle</button></div></section>
+
+
+<section id="tests" class="page">
+ <div class="card testHero">
+   <button class="secondary" onclick="backHomeFromExtra()">← Ana Sayfa</button>
+   <div class="tag" style="margin-top:14px">OYUNCU PERFORMANS</div>
+   <h2>🧪 Futbolcu Test Merkezi</h2>
+   <p>Ölç, kaydet, gelişimini gör. AI Koç sonraki önerilerinde bu sonuçları kullanır.</p>
+ </div>
+ <div class="card">
+   <h2>Yeni Test Sonucu</h2>
+   <label>Test</label>
+   <select id="testType" onchange="updateTestUnit()">
+     <option value="sprint20">20 m Sprint</option>
+     <option value="slalom">Topla Slalom</option>
+     <option value="wallpass">60 sn Duvar Pası</option>
+     <option value="weakpass">Zayıf Ayak 20 Pas</option>
+     <option value="shot">10 Şut İsabeti</option>
+   </select>
+   <label id="testValueLabel">Sonuç (saniye)</label>
+   <input id="testValue" type="number" step="0.01" min="0" placeholder="Örn: 4.25">
+   <button class="trainerGenerate" onclick="saveTestResult()">💾 Sonucu Kaydet</button>
+ </div>
+ <div class="card">
+   <div class="row"><h2 style="margin:0">📊 Gelişim Paneli</h2><span class="pill" id="testCount">0 test</span></div>
+   <div id="developmentScore" class="devScore"></div>
+   <div id="testProgress"></div>
+ </div>
+ <div class="card">
+   <h2>🤖 AI Koç Yorumu</h2>
+   <div id="testCoachComment" class="testCoachComment">İlk test sonuçlarını girdikten sonra gelişim yorumu burada görünecek.</div>
+   <button class="proOpenBtn" onclick="applyTestCoachPlan()">⚽ Sonuçlarıma Göre Antrenman Öner</button>
+ </div>
+ <div class="card"><h2>🗂️ Son Testler</h2><div id="testHistory"></div></div>
+</section>
+
+<section id="growth" class="page"><div class="card"><h2>📈 Gelişim</h2><div class="grid"><div class="stat"><b id="sx">0</b><span>XP</span></div><div class="stat"><b id="se">0</b><span>Antrenman</span></div><div class="stat"><b id="sm">0</b><span>Dakika</span></div><div class="stat"><b id="sd">1</b><span>Aktif gün</span></div></div></div></section>
+
+
+<section id="playercard" class="page">
+ <div class="card playerCardHero">
+   <button class="secondary" onclick="backHomeFromExtra()">← Ana Sayfa</button>
+   <div class="tag" style="margin-top:14px">OYUNCU KARTI</div>
+   <h2 id="pcName">Futbolcu</h2>
+   <div class="playerOVR"><span id="pcOverall">60</span><small>GENEL</small></div>
+   <div class="skillGrid" id="skillGrid"></div>
+   <div class="shareLine"><button onclick="sharePlayerCard()">📤 Oyuncu Kartını Paylaş</button></div>
+ </div>
+ <div class="card"><h2>🏅 Rozetler & Görevler</h2><div id="badgeGrid"></div></div>
+</section>
+
+<section id="parent" class="page">
+ <div class="card parentHero">
+  <button class="secondary" onclick="backHomeFromExtra()">← Ana Sayfa</button>
+  <div class="tag" style="margin-top:14px">VELİ RAPORU</div>
+  <h2>👨‍👩‍👦 Aylık Gelişim Özeti</h2>
+  <p>Oyuncunun antrenman düzenini, testlerini ve gelişen alanlarını tek ekranda gösterir.</p>
+ </div>
+ <div class="card"><div id="parentReport"></div><button class="proOpenBtn" onclick="shareParentReport()">📤 Veli Raporunu Paylaş</button></div>
+</section>
+
+<section id="club" class="page">
+ <div class="card clubHero">
+  <button class="secondary" onclick="backHomeFromExtra()">← Ana Sayfa</button>
+  <div class="tag" style="margin-top:14px">KULÜP MODU · DEMO</div>
+  <h2>🏟️ Takım & Oyuncu Yönetimi</h2>
+  <p>Oyuncu ekle, bireysel ödev ata ve takımın genel gelişimini takip et.</p>
+ </div>
+ <div class="card">
+  <h2>Oyuncu Ekle</h2>
+  <input id="clubPlayerName" placeholder="Oyuncu adı">
+  <select id="clubPlayerPos"><option>Kaleci</option><option>Stoper</option><option>Bek</option><option>Orta Saha</option><option>Kanat</option><option>Forvet</option></select>
+  <button class="trainerGenerate" onclick="addClubPlayer()">+ Oyuncu Ekle</button>
+ </div>
+ <div class="card"><h2>Takım Oyuncuları</h2><div id="clubPlayerList"></div></div>
+</section>
+
+<section id="matchday" class="page">
+ <div class="card matchHero">
+  <button class="secondary" onclick="backHomeFromExtra()">← Ana Sayfa</button>
+  <div class="tag" style="margin-top:14px">MAÇ GÜNÜ</div>
+  <h2>🏟️ Maça Göre Hazırlık</h2>
+ </div>
+ <div class="card">
+  <label>Maça ne kadar kaldı?</label>
+  <select id="matchWindow"><option value="24">24 saat</option><option value="6">6 saat</option><option value="3">3 saat</option><option value="post">Maç sonrası</option></select>
+  <button class="trainerGenerate" onclick="buildMatchDayPlan()">Planı Oluştur</button>
+  <div id="matchDayPlan" style="margin-top:14px"></div>
+ </div>
+</section>
+
+
+
+<section id="feedback" class="page">
+ <div class="card">
+  <button class="secondary" onclick="backHomeFromExtra()">← Ana Sayfa</button>
+  <h2 style="margin-top:16px">💬 Test Geri Bildirimi</h2>
+  <div class="small">Kapalı testte sorunları hızlı toplamak için.</div>
+  <label>Konu</label>
+  <select id="fbType">
+   <option>Video açılmıyor</option>
+   <option>Antrenman yanlış / tekrar ediyor</option>
+   <option>PRO kilidi sorunu</option>
+   <option>Tasarım / metin sorunu</option>
+   <option>Uygulama dondu / açılmadı</option>
+   <option>Öneri</option>
+  </select>
+  <label>Detay</label>
+  <textarea id="fbText" rows="5" placeholder="Ne oldu? Hangi ekranda oldu?"></textarea>
+  <button class="trainerGenerate" onclick="shareFeedback()">📤 Geri Bildirimi Paylaş</button>
+ </div>
+</section>
+
+<section id="settings" class="page">
+ <div class="card">
+  <button class="secondary" onclick="backHomeFromExtra()">← Ana Sayfa</button>
+  <h2 style="margin-top:16px">⚙️ Ayarlar & Gizlilik</h2>
+  <label>Kullanım rolü</label>
+  <select id="settingsRole" onchange="saveSettingsRole()">
+    <option value="player">Oyuncu</option>
+    <option value="parent">Veli</option>
+    <option value="coach">Antrenör</option>
+  </select>
+  <div class="settingsRow"><div><b>Veriler nerede?</b><span>Bu test sürümünde veriler bu cihazda saklanır.</span></div></div>
+  <div class="settingsRow"><div><b>Hesap sistemi</b><span>Henüz çevrimiçi kullanıcı hesabı açılmıyor.</span></div></div>
+ </div>
+ <div class="card">
+  <h2>📄 Yasal & Destek</h2>
+  <button class="settingsBtn" onclick="location.href='privacy.html'">Gizlilik Politikası</button>
+  <button class="settingsBtn" onclick="location.href='terms.html'">Kullanım Koşulları</button>
+  <button class="settingsBtn" onclick="location.href='support.html'">Destek / İletişim</button><button class="settingsBtn" onclick="openExtra('feedback')">Test Geri Bildirimi</button>
+ </div>
+ <div class="card">
+  <h2>💾 Verilerim</h2>
+  <button class="settingsBtn" onclick="exportMyData()">Verilerimi Dışa Aktar</button>
+  <button class="dangerBtn" onclick="resetAllData()">Bu Cihazdaki Verilerimi Sil</button>
+  <div class="small" style="margin-top:10px">Gerçek kullanıcı hesabı açıldığında ayrıca hesap silme ve sunucudaki verileri silme yolu eklenecek.</div>
+ </div>
+ <div class="card">
+  <h2>🔐 PRO Test Erişimi</h2>
+  <div class="settingsRow"><span>Durum</span><b id="ownerStatus">Kilitli</b></div>
+  <button class="settingsBtn" onclick="openOwnerAccess()">Yönetici erişimini aç</button>
+  <button class="dangerBtn" onclick="lockProAgain()">PRO test erişimini kapat</button>
+ </div>
+ <div class="card">
+  <h2>ℹ️ Sürüm</h2>
+  <div class="settingsRow"><span>Futbolcu Gelişim</span><b>v27 Final Test</b></div>
+ </div>
+</section>
+
+<section id="pro" class="page">
+<div class="card proHero">
+  <div class="row"><span class="tag">PRO</span><span class="proPrice">1199 TL / ay</span></div>
+  <h2>⚽ Kişisel Futbol Gelişim Programı</h2>
+  <p>Mevkine, yaşına ve gelişim hedefine göre 7 günlük antrenman planı oluştur.</p>
+</div>
+
+<div class="card">
+  <h2>1. Hedefini seç</h2>
+  <label>Gelişim hedefi</label>
+  <select id="proGoal">
+    <option value="teknik">Top Tekniği</option>
+    <option value="hiz">Sürat & Çeviklik</option>
+    <option value="pas">Pas & Oyun Görüşü</option>
+    <option value="bitiricilik">Şut & Bitiricilik</option>
+    <option value="zayif">Zayıf Ayak</option>
+    <option value="komple">Komple Futbolcu</option>
+  </select>
+  <label>Haftada kaç gün?</label>
+  <select id="proDays"><option value="3">3 gün</option><option value="4" selected>4 gün</option><option value="5">5 gün</option></select>
+  <label>Antrenman süresi</label>
+  <select id="proDuration"><option value="20">20 dk</option><option value="30" selected>30 dk</option><option value="45">45 dk</option></select>
+  <button class="proGenerate" onclick="if(requirePro('proPlan'))generateProPlan()" data-pro-action="1">✨ Bana Özel Program Oluştur</button>
+</div>
+
+<div class="card" id="proPlanCard" style="display:none">
+  <div class="row"><h2 style="margin:0">Haftalık Programım</h2><span class="pill" id="proPlanBadge"></span></div>
+  <div class="small" id="proPlanSummary" style="margin:8px 0 14px"></div>
+  <div id="proWeek"></div>
+</div>
+<div class="card" id="proSessionCard" style="display:none">
+  <button class="secondary" onclick="closeProSession()">← Haftalık Programa Dön</button>
+  <div class="row" style="margin-top:14px">
+    <div><div class="small" id="proSessionDay"></div><h2 id="proSessionTitle" style="margin:3px 0"></h2></div>
+    <span class="proLock" id="proSessionDuration"></span>
+  </div>
+  <div class="timer" id="proSessionTimer">30:00</div>
+  <div class="row">
+    <button id="proTimerBtn" onclick="toggleProSessionTimer()">▶ Antrenmana Başla</button>
+    <button class="secondary" onclick="completeProSession()">✓ Bitir</button>
+  </div>
+  <div id="proSessionDrills" style="margin-top:15px"></div>
+<div class="sessionFeedbackBox">
+ <h3>Antrenman nasıldı?</h3>
+ <div class="readinessGrid">
+  <button onclick="saveSessionDifficulty('easy')">Kolay</button>
+  <button onclick="saveSessionDifficulty('normal')">Normal</button>
+  <button onclick="saveSessionDifficulty('hard')">Zor</button>
+ </div>
+ <div id="sessionFeedbackNote" class="small"></div>
+</div>
+</div>
+
+<div class="card">
+  <h2>PRO ile açılanlar</h2>
+  <div class="proFeature">🎯 <div><b>Mevkiye özel program</b><span>Kanat, forvet, orta saha, bek, stoper ve kaleci için farklı çalışma.</span></div></div>
+  <div class="proFeature">📅 <div><b>7 günlük plan</b><span>Çalışma ve dinlenme günlerini otomatik düzenler.</span></div></div>
+  <div class="proFeature">📊 <div><b>Haftalık gelişim raporu</b><span>XP, dakika, tamamlanan antrenman ve çalışma alanlarını takip eder.</span></div></div>
+  <div class="proFeature">🏆 <div><b>Hedefler & rozetler</b><span>Seri, haftalık görev ve gelişim hedefleri.</span></div></div>
+  <div class="proFeature">🧠 <div><b>Akıllı antrenör</b><span>Süre ve hedefe göre uygun çalışmayı önerir.</span></div></div>
+</div>
+
+<div class="card">
+  <h2>Bu Haftaki Gelişim</h2>
+  <div class="grid">
+    <div class="stat"><b id="proXP">0</b><span>Toplam XP</span></div>
+    <div class="stat"><b id="proMinutes">0</b><span>Dakika</span></div>
+    <div class="stat"><b id="proCompleted">0</b><span>Antrenman</span></div>
+    <div class="stat"><b id="proStreak">1</b><span>Günlük seri 🔥</span></div>
+  </div>
+</div>
+</section>
+
+
+<section id="library" class="page">
+  <div class="card">
+    <button class="secondary" onclick="backHomeFromExtra()">← Ana Sayfa</button>
+    <h2 style="margin-top:16px">📚 Antrenman Kütüphanesi</h2>
+    <div class="small">Temel 4 çalışmanın dışında genişleyen futbol gelişim alanları.</div>
+    <div id="libraryCats" class="libraryCats"></div>
+  </div>
+  <div class="card" id="libraryDrillCard" style="display:none">
+    <div class="row"><h2 id="libraryTitle" style="margin:0"></h2><span class="pill" id="libraryCount"></span></div>
+    <div id="libraryDrills"></div>
+  </div>
+</section>
+
+<section id="trainer" class="page">
+  <div class="card trainerHero">
+    <button class="secondary" onclick="backHomeFromExtra()">← Ana Sayfa</button>
+    <div class="tag" style="margin-top:16px">ANTRENÖR MODU · DEMO</div>
+    <h2>🧑‍🏫 Takım Antrenmanı Oluştur</h2>
+    <p>Oyuncu sayısı, yaş grubu, süre ve hedefe göre komple saha antrenmanı oluştur.</p>
+  </div>
+
+  <div class="card">
+  <div class="row"><div><div class="tag">YENİ</div><h2 style="margin:8px 0 2px">📆 Takım Program Planlayıcı</h2></div><span class="pill">PRO</span></div>
+  <div class="small">Tek idman değil, birbirini takip eden haftalık veya 4 haftalık takım programı üret.</div>
+  <label>Plan türü</label>
+  <select id="planType"><option value="week">1 Haftalık</option><option value="month">4 Haftalık</option></select>
+  <label>Haftada kaç antrenman?</label>
+  <select id="planDays"><option value="2">2 gün</option><option value="3" selected>3 gün</option><option value="4">4 gün</option><option value="5">5 gün</option></select>
+  <label>Maç günü</label>
+  <select id="matchDay"><option value="6">Cumartesi</option><option value="0" selected>Pazar</option><option value="-1">Maç yok</option></select>
+  <label>Ana gelişim hedefi</label>
+  <select id="planFocus">
+    <option value="balanced">Dengeli gelişim</option><option value="pas">Pas & oyun yönü</option><option value="1v1">1v1 adam eksiltme</option>
+    <option value="bitiricilik">Şut & bitiricilik</option><option value="gecis">Geçiş oyunu</option><option value="savunma">Savunma</option><option value="surat">Sürat & çeviklik</option>
+  </select>
+  <button class="trainerGenerate" onclick="generatePeriodPlan()">✨ Programı Oluştur</button>
+</div>
+<div class="card" id="periodPlanCard" style="display:none">
+  <div class="row"><h2 style="margin:0">🗓️ Takım Programı</h2><span class="pill" id="periodBadge"></span></div>
+  <div class="small" id="periodSummary" style="margin:7px 0 12px"></div>
+  <div id="periodWeeks"></div>
+  <button class="trainerSaveBtn" onclick="savePeriodPlan()">💾 Programı Kaydet</button>
+</div>
+
+
+<div class="card">
+  <h2>👥 Son Dakika Oyuncu Sayısı</h2>
+  <div class="small">Planlandıktan sonra eksik oyuncu gelirse programı yeniden düzenle.</div>
+  <label>Gerçek gelen oyuncu sayısı</label>
+  <input id="actualPlayers" type="number" min="4" max="30" value="14">
+  <button class="trainerGenerate" onclick="adaptLastCoachSession()">🔄 Son Planı Oyuncu Sayısına Uyarla</button>
+  <div id="attendanceNote" class="small" style="margin-top:9px"></div>
+</div>
+<div class="card">
+    <h2>⚡ Tek Antrenman Oluştur</h2>
+    <label>Yaş grubu</label>
+    <select id="coachAgeGroup">
+      <option value="U8-U10">U8–U10</option>
+      <option value="U11-U13" selected>U11–U13</option>
+      <option value="U14-U16">U14–U16</option>
+      <option value="U17+">U17+</option>
+    </select>
+    <label>Oyuncu sayısı</label>
+    <input id="coachPlayers" type="number" min="4" max="30" value="16">
+    <label>Antrenman süresi</label>
+    <select id="coachDuration">
+      <option value="60">60 dk</option>
+      <option value="75" selected>75 dk</option>
+      <option value="90">90 dk</option>
+    </select>
+    <label>Ana hedef</label>
+    <select id="coachTarget">
+      <option value="pas">Pas & oyun yönü</option>
+      <option value="1v1">1v1 adam eksiltme</option>
+      <option value="bitiricilik">Şut & bitiricilik</option>
+      <option value="gecis">Geçiş oyunu</option>
+      <option value="savunma">Savunma</option>
+      <option value="duran">Duran top</option>
+      <option value="surat">Sürat & çeviklik</option>
+    </select>
+    <button class="trainerGenerate" onclick="generateCoachSession('new')">✨ Yeni Antrenman Oluştur</button>
+<div class="trainerBtnRow">
+  <button class="secondary" onclick="generateCoachSession('progress')">📈 Dünkü Planı Geliştir</button>
+  <button class="secondary" onclick="generateCoachSession('tomorrow')">📅 Yarının Planını Oluştur</button>
+</div>
+  </div>
+
+  <div class="card" id="coachLoadCard">
+    <div class="row"><h2 style="margin:0">📊 Son 7 Gün Yükü</h2><span class="pill" id="weeklyLoadBadge">0 dk</span></div>
+    <div class="small" id="weeklyLoadText" style="margin-top:8px">Henüz takım antrenmanı kaydı yok.</div>
+    <div id="loadBars" style="margin-top:12px"></div>
+  </div>
+
+  <div class="card" id="coachSessionCard" style="display:none">
+    <div class="row"><h2 id="coachSessionHeading" style="margin:0">Bugünkü Takım Antrenmanı</h2><span class="pill" id="coachSessionBadge"></span></div>
+    <div class="small" id="coachSessionSummary" style="margin:8px 0 12px"></div>
+    <div id="coachProgressNote" class="progressNote"></div>
+    <div id="coachSessionBlocks"></div>
+    <button class="trainerSaveBtn" onclick="saveCurrentCoachSession()">💾 Bu Antrenmanı Geçmişe Kaydet</button><button class="settingsBtn" onclick="shareCurrentCoachSession()">📤 Planı Paylaş</button>
+  </div>
+
+  <div class="card">
+    <div class="row"><h2 style="margin:0">🗂️ Son Antrenmanlar</h2><button class="secondary" onclick="clearTeamHistory()">Temizle</button></div>
+    <div id="teamHistoryList"></div>
+  </div>
+  <div class="card">
+    <h2>📁 Kayıtlı Haftalık / Aylık Planlar</h2>
+    <div id="savedPeriodPlans"></div>
+  </div>
+</section>
+
+<section id="coach" class="page">
+  <div class="card aiHero">
+    <div class="row">
+      <div>
+        <div class="tag">AI ANTRENÖR · DEMO</div>
+        <h2 style="margin:10px 0 5px">🤖 Futbolcu Koçu</h2>
+      </div>
+      <span class="pill" id="coachPos">Orta Saha</span>
+    </div>
+    <p id="coachIntro">Profiline ve gelişimine göre bugünkü çalışmanı önerir.</p>
+  </div>
+
+  <div class="card">
+    <h2>Bugün ne yapalım?</h2>
+    <div class="quickGrid">
+      <button onclick="coachQuick('today')">⚽ Bugün ne çalışmalıyım?</button>
+      <button onclick="coachQuick('weak')">🦶 Zayıf yönümü geliştir</button>
+      <button onclick="coachQuick('prematch')">🏟️ Maç öncesi çalışma</button>
+      <button onclick="coachQuick('tired')">😮‍💨 Bugün yorgunum</button>
+      <button onclick="coachQuick('evaluate')">📊 Antrenmanımı değerlendir</button>
+      <button onclick="coachQuick('improve')">🚀 Beni daha hızlı geliştir</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="row">
+      <h2 style="margin:0">Koç Mesajları</h2>
+      <button class="secondary" onclick="clearCoach()">Temizle</button>
+    </div>
+    <div id="coachChat" class="coachChat"></div>
+    <div class="coachInput">
+      <input id="coachQuestion" placeholder="Örn: Sol ayağımı nasıl geliştiririm?">
+      <button onclick="askCoach()">Gönder</button>
+    </div>
+    <div class="small">Bu sürüm demo mantığıyla çalışır. Gerçek AI bağlantısını ödeme ve kullanıcı sistemiyle birlikte güvenli sunucu üzerinden ekleyeceğiz.</div>
+  </div>
+
+  <div class="card">
+    <h2>Bugünkü Koç Planı</h2>
+    <div id="coachPlan"></div>
+  </div>
+</section>
+
+</main>
+
+<div class="nav" id="nav"><div class="navin"><button class="active" onclick="show('home',this)">🏠<br>Ana</button><button onclick="show('player',this)">👤<br>Oyuncum</button><button onclick="show('growth',this)">📈<br>Gelişim</button><button onclick="show('coach',this)">🤖<br>Koç</button><button onclick="show('pro',this)">⭐<br>PRO</button></div></div>
+</div>
+
+<script>
+const K='futbolcu_v30';
+let old=JSON.parse(localStorage.getItem('futbolcu_v20')||'null')||JSON.parse(localStorage.getItem('futbolcu_v19')||'null')||JSON.parse(localStorage.getItem('futbolcu_v18')||'null')||JSON.parse(localStorage.getItem('futbolcu_v17')||'null')||JSON.parse(localStorage.getItem('futbolcu_v16')||'null')||JSON.parse(localStorage.getItem('futbolcu_v15')||'null')||JSON.parse(localStorage.getItem('futbolcu_v14')||'null')||JSON.parse(localStorage.getItem('futbolcu_v13')||'null')||JSON.parse(localStorage.getItem('futbolcu_v12_2')||'null')||JSON.parse(localStorage.getItem('futbolcu_v12_1')||'null')||JSON.parse(localStorage.getItem('futbolcu_v12')||'null')||JSON.parse(localStorage.getItem('futbolcu_v11')||'null')||JSON.parse(localStorage.getItem('futbolcu_v10')||'null')||JSON.parse(localStorage.getItem('futbolcu_v9')||'null')||JSON.parse(localStorage.getItem('futbolcu_v8')||'null')||JSON.parse(localStorage.getItem('futbolcu_v7')||'null');
+let s=JSON.parse(localStorage.getItem(K)||'null')||JSON.parse(localStorage.getItem('futbolcu_v29')||'null')||JSON.parse(localStorage.getItem('futbolcu_v28')||'null')||JSON.parse(localStorage.getItem('futbolcu_v27_1')||'null')||JSON.parse(localStorage.getItem('futbolcu_v27')||'null')||JSON.parse(localStorage.getItem('futbolcu_v26')||'null')||old||{name:'Yeni Oyuncu',age:12,pos:'Orta Saha',xp:0,done:[],totalE:0,totalM:0,days:1,pro:false};
+if(!s.proPlan)s.proPlan=null;if(!s.streak)s.streak=1;if(!s.coachHistory)s.coachHistory=[];if(!s.coachPlan)s.coachPlan=[];if(!s.teamCoachHistory)s.teamCoachHistory=[];if(!s.teamPlans)s.teamPlans=[];if(!s.testResults)s.testResults=[];
+
+function st(name,sec,desc,good,bad,tip,anim){return [name,sec,desc,good,bad,tip,anim]}
+const plan=[
+{icon:'⚽',name:'Top Hakimiyeti',mins:10,xp:50,steps:[
+st('Ayak içi dokunuş',120,'Sağ ve sol ayağın içiyle küçük ve seri dokunuşlar yap.','Top ayağından yarım metreden fazla açılmasın.','Sadece güçlü ayağı kullanmak.','Her 5-6 dokunuşta başını kaldır.','inside'),
+st('Taban çekme',120,'Topu sağ ve sol tabanla yanlara çek.','Dizler hafif kırık, merkez alçak.','Dik durup topu kaçırmak.','Önce yavaş, sonra ritmi artır.','sole'),
+st('İç-dış dokunuş',120,'Aynı ayakla iç-dış dokunuş yap.','Dokunuşlar kısa ve kontrollü.','Topa sürekli bakmak.','60 sn sağ, 60 sn sol.','inout'),
+st('Slalom',120,'5 koni veya şişe arasında slalom yap.','Konilere yakın dön.','Topu çok öne atmak.','Son 30 sn hızlan.','slalom'),
+st('Serbest kombinasyon',120,'V çekiş, iç-dış ve yön değişimini birleştir.','Hareketleri bilinçli bağla.','Tek hareketi sürekli tekrar etmek.','Hayali rakip belirle.','vdrag')]},
+{icon:'🎯',name:'Duvar Pası',mins:10,xp:50,steps:[
+st('Sağ ayak pas',150,'Ayağın içiyle kontrollü duvar pası.','Destek ayağı hedefe baksın.','Topun altına vurmak.','Duvarda hedef belirle.','rightpass'),
+st('Sol ayak pas',150,'Sol ayakla tekrar.','Aynı tekniği koru.','Güç için tekniği bozmak.','Kısa mesafeden başla.','leftpass'),
+st('Kontrol + pas',150,'Kontrol et ve pas ver.','Kontrolü pas yönüne al.','Topu ayağın altında öldürmek.','Kontrol ayağını değiştir.','controlpass'),
+st('Tek dokunuş',150,'Tek dokunuş pas.','Topun geliş hızını kullan.','Her topa aynı güçle vurmak.','10 paslık seri hedefle.','onetouch')]},
+{icon:'🏃',name:'Koordinasyon',mins:5,xp:30,steps:[
+st('Hızlı ayak',75,'Koordinasyon merdiveninde kısa ve seri adımlar.','Ayaklar hafif ve dizler kırık.','Topuklara basmak.','Her kutuya iki hızlı temas.','fastfeet'),
+st('Yan adım',75,'Merdiven üzerinde sağa-sola seri yan adım.','Kalça alçak, gövde dengeli.','Ayakları birbirine dolamak.','Başını yukarıda tut.','sidefeet'),
+st('Çapraz adım',75,'Ayakları kontrollü biçimde çaprazlayarak ilerle.','Ritmi ve dengeyi koru.','Çok büyük adım atmak.','Önce yavaş öğren.','crossfeet'),
+st('Topla koordinasyon',75,'İki ayakla ritmik koordinasyon çalış.','Adımlar kısa ve kontrollü olsun.','Ritmi bozmak.','Önce yavaş, sonra hızlan.','doublefeet')]},
+{icon:'💨',name:'Sürat',mins:10,xp:50,steps:[
+st('Hazır pozisyon',120,'Sprint öncesi öne eğik atletik çıkış pozisyonu al.','Ağırlık ayak önünde, dizler kırık.','Dik ve geride beklemek.','İlk adımı öne saldırır gibi at.','ready'),
+st('5 metre çıkış',180,'Başlangıç çizgisinden topsuz patlayıcı sprint yap.','İlk üç adım kısa ve güçlü.','İlk adımda hemen doğrulmak.','Tekrarlar arasında tam dinlen.','burst'),
+st('Yön değiştir + sprint',150,'Koniye yaklaş, keskin yön değiştir ve tekrar hızlan.','Dönüşte ağırlık merkezini alçalt.','Dönüşte dik kalmak.','Sağ ve solu eşit çalış.','change'),
+st('Topla sprint',150,'Topu koşu yoluna öne bırakıp yüksek hızda sür.','Boş alanda topu 2-3 metre öne aç.','Sprintte topu ayağa yapıştırmak.','3 uzun dokunuş + hızlan.','ballsprint')]}
+];
+
+let active=null,stepIndex=0,remaining=0,total=0,timerId=null,running=false,stepFinished=false,scenePlaying=true;
+if(!s.playerTasks)s.playerTasks=[];if(!s.badges)s.badges=[];if(!s.parentNotes)s.parentNotes=[];if(!s.clubPlayers)s.clubPlayers=[];if(!s.clubTeams)s.clubTeams=[];if(!s.matchLog)s.matchLog=[];if(!s.appSettings)s.appSettings={role:'',consent:false,onboarded:false,notifications:false,goal:'teknik',daysPerWeek:3,matchDay:'Pazar',equipment:'full',readiness:'normal'};if(!s.sessionFeedback)s.sessionFeedback=[];if(typeof s.proUnlocked==='undefined')s.proUnlocked=false;if(typeof s.coachProUnlocked==='undefined')s.coachProUnlocked=false;
+function save(){localStorage.setItem(K,JSON.stringify(s))}
+
+
+const goalNames={teknik:'Top Tekniği',hiz:'Sürat & Çeviklik',pas:'Pas & Oyun Görüşü',bitiricilik:'Şut & Bitiricilik',zayif:'Zayıf Ayak',komple:'Komple Futbolcu'};
+
+
+
+const POSITION_FOCUS={
+ 'Kaleci':['ayakla oyun','reaksiyon','pozisyon alma'],
+ 'Stoper':['ilk kontrol','pas','savunma ayakları'],
+ 'Bek':['sürat','orta','1v1'],
+ 'Orta Saha':['ilk kontrol','pas','oyun görüşü'],
+ 'Kanat':['1v1','sürat','bitiricilik'],
+ 'Forvet':['bitiricilik','ilk kontrol','patlayıcılık']
+};
+function recentDifficulty(){
+ const arr=(s.sessionFeedback||[]).slice(-3);if(!arr.length)return 'normal';
+ const hard=arr.filter(x=>x.level==='hard').length,easy=arr.filter(x=>x.level==='easy').length;
+ return hard>=2?'down':easy>=2?'up':'normal';
+}
+function progressionLevel(){
+ const done=(s.done||[]).length;
+ const fb=recentDifficulty();
+ let level=done<4?1:done<10?2:3;
+ if(fb==='down')level=Math.max(1,level-1);
+ if(fb==='up')level=Math.min(4,level+1);
+ return level;
+}
+function progressionLabel(l){return ['','Temel','Baskı altında','Karar verme','Maç gerçekliği'][l]||'Temel'}
+function positionFocus(){
+ const pos=s.position||s.pos||'Orta Saha';
+ return POSITION_FOCUS[pos]||POSITION_FOCUS['Orta Saha'];
+}
+function enrichDrillForProgression(d){
+ const l=progressionLevel(),focus=positionFocus();
+ let extra=`Seviye: ${progressionLabel(l)}.`;
+ if(l===2)extra+=' Alanı küçült veya süre baskısı ekle.';
+ if(l===3)extra+=' Her tekrarda renk/kapı/yön komutuna göre karar ver.';
+ if(l>=4)extra+=' Rakip baskısı veya maç hızına yakın karar zorunluluğu ekle.';
+ extra+=` Mevki odağı: ${focus.slice(0,2).join(' + ')}.`;
+ return {...d,how:d.how+' '+extra};
+}
+
+
+const GOAL_HOME_ORDER={
+ teknik:[0,1,2,3],
+ hiz:[3,2,0,1],
+ pas:[1,0,2,3],
+ bitiricilik:[0,3,1,2],
+ zayif:[1,0,2,3],
+ komple:[0,1,3,2]
+};
+const POS_HOME_ORDER={
+ 'Kaleci':[2,1,3,0],
+ 'Stoper':[1,2,0,3],
+ 'Bek':[3,0,1,2],
+ 'Orta Saha':[1,0,2,3],
+ 'Kanat':[0,3,2,1],
+ 'Forvet':[0,3,1,2]
+};
+let currentHomeIndices=[0,1,2,3];
+
+function todayDayName(){
+ return ['Pazar','Pazartesi','Salı','Çarşamba','Perşembe','Cuma','Cumartesi'][new Date().getDay()];
+}
+function tomorrowDayName(){
+ return ['Pazar','Pazartesi','Salı','Çarşamba','Perşembe','Cuma','Cumartesi'][(new Date().getDay()+1)%7];
+}
+function matchTomorrow(){
+ const md=s.appSettings?.matchDay||'Maç yok';
+ return md!=='Maç yok' && md===tomorrowDayName();
+}
+function adaptiveHomeIndices(){
+ const goal=s.appSettings?.goal||'komple';
+ const pos=s.pos||s.position||'Orta Saha';
+ const goalOrder=GOAL_HOME_ORDER[goal]||GOAL_HOME_ORDER.komple;
+ const posOrder=POS_HOME_ORDER[pos]||POS_HOME_ORDER['Orta Saha'];
+ const score={};
+ [...goalOrder,...posOrder].forEach((idx,i)=>{score[idx]=(score[idx]||0)+(8-i);});
+ let order=[0,1,2,3].sort((a,b)=>(score[b]||0)-(score[a]||0));
+ const readiness=s.appSettings?.readiness||'normal';
+ let count=readiness==='fresh'?4:readiness==='tired'?2:3;
+ if(matchTomorrow()){
+   count=Math.min(count,2);
+   order=order.filter(x=>x!==3).concat(order.filter(x=>x===3)); // sprinti maç arifesine bırakma
+ }
+ // tamamlanmış olanları aynı gün listenin arkasına al
+ order=order.sort((a,b)=>(s.done.includes(a)?1:0)-(s.done.includes(b)?1:0));
+ return order.slice(0,count);
+}
+function adaptiveReasonText(){
+ const pos=s.pos||'Orta Saha';
+ const goal=goalNames[s.appSettings?.goal]||'Komple Futbolcu';
+ const ready=readinessLabel(s.appSettings?.readiness||'normal');
+ const prog=progressionLabel(progressionLevel());
+ const focus=positionFocus().slice(0,2).join(' + ');
+ let txt=`${pos} mevkiin, ${goal} hedefin ve bugünkü ${ready.toLocaleLowerCase('tr-TR')} durumun birlikte değerlendirildi. Progresyon seviyen: ${prog}. Mevki odağı: ${focus}.`;
+ if(matchTomorrow())txt+=' Yarın maç günü olduğu için yük azaltıldı ve yoğun sprint geri plana alındı.';
+ const fb=recentDifficulty();
+ if(fb==='down')txt+=' Son geri bildirimlerin zor olduğu için seviye bir kademe hafifletildi.';
+ if(fb==='up')txt+=' Son geri bildirimlerin kolay olduğu için zorluk bir kademe yükseltildi.';
+ return txt;
+}
+function renderAdaptiveHome(){
+ if(!document.getElementById('workouts'))return;
+ currentHomeIndices=adaptiveHomeIndices();
+ const l=progressionLevel();
+ if(document.getElementById('todayProgressionPill'))todayProgressionPill.textContent=progressionLabel(l);
+ planDesc.textContent=`${s.age} yaş · ${s.pos} · ${goalNames[s.appSettings?.goal]||'Komple Futbolcu'}`;
+ if(document.getElementById('adaptiveReason'))adaptiveReason.textContent=adaptiveReasonText();
+ const wu=ageWarmup(s.age).reduce((a,b)=>a+b.mins,0);
+ const cd=cooldownBlock(s.age).reduce((a,b)=>a+b.mins,0);
+ const main=currentHomeIndices.reduce((a,i)=>a+plan[i].mins,0);
+ if(document.getElementById('sessionStructure'))sessionStructure.innerHTML=
+  `<div class="structureBox"><b>🔥 Isınma</b><span>${wu} dk</span></div><div class="structureBox"><b>⚽ Ana bölüm</b><span>${main} dk</span></div><div class="structureBox"><b>🧘 Soğuma</b><span>${cd} dk</span></div>`;
+ workouts.innerHTML=currentHomeIndices.map(i=>{
+   const w=plan[i];
+   const done=s.done.includes(i);
+   return `<div class="exercise"><div class="ico">${w.icon}</div><div class="grow"><div class="name">${w.name}</div><div class="small">${w.mins} dk · +${w.xp} XP · ${w.steps.length} adım</div><div class="adaptiveBadge">${progressionLabel(l)} · ${positionFocus()[0]}</div></div><button class="${done?'done':''}" onclick="openWorkout(${i})">${done?'✓ Tamamlandı':'Nasıl Yapılır?'}</button></div>`;
+ }).join('');
+ if(document.getElementById('progressSteps')){
+   progressSteps.innerHTML=[1,2,3,4].map(x=>`<div class="progressStep ${x===l?'active':''}">${progressionLabel(x)}</div>`).join('');
+   progressExplainText.textContent=l===1?'Önce temiz teknik ve doğru hareket kalitesi.':l===2?'Aynı beceriler daha dar alan ve süre baskısıyla uygulanır.':l===3?'Hareketten önce karar verme ve çevre kontrolü eklenir.':'Çalışmalar rakip baskısı ve maç hızına yaklaştırılır.';
+ }
+}
+function startAdaptiveToday(){
+ renderAdaptiveHome();
+ const next=currentHomeIndices.find(i=>!s.done.includes(i));
+ openWorkout(next===undefined?currentHomeIndices[0]:next);
+}
+
+function ageWarmup(age){
+ const a=+age||12;
+ if(a<=11)return [
+  {name:'Topla oyunlu ısınma',mins:3,how:'Küçük alanda hafif top sürme, yön değiştirme ve eğlenceli komutlarla vücudu hazırla.'},
+  {name:'Koordinasyon aktivasyonu',mins:2,how:'Kısa yan adım, skipping ve hafif hızlanmalar yap. Amaç yorulmak değil hazırlanmak.'}
+ ];
+ if(a<=15)return [
+  {name:'Dinamik mobilite',mins:3,how:'Kalça açma, walking lunge, ayak bileği ve hamstring dinamik hareketleri yap.'},
+  {name:'Koordinasyon + kısa hızlanma',mins:3,how:'Skipping, yan koşu ve 2-3 kısa kontrollü hızlanma yap.'}
+ ];
+ return [
+  {name:'Dinamik mobilite',mins:4,how:'Kalça, hamstring, ayak bileği ve gövdeyi dinamik hareketlerle hazırla.'},
+  {name:'Nöromüsküler aktivasyon',mins:3,how:'Skipping, kısa sıçrama ve 2-3 kademeli hızlanma yap.'}
+ ];
+}
+function cooldownBlock(age){
+ return [
+  {name:'Hafif soğuma',mins:3,how:'Düşük tempoda yürü veya hafif jog yap; nabzı kontrollü şekilde düşür.'},
+  {name:'Mobilite / hafif esneme',mins:2,how:'Ağrısız ve rahat aralıkta baldır, hamstring, kalça ve adduktor bölgesine hafif esneme uygula.'}
+ ];
+}
+function splitSessionDuration(total,age){
+ const wu=ageWarmup(age).reduce((a,b)=>a+b.mins,0);
+ const cd=cooldownBlock(age).reduce((a,b)=>a+b.mins,0);
+ const main=Math.max(10,total-wu-cd);
+ return {wu,cd,main};
+}
+
+const proSessions={
+teknik:[
+ {title:'Yakın Top Kontrolü',drills:[
+   {name:'Ayak içi seri dokunuş',key:'inside',how:'Topu iki ayağın arasında kısa dokunuşlarla taşı. Dizler hafif kırık olsun ve her 5-6 dokunuşta başını kaldır.'},
+   {name:'Taban çekme',key:'sole',how:'Topu tabanınla sağa-sola çek. Top vücudundan fazla uzaklaşmasın; önce kontrollü, sonra hızlı yap.'},
+   {name:'İç-dış dokunuş',key:'inout',how:'Aynı ayağın içi ve dışıyla topun yönünü değiştir. 45 saniye sağ, 45 saniye sol ayak çalış.'}]},
+ {title:'Yön Değiştirme Tekniği',drills:[
+   {name:'V çekiş',key:'vdrag',how:'Topu tabanla geriye çek, ayağın içiyle çapraza çıkar. V şekli oluşturacak şekilde iki yöne tekrarla.'},
+   {name:'Slalom',key:'slalom',how:'Koniler arasında küçük dokunuşlarla ilerle. Dönüşte topu ayağına yakın tut.'},
+   {name:'İç-dış + hızlanma',key:'inout',how:'İç-dış dokunuştan sonra 3-4 metre hızlan. Hareketten çıkışı patlayıcı yap.'}]},
+ {title:'İlk Kontrol Günü',drills:[
+   {name:'Kontrol + pas',key:'controlpass',how:'Gelen topu ilk dokunuşla pas vereceğin yöne hazırla, ikinci dokunuşta pası çıkar.'},
+   {name:'Tek dokunuş',key:'onetouch',how:'Topun hızını kullanarak ayağın içiyle tek dokunuş pas yap. Güçten önce doğruluk.'},
+   {name:'Slalom + kontrol',key:'slalom',how:'Slalom sonunda topu tek dokunuşla durdur ve farklı yöne çıkar.'}]},
+ {title:'Dar Alan Top Hakimiyeti',drills:[
+   {name:'Hızlı ayak + top',key:'fastfeet',how:'Ayaklarını hızlı çalıştırdıktan sonra hemen topa geç ve 20-30 saniye seri dokunuş yap.'},
+   {name:'Taban + iç-dış kombinasyon',key:'sole',how:'2 taban çekme, ardından 2 iç-dış dokunuş yap. Kombinasyonu kesmeden tekrar et.'},
+   {name:'Serbest ball mastery',key:'vdrag',how:'V çekiş, iç-dış ve taban hareketlerini 30 saniyelik seriler halinde birleştir.'}]},
+ {title:'Teknik Test Günü',drills:[
+   {name:'60 sn dokunuş testi',key:'inside',how:'60 saniyede kontrollü dokunuş sayını ölç. Top kaçarsa kaldığın yerden devam et.'},
+   {name:'Slalom süre testi',key:'slalom',how:'Aynı parkuru 3 kez tamamla. En iyi süreyi bulurken top kontrolünü bozma.'},
+   {name:'Zayıf ayak teknik seti',key:'inout',how:'Tüm hareketleri sadece zayıf ayağınla daha yavaş ve kontrollü uygula.'}]}
+],
+hiz:[
+ {title:'Patlayıcı Çıkış',drills:[
+   {name:'Sprint hazır pozisyonu',key:'ready',how:'Öne eğik atletik pozisyon al. Ağırlık ayak önlerinde, kalça hafif alçakta olsun.'},
+   {name:'5 metre patlayıcı çıkış',key:'burst',how:'İlk 3 adımı kısa ve güçlü at. 5 metre maksimum hızlan, sonra tamamen dinlen.'},
+   {name:'Hızlı ayak aktivasyonu',key:'fastfeet',how:'Merdivende seri ayak çalışması yap. Her kutuya iki temas; üst gövde rahat kalsın.'}]},
+ {title:'Çeviklik & Yan Hareket',drills:[
+   {name:'Yan adım',key:'sidefeet',how:'Kalçanı alçalt, ayaklarını çaprazlamadan sağa-sola seri kaydır.'},
+   {name:'Çapraz adım',key:'crossfeet',how:'Ritmi bozmadan kontrollü çapraz adımlarla ilerle. Baş ve gövde dengeli kalsın.'},
+   {name:'Koni yön değiştirme',key:'change',how:'Koniye yaklaşırken adımları kısalt, dış ayağınla yere basıp ters yöne patlayıcı çık.'}]},
+ {title:'Hızlanma & Frenleme',drills:[
+   {name:'10 metre hızlanma',key:'burst',how:'İlk 5 metrede ivmelen, sonraki 5 metrede hızını koru. Her tekrar sonrası tam dinlen.'},
+   {name:'Sprint + kontrollü duruş',key:'ready',how:'8-10 metre sprintten sonra 3-4 kısa adımla kontrollü yavaşla. Ani dik durma.'},
+   {name:'180° dönüş + çıkış',key:'change',how:'Çizgiye bas, ağırlık merkezini alçalt, tek ayakla güçlü itiş yapıp ters yöne hızlan.'}]},
+ {title:'Topla Sürat',drills:[
+   {name:'Topu öne bırak + sprint',key:'ballsprint',how:'Boş alanda topu 2-3 metre önüne bırak ve maksimum hızda takip et.'},
+   {name:'Slalomdan çıkış',key:'slalom',how:'Son koniden çıkar çıkmaz topu öne aç ve 5 metre hızlan.'},
+   {name:'Yön değiştir + topla sprint',key:'change',how:'Koni etrafında yön değiştir, ilk dokunuşu koşu yoluna yap ve hızlan.'}]},
+ {title:'Tekrarlı Sprint',drills:[
+   {name:'5 x 5 metre',key:'burst',how:'5 metre maksimum sprint yap, yürüyerek geri dön. 5 kaliteli tekrar tamamla.'},
+   {name:'Sağ-sol reaksiyon',key:'sidefeet',how:'Sesli komuta göre sağa veya sola iki hızlı adım atıp 5 metre sprint yap.'},
+   {name:'Son hız seti',key:'ballsprint',how:'2 topsuz ve 2 topla sprinti tam dinlenmeyle tamamla. Kalite düşerse seti bitir.'}]}
+],
+pas:[
+ {title:'Temel Pas Kalitesi',drills:[
+   {name:'Sağ ayak duvar pası',key:'rightpass',how:'Destek ayağını hedefe çevir, bileği kilitle ve ayağın içiyle hedefe pas ver.'},
+   {name:'Sol ayak duvar pası',key:'leftpass',how:'Aynı tekniği sol ayakla uygula. Güç yerine temiz temas ve doğruluğa odaklan.'},
+   {name:'Kontrol + pas',key:'controlpass',how:'İlk dokunuşu pas yönüne al, ikinci dokunuşta topu çıkar.'}]},
+ {title:'Tek Dokunuş Günü',drills:[
+   {name:'Tek dokunuş duvar pası',key:'onetouch',how:'Duvara tek dokunuş pas yap. 10 hatasız paslık seriler hedefle.'},
+   {name:'Sağ-sol dönüşümlü pas',key:'rightpass',how:'Bir sağ, bir sol ayak kullan. Vücudunu topun geliş açısına göre ayarla.'},
+   {name:'Hareketli kontrol + pas',key:'controlpass',how:'Pas sonrası 1-2 metre yana hareket et, gelen topu yeni açıya kontrol edip tekrar pas ver.'}]},
+ {title:'Oyun Yönü Değiştirme',drills:[
+   {name:'Kontrolü dışarı alma',key:'controlpass',how:'Gelen topu ilk dokunuşta vücudunun diğer tarafına geçir, ardından hedefe pas ver.'},
+   {name:'İki ayak pas serisi',key:'leftpass',how:'30 saniye sağ, 30 saniye sol ayak seri pas yap. İsabet oranını takip et.'},
+   {name:'Tek dokunuş hız seti',key:'onetouch',how:'15 saniye hızlı tek dokunuş, 15 saniye dinlenme şeklinde setler uygula.'}]},
+ {title:'Baskı Altında Pas',drills:[
+   {name:'Kontrol + yön değiştir',key:'controlpass',how:'Kontrolden önce omuz kontrolü yap; topu hayali baskıdan uzağa al.'},
+   {name:'Dar açı pas',key:'rightpass',how:'Duvara çapraz açıyla yaklaş ve pas sonrası farklı açıya hareket et.'},
+   {name:'Zayıf ayak tek dokunuş',key:'onetouch',how:'Mesafeyi kısaltarak zayıf ayakla tek dokunuş doğruluk çalış.'}]},
+ {title:'Pas Test Günü',drills:[
+   {name:'30 pas isabet testi',key:'rightpass',how:'Duvarda küçük hedef belirle ve 30 pasta kaç isabet yaptığını kaydet.'},
+   {name:'Zayıf ayak 20 pas',key:'leftpass',how:'Sadece zayıf ayağınla 20 kontrollü pas yap.'},
+   {name:'Tek dokunuş seri rekoru',key:'onetouch',how:'Hata yapmadan kaç tek dokunuş pas yapabildiğini ölç.'}]}
+],
+bitiricilik:[
+ {title:'Vuruş Tekniği',drills:[
+   {name:'Kontrol + şut hazırlığı',key:'controlpass',how:'İlk kontrolü vuruş ayağının önüne al; gereksiz ekstra dokunuş yapma.'},
+   {name:'İç ayak plase mekaniği',key:'rightpass',how:'Destek ayağını hedefe çevir, bileği kilitle ve kontrollü iç ayak teması yap.'},
+   {name:'Zayıf ayak vuruş hazırlığı',key:'leftpass',how:'Yakın mesafeden zayıf ayakla temiz temas ve dengeye odaklan.'}]},
+ {title:'Hızlı Bitiriş',drills:[
+   {name:'Tek dokunuş bitiriş ritmi',key:'onetouch',how:'Gelen topu durdurmadan tek dokunuş vuruş ritmini çalış.'},
+   {name:'5 m çıkış + bitiriş',key:'burst',how:'Kısa patlayıcı sprint sonrası vücudunu hızla dengele ve vuruşa hazırlan.'},
+   {name:'Yön değiştir + vuruş',key:'change',how:'Konide yön değiştir, ilk temasla vuruş açısını oluştur.'}]},
+ {title:'Topla Koşu Sonrası Bitiriş',drills:[
+   {name:'Topla sprint',key:'ballsprint',how:'Topu öne açarak hızlan, son 2-3 adımda topu vuruş mesafesine getir.'},
+   {name:'Slalom + çıkış',key:'slalom',how:'Slalomdan sonra başını kaldır ve hayali kalede köşe seç.'},
+   {name:'Kontrol + hızlı vuruş',key:'controlpass',how:'İlk dokunuşu kısa tut, ikinci aksiyonda vuruşu tamamla.'}]},
+ {title:'Zayıf Ayak Bitiriş',drills:[
+   {name:'Zayıf ayak kontrol',key:'leftpass',how:'Topu zayıf ayağınla vuruş yönüne hazırla.'},
+   {name:'Zayıf ayak tek temas',key:'onetouch',how:'Yakın mesafeden tek temas ritmi çalış; güç değil teknik.'},
+   {name:'Zayıf ayak hız sonrası',key:'burst',how:'Kısa sprint sonrası dengeyi bulup zayıf ayak vuruş pozisyonu al.'}]},
+ {title:'Bitiricilik Testi',drills:[
+   {name:'10 kontrollü plase',key:'rightpass',how:'10 vuruşta hedef bölge isabetini say.'},
+   {name:'10 zayıf ayak vuruş',key:'leftpass',how:'Yakın mesafede zayıf ayakla 10 temiz vuruş yap.'},
+   {name:'Hız sonrası 5 bitiriş',key:'ballsprint',how:'Topla hızlandıktan sonra 5 kaliteli bitiriş simülasyonu yap.'}]}
+],
+zayif:[
+ {title:'Zayıf Ayak Temel Kontrol',drills:[
+   {name:'Zayıf ayak iç dokunuş',key:'inside',how:'Sadece zayıf ayağını kullanarak kısa ve seri dokunuşlar yap.'},
+   {name:'Zayıf ayak iç-dış',key:'inout',how:'Topu zayıf ayağın içi ve dışıyla kontrollü yönlendir.'},
+   {name:'Zayıf ayak taban çekme',key:'sole',how:'Zayıf ayağın tabanıyla topu geriye ve yana çek.'}]},
+ {title:'Zayıf Ayak Pas',drills:[
+   {name:'Duvar pası',key:'leftpass',how:'Zayıf ayakla kısa mesafeden doğru teknikle pas yap.'},
+   {name:'Kontrol + pas',key:'controlpass',how:'İlk kontrol ve pasın ikisini de zayıf ayakla yap.'},
+   {name:'Tek dokunuş',key:'onetouch',how:'Mesafeyi kısalt ve zayıf ayakla seri tek dokunuş çalış.'}]},
+ {title:'Zayıf Ayak Hareket',drills:[
+   {name:'Slalom',key:'slalom',how:'Slalomda topa sadece zayıf ayağınla dokun.'},
+   {name:'V çekiş',key:'vdrag',how:'V çekişi zayıf ayağınla iki yöne çalış.'},
+   {name:'Topla sprint',key:'ballsprint',how:'Topu zayıf ayak tarafında taşıyarak kontrollü hızlan.'}]},
+ {title:'Zayıf Ayak Hızlı Oyun',drills:[
+   {name:'Hızlı dokunuş',key:'inside',how:'20 saniyelik hızlı zayıf ayak dokunuş setleri yap.'},
+   {name:'Tek dokunuş pas',key:'onetouch',how:'Zayıf ayakla tek dokunuş pas temposunu artır.'},
+   {name:'Kontrol + yön değiştir',key:'controlpass',how:'Zayıf ayak ilk kontrolüyle farklı yöne çık.'}]},
+ {title:'Zayıf Ayak Testi',drills:[
+   {name:'60 sn dokunuş',key:'inside',how:'60 saniyede zayıf ayakla kaç kontrollü dokunuş yaptığını ölç.'},
+   {name:'20 pas isabet',key:'leftpass',how:'20 zayıf ayak pasında isabet sayını ölç.'},
+   {name:'Slalom süre testi',key:'slalom',how:'Zayıf ayakla slalom parkurunu 3 kez tamamla ve en iyi süreyi kaydet.'}]}
+],
+komple:[
+ {title:'Teknik + Pas',drills:[
+   {name:'Top hakimiyeti',key:'inside',how:'İki ayak seri dokunuşla vücudu ve topu antrenmana hazırla.'},
+   {name:'Slalom',key:'slalom',how:'Koniler arasında kontrollü yön değiştir.'},
+   {name:'Kontrol + pas',key:'controlpass',how:'İlk dokunuşu yönüne al, ikinci dokunuşta pas yap.'}]},
+ {title:'Hız + Çeviklik',drills:[
+   {name:'5 m patlayıcı çıkış',key:'burst',how:'İlk 3 adım kısa ve güçlü; tam dinlenmeyle kaliteli tekrarlar yap.'},
+   {name:'Yan adım',key:'sidefeet',how:'Kalçayı alçalt ve ayakları çaprazlamadan hızlı hareket et.'},
+   {name:'Yön değiştirme',key:'change',how:'Koniye yaklaş, merkezi alçalt ve ters yöne patlayıcı çık.'}]},
+ {title:'İlk Kontrol + Tek Dokunuş',drills:[
+   {name:'Kontrol + pas',key:'controlpass',how:'İlk dokunuşu boş alana al.'},
+   {name:'Tek dokunuş',key:'onetouch',how:'Topun hızını kullanarak hızlı ve isabetli pas yap.'},
+   {name:'Zayıf ayak pas',key:'leftpass',how:'Zayıf ayağınla teknik kalitesini koru.'}]},
+ {title:'Topla Hız',drills:[
+   {name:'İç-dış dokunuş',key:'inout',how:'İç-dış hareketten sonra hızlan.'},
+   {name:'Slalom + sprint',key:'slalom',how:'Son koniden sonra topu öne aç.'},
+   {name:'Topla sprint',key:'ballsprint',how:'Boş alanda uzun dokunuşlarla yüksek hızda top sür.'}]},
+ {title:'Haftalık Test',drills:[
+   {name:'Teknik test',key:'inside',how:'60 saniyelik kontrollü dokunuş sayını ölç.'},
+   {name:'Sprint test',key:'burst',how:'5 metre çıkışta aynı kaliteyle 5 tekrar yap.'},
+   {name:'Pas test',key:'rightpass',how:'30 pasta hedef isabetini say.'}]}
+]
+};
+
+function positionPrefix(){
+ if(s.pos==='Kaleci') return 'Kaleci ';
+ if(s.pos==='Stoper') return 'Stoper ';
+ if(s.pos==='Bek') return 'Bek ';
+ if(s.pos==='Kanat') return 'Kanat ';
+ if(s.pos==='Forvet') return 'Forvet ';
+ return '';
+}
+
+function generateProPlan(){if(!requirePro('generateProPlan'))return;
+ const goal=proGoal.value, days=+proDays.value, duration=Math.max(15,Math.round((+proDuration.value)*readinessFactor()/5)*5);
+ const sessions=proSessions[goal]||proSessions.komple;
+ const dayNames=['Pazartesi','Salı','Çarşamba','Perşembe','Cuma','Cumartesi','Pazar'];
+ const patterns={3:[0,2,5],4:[0,1,3,5],5:[0,1,3,4,6]};
+ const trainDays=patterns[days];
+ let sidx=0;
+ const week=dayNames.map((day,i)=>{
+   if(!trainDays.includes(i)) return {day,rest:true};
+   const base=sessions[sidx % sessions.length]; sidx++;
+   const each=Math.max(3,Math.floor(split.main/base.drills.length));
+   const drills=base.drills.map(d=>enrichDrillForProgression({...d,mins:each}));
+   return {day,rest:false,duration,title:positionPrefix()+base.title,drills,warmup:ageWarmup(s.age),cooldown:cooldownBlock(s.age),mainMinutes:split.main};
+ });
+ s.proPlan={goal,days,duration,pos:s.pos,age:s.age,week,created:new Date().toISOString()};
+ save();renderProPlan();
+}
+
+let proActiveDay=null,proTimerId=null,proTimerRunning=false,proRemain=0;
+
+function renderProPlan(){
+ if(!document.getElementById('proPlanCard'))return;
+ proXP.textContent=s.xp||0;proMinutes.textContent=s.totalM||0;proCompleted.textContent=s.totalE||0;proStreak.textContent=s.streak||1;
+ if(!s.proPlan){proPlanCard.style.display='none';return}
+ const p=s.proPlan;proPlanCard.style.display='block';proPlanBadge.textContent=p.pos+' · '+goalNames[p.goal];
+ proPlanSummary.textContent=p.age+' yaş · Haftada '+p.days+' gün · Her çalışma '+p.duration+' dk';
+ proWeek.innerHTML=p.week.map((x,i)=>x.rest
+ ? `<div class="proDay rest"><div class="proDayTop"><span class="proDayTitle">😴 ${x.day}</span><span>Dinlenme</span></div></div>`
+ : `<div class="proDay"><div class="proDayTop"><span class="proDayTitle">⚽ ${x.day} · ${x.title}</span><span class="proLock">PRO · ${x.duration} dk</span></div><div class="proDrills">${x.drills.map((d,j)=>(j+1)+'. '+d.name).join('<br>')}</div><button class="proOpenBtn" onclick="openProSession(${i})" data-pro-action="1">▶ Nasıl Yapılır? / Antrenmanı Aç</button></div>`
+ ).join('');
+}
+
+function proVideo(key){
+ const v=stageYoutube[key]||stageYoutube.inside;
+ return `<iframe class="proYT" src="https://www.youtube-nocookie.com/embed/${v.id}?playsinline=1&rel=0" title="${v.label}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+}
+function openProSession(dayIndex){
+ const x=s.proPlan.week[dayIndex]; if(!x||x.rest)return;
+ proActiveDay=dayIndex;proRemain=x.duration*60;proTimerRunning=false;clearInterval(proTimerId);
+ proSessionDay.textContent=x.day+' · '+goalNames[s.proPlan.goal];
+ proSessionTitle.textContent=x.title;proSessionDuration.textContent='PRO · '+x.duration+' dk';
+ const warm=(x.warmup||ageWarmup(s.age)).map((d,i)=>`<div class="proDrillCard warmCard"><div class="proDrillHead"><b>🔥 Isınma ${i+1}: ${d.name}</b><span class="proMins">${d.mins} dk</span></div><div class="proHow"><b>Nasıl yapılır?</b><br>${d.how}${equipmentFallback(d.name)?'<br><br><b>Alternatif:</b> '+equipmentFallback(d.name):''}</div></div>`).join('');
+ const main=x.drills.map((d,i)=>`<div class="proDrillCard"><div class="proDrillHead"><b>⚽ ${i+1}. ${d.name}</b><span class="proMins">${d.mins} dk</span></div>${proVideo(d.key)}<div class="proHow"><b>Nasıl yapılır?</b><br>${d.how}</div></div>`).join('');
+ const cool=(x.cooldown||cooldownBlock(s.age)).map((d,i)=>`<div class="proDrillCard coolCard"><div class="proDrillHead"><b>🧘 Soğuma ${i+1}: ${d.name}</b><span class="proMins">${d.mins} dk</span></div><div class="proHow"><b>Nasıl yapılır?</b><br>${d.how}</div></div>`).join('');
+ proSessionDrills.innerHTML=warm+main+cool;
+ proPlanCard.style.display='none';proSessionCard.style.display='block';updateProTimer();proSessionCard.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function closeProSession(){clearInterval(proTimerId);proTimerRunning=false;proSessionCard.style.display='none';proPlanCard.style.display='block';proPlanCard.scrollIntoView({behavior:'smooth',block:'start'});}
+function updateProTimer(){let m=Math.floor(proRemain/60),ss=proRemain%60;proSessionTimer.textContent=String(m).padStart(2,'0')+':'+String(ss).padStart(2,'0');proTimerBtn.textContent=proTimerRunning?'⏸ Duraklat':'▶ Antrenmana Başla';}
+function toggleProSessionTimer(){
+ if(proTimerRunning){clearInterval(proTimerId);proTimerRunning=false;updateProTimer();return}
+ if(proRemain<=0)return;proTimerRunning=true;updateProTimer();
+ proTimerId=setInterval(()=>{proRemain--;if(proRemain<=0){proRemain=0;clearInterval(proTimerId);proTimerRunning=false;}updateProTimer()},1000);
+}
+function completeProSession(){
+ if(proActiveDay===null)return;
+ const x=s.proPlan.week[proActiveDay];
+ s.xp=(s.xp||0)+100;s.totalE=(s.totalE||0)+1;s.totalM=(s.totalM||0)+x.duration;
+ if(!s.proCompletedDays)s.proCompletedDays={};s.proCompletedDays[s.proPlan.created+'_'+proActiveDay]=true;
+ save();alert('🏆 PRO antrenmanı tamamlandı! +100 XP');closeProSession();render();renderProPlan();
+}
+
+
+
+
+
+const testDefs={
+ sprint20:{name:'20 m Sprint',unit:'sn',better:'low',label:'Sonuç (saniye)'},
+ slalom:{name:'Topla Slalom',unit:'sn',better:'low',label:'Sonuç (saniye)'},
+ wallpass:{name:'60 sn Duvar Pası',unit:'pas',better:'high',label:'Başarılı pas sayısı'},
+ weakpass:{name:'Zayıf Ayak 20 Pas',unit:'isabet',better:'high',label:'20 pasta isabet sayısı'},
+ shot:{name:'10 Şut İsabeti',unit:'isabet',better:'high',label:'10 şutta isabet sayısı'}
+};
+function openTests(){if(!requirePro('tests'))return;head.style.display='none';nav.style.display='none';showRaw('tests');renderTests();}
+function updateTestUnit(){if(document.getElementById('testValueLabel'))testValueLabel.textContent=testDefs[testType.value].label;}
+function saveTestResult(){
+ const type=testType.value,val=parseFloat(testValue.value);
+ if(!isFinite(val)||val<=0){alert('Geçerli bir sonuç gir.');return}
+ if((type==='weakpass'&&val>20)||(type==='shot'&&val>10)){alert('Bu test için sonuç üst sınırı aşıyor.');return}
+ s.testResults.push({type,value:val,ts:Date.now()});
+ if(s.testResults.length>100)s.testResults=s.testResults.slice(-100);
+ save();testValue.value='';renderTests();
+ alert('✅ Test sonucu kaydedildi.');
+}
+function resultsFor(type){return s.testResults.filter(x=>x.type===type).sort((a,b)=>a.ts-b.ts)}
+function improvement(type){
+ const a=resultsFor(type);if(a.length<2)return null;
+ const first=a[0].value,last=a[a.length-1].value,d=testDefs[type];
+ return d.better==='low'?((first-last)/first*100):((last-first)/first*100);
+}
+function metricScore(type){
+ const a=resultsFor(type);if(!a.length)return null;
+ const v=a[a.length-1].value;
+ const ranges={sprint20:[3.2,6.5],slalom:[8,22],wallpass:[20,70],weakpass:[5,20],shot:[2,10]};
+ const [lo,hi]=ranges[type],d=testDefs[type];
+ let x=d.better==='low'?(hi-v)/(hi-lo):(v-lo)/(hi-lo);
+ return Math.max(5,Math.min(100,Math.round(x*100)));
+}
+function weakestTest(){
+ let vals=Object.keys(testDefs).map(k=>({k,score:metricScore(k)})).filter(x=>x.score!==null);
+ return vals.length?vals.sort((a,b)=>a.score-b.score)[0]:null;
+}
+function renderTests(){
+ if(!document.getElementById('testProgress'))return;updateTestUnit();
+ testCount.textContent=s.testResults.length+' test';
+ let scores=Object.keys(testDefs).map(metricScore).filter(x=>x!==null);
+ let overall=scores.length?Math.round(scores.reduce((a,b)=>a+b,0)/scores.length):0;
+ developmentScore.innerHTML=scores.length?`<strong>${overall}/100</strong><span>Mevcut gelişim skoru · daha fazla test girdikçe daha anlamlı olur</span>`:'<span>Henüz yeterli test sonucu yok.</span>';
+ testProgress.innerHTML=Object.entries(testDefs).map(([k,d])=>{
+   const arr=resultsFor(k);if(!arr.length)return '';
+   const last=arr[arr.length-1].value,imp=improvement(k),score=metricScore(k);
+   const change=imp===null?'İlk ölçüm':`${imp>=0?'▲':'▼'} ${Math.abs(imp).toFixed(1)}%`;
+   return `<div class="testMetric"><div class="metricTop"><b>${d.name}</b><span class="metricChange">${last} ${d.unit} · ${change}</span></div><div class="metricBar"><div class="metricFill" style="width:${score}%"></div></div></div>`;
+ }).join('')||'<div class="small">İlk sonucunu kaydet.</div>';
+ const weak=weakestTest();
+ testCoachComment.textContent=!weak?'Henüz yeterli veri yok. En az bir performans testi gir.':coachCommentForTest(weak.k,weak.score);
+ testHistory.innerHTML=s.testResults.slice().reverse().slice(0,10).map(x=>`<div class="testHistoryItem"><span>${testDefs[x.type].name}<br><small>${new Date(x.ts).toLocaleDateString('tr-TR')}</small></span><b>${x.value} ${testDefs[x.type].unit}</b></div>`).join('')||'<div class="small">Henüz test yok.</div>';
+}
+function coachCommentForTest(k,score){
+ const map={
+ sprint20:'Sprint skorun diğer ölçümlere göre geliştirilmesi gereken alanlardan biri. Kısa patlayıcı çıkışlar ve tam dinlenmeli 5–20 m sprintlere ağırlık verelim.',
+ slalom:'Topla slalom tarafında gelişim alanı görüyorum. Küçük dokunuş, yön değiştirme ve hareket sonrası hızlanmayı artırmalıyız.',
+ wallpass:'Pas tekrarında gelişim alanı var. İlk kontrol + duvar pası + tek dokunuş kombinasyonu ekleyelim.',
+ weakpass:'Zayıf ayak pasında ekstra tekrar faydalı olur. Her teknik çalışmanın en az üçte birini zayıf ayağa ayıralım.',
+ shot:'Şut isabetinde gelişim alanı var. Güçten önce temiz temas, köşe seçimi ve kontrol + bitiriş çalışalım.'
+ };
+ return `Verilerine göre öncelik: ${testDefs[k].name}. ${map[k]} Mevcut alan skoru yaklaşık ${score}/100.`;
+}
+function applyTestCoachPlan(){if(!requirePro('aiCoach'))return;
+ const w=weakestTest();if(!w){alert('Önce en az bir test sonucu gir.');return}
+ const plans={
+ sprint20:['5 m patlayıcı çıkış','10–20 m sprint','Yön değiştirme'],
+ slalom:['İç-dış dokunuş','Slalom','Slalom + sprint'],
+ wallpass:['Kontrol + pas','Duvar pası','Tek dokunuş'],
+ weakpass:['Zayıf ayak dokunuş','Zayıf ayak duvar pası','Zayıf ayak kontrol'],
+ shot:['Kontrol + vuruş','Tek dokunuş bitiriş','Uzak köşe plase']
+ };
+ buildCoachPlan(plans[w.k],'Orta');
+ pushCoach('coach',`Performans testlerine baktım. Şu an önceliği ${testDefs[w.k].name} alanına veriyorum. Bugünkü Koç Planını buna göre değiştirdim.`);
+ head.style.display='block';nav.style.display='flex';showRaw('coach');initCoach();
+}
+
+const trainingLibrary={
+ '1v1':{icon:'🪄',title:'1v1 Adam Eksiltme',drills:[
+   {name:'Body Feint',mins:8,how:'Rakibe yaklaşırken gövdeyi bir yöne düşür, topu diğer yöne çıkar ve ilk 2 adımda hızlan.'},
+   {name:'Step-over / Scissors',mins:8,how:'Ayağını topun önünden dıştan içe dolaştır, rakibin ağırlığını boz ve ters yöne çık.'},
+   {name:'La Croqueta',mins:8,how:'Topu bir ayağın içinden diğer ayağın içine hızlı aktar. Rakibin uzanan ayağının yanından geç.'},
+   {name:'Inside-out',mins:8,how:'Aynı ayakla önce içe göster, dışıyla yön değiştir ve hızlan.'},
+   {name:'1v1 çıkış sprinti',mins:6,how:'Her çalımın sonunda 5–8 metre maksimum çıkış yap. Hareketin amacı rakibi geçtikten sonra mesafe yaratmak.'}
+ ]},
+ 'duran':{icon:'🎯',title:'Duran Top',drills:[
+   {name:'Direkt frikik tekniği',mins:10,how:'Topun yanına destek ayağını yerleştir, vuruş yüzeyini hedefe göre seç ve önce doğruluğa odaklan.'},
+   {name:'Korner servisi',mins:10,how:'Ön direk, penaltı noktası ve arka direk için üç ayrı hedef belirle. Her bölgeye seri servis yap.'},
+   {name:'Penaltı rutini',mins:8,how:'Aynı yaklaşma ritmini koru. Köşeyi önceden seç ve vuruş anında karar değiştirmemeye çalış.'},
+   {name:'İndirekt serbest vuruş',mins:10,how:'İlk dokunuş + koşu + ikinci pas veya şut seçeneklerini 2–3 oyunculu kombinasyonla çalış.'}
+ ]},
+ 'sut':{icon:'🥅',title:'Şut & Bitiricilik',drills:[
+   {name:'Kontrol + şut',mins:10,how:'İlk kontrolü vuruş ayağının önüne al ve ikinci aksiyonda şutu tamamla.'},
+   {name:'Tek vuruş',mins:10,how:'Gelen topun hızını kullan. Destek ayağını hedefe çevir ve tek temasla bitir.'},
+   {name:'Uzak köşe plase',mins:10,how:'Kaleciden uzağa iç ayakla kontrollü vuruş yap. Güçten önce köşe seçimi.'}
+ ]},
+ 'ilk':{icon:'🧲',title:'İlk Kontrol',drills:[
+   {name:'Açık vücut kontrolü',mins:8,how:'Top gelmeden önce omuz kontrolü yap, vücudu yarım açık konuma getir ve ilk teması boş alana al.'},
+   {name:'Baskıdan uzağa kontrol',mins:8,how:'Hayali rakibi bir tarafta düşün ve ilk dokunuşu baskının tersine yap.'},
+   {name:'Kontrol + pas',mins:8,how:'İlk dokunuş pas açısını hazırlasın; ikinci dokunuş temiz pas olsun.'}
+ ]},
+ 'pas':{icon:'🔁',title:'Pas & Oyun Görüşü',drills:[
+   {name:'Duvar pası',mins:10,how:'Sağ-sol ayak dönüşümlü çalış. İlk kontrolü pas yönüne al.'},
+   {name:'Tek dokunuş',mins:8,how:'10 hatasız paslık seriler hedefle. Tempo arttıkça tekniği bozma.'},
+   {name:'Dikey pas',mins:10,how:'Hedef kapı belirle ve topu yerden, doğru hızda boşluğa oyna.'}
+ ]},
+ 'savunma':{icon:'🛡️',title:'Savunma',drills:[
+   {name:'Jockey / yönlendirme',mins:10,how:'Rakibe düz koşma; vücudu yan çevir ve onu istediğin yöne yönlendir.'},
+   {name:'1v1 savunma',mins:10,how:'Mesafeyi koru, rakibin topu ayağından açmasını bekle ve o anda müdahale et.'},
+   {name:'Geri koşu + dönüş',mins:8,how:'Geri koşudan yan vücut pozisyonuna dönüp patlayıcı şekilde rakibe yaklaş.'}
+ ]},
+ 'orta':{icon:'🎯',title:'Orta Açma',drills:[
+   {name:'Koşu halinde orta',mins:10,how:'Topu son dokunuşta ayağından biraz aç, destek ayağını hedefe çevir ve ceza sahasına servis yap.'},
+   {name:'Erken orta',mins:8,how:'Çizgiye inmeden, yarı alandan forvet koşusuna doğru kavisli orta çalış.'},
+   {name:'Zayıf ayak orta',mins:8,how:'Mesafeyi kısalt ve zayıf ayakla önce isabet oranını yükselt.'}
+ ]},
+ 'zayif':{icon:'🦶',title:'Zayıf Ayak',drills:[
+   {name:'Zayıf ayak dokunuş',mins:8,how:'Sadece zayıf ayağınla seri küçük dokunuşlar yap.'},
+   {name:'Zayıf ayak pas',mins:8,how:'Kısa mesafeden duvar pası yap, bileği kilitle ve hedefe odaklan.'},
+   {name:'Zayıf ayak şut',mins:8,how:'Yakın mesafeden temiz temas ve dengeye odaklan; gücü sonra artır.'}
+ ]},
+ 'dayanik':{icon:'🫁',title:'Dayanıklılık',drills:[
+   {name:'Toplu interval',mins:12,how:'30 sn tempolu top sürme + 30 sn hafif tempo şeklinde tekrarlar yap.'},
+   {name:'Kısa shuttle',mins:10,how:'5–10–15 metre gidiş dönüşleri kontrollü yoğunlukta uygula.'},
+   {name:'Teknik kondisyon',mins:12,how:'Pas, slalom ve sprinti düşük dinlenme aralarıyla istasyon şeklinde birleştir.'}
+ ]}
+};
+
+function openLibrary(){head.style.display='none';nav.style.display='none';showRaw('library');renderLibraryCats();}
+function openTrainer(){if(!requireCoachPro())return;head.style.display='none';nav.style.display='none';showRaw('trainer');}
+function backHomeFromExtra(){head.style.display='block';nav.style.display='flex';showRaw('home');scrollTo(0,0);}
+function renderLibraryCats(){
+ libraryCats.innerHTML=Object.entries(trainingLibrary).map(([k,v])=>`<div class="libCat" onclick="openLibraryCat('${k}')"><span>${v.icon}</span><b>${v.title}</b><small>${v.drills.length} çalışma</small></div>`).join('');
+}
+function openLibraryCat(key){
+ const c=trainingLibrary[key]; libraryDrillCard.style.display='block';libraryTitle.textContent=c.icon+' '+c.title;libraryCount.textContent=c.drills.length+' çalışma';
+ libraryDrills.innerHTML=c.drills.map((d,i)=>{const id='libdemo_'+key+'_'+i;const type=demoTypeFromName(d.name);return `<div class="libDrill"><b>${i+1}. ${d.name}</b><div class="libMeta">${d.mins} dk · Teknik çalışma</div><div class="libHow"><b>Nasıl yapılır?</b><br>${d.how}</div><button class="demoBtn" onclick="toggleDemo('${id}')">▶ Ön Gösterimi Aç / Kapat</button>${demoHTML(type,d.name).replace('class="demoBox"','class="demoBox" id="'+id+'"')}</div>`}).join('');
+ libraryDrillCard.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+
+function demoTypeFromName(name){
+ const n=(name||'').toLocaleLowerCase('tr-TR');
+ if(n.includes('slalom')||n.includes('koni')||n.includes('parkur'))return 'slalom';
+ if(n.includes('1v1')||n.includes('adam eksilt')||n.includes('koridor'))return '1v1';
+ if(n.includes('2v2')||n.includes('3v3')||n.includes('4v4')||n.includes('küçük oyun')||n.includes('serbest oyun')||n.includes('rondo')||n.includes('geçiş'))return '2v2';
+ if(n.includes('pas')||n.includes('tek dokunuş'))return 'pass';
+ if(n.includes('sprint')||n.includes('hızlan')||n.includes('çıkış'))return 'sprint';
+ return '2v2';
+}
+function demoHTML(type,label){
+ const base=`<div class="demoLabel">${label}</div><div class="pitchLine"></div><div class="pitchMid"></div><div class="pitchCircle"></div>`;
+ if(type==='slalom'){
+   return `<div class="demoBox">${base}
+   <div class="coneMini" style="left:25%;top:48%"></div><div class="coneMini" style="left:40%;top:48%"></div><div class="coneMini" style="left:55%;top:48%"></div><div class="coneMini" style="left:70%;top:48%"></div>
+   <div class="playerDot blue" style="animation:slalomPlayer 4s infinite linear"></div>
+   <div class="ballDot" style="animation:slalomBall 4s infinite linear"></div>
+   <div class="demoTip">Oyuncu koniler arasında topu yakın tutarak zikzak ilerler.</div></div>`;
+ }
+ if(type==='1v1'){
+   return `<div class="demoBox">${base}
+   <div class="playerDot blue" style="animation:duelBlue 3s infinite ease-in-out"></div>
+   <div class="playerDot yellow" style="animation:duelYellow 3s infinite ease-in-out"></div>
+   <div class="ballDot" style="animation:duelBall 3s infinite ease-in-out"></div>
+   <div class="demoTip">Mavi hücumcu rakibe yaklaşır, yön değiştirip sarı savunmacıyı geçmeye çalışır.</div></div>`;
+ }
+ if(type==='pass'){
+   return `<div class="demoBox">${base}
+   <div class="playerDot blue" style="animation:passA 2.3s infinite ease-in-out"></div>
+   <div class="playerDot blue" style="animation:passB 2.3s infinite ease-in-out"></div>
+   <div class="ballDot" style="animation:passBall 2.3s infinite ease-in-out"></div>
+   <div class="demoTip">Top oyuncular arasında sürekli gidip gelir; pas sonrası oyuncular açı değiştirir.</div></div>`;
+ }
+ if(type==='sprint'){
+   return `<div class="demoBox">${base}
+   <div class="playerDot blue" style="animation:sprintP 2.2s infinite linear"></div>
+   <div class="ballDot" style="animation:sprintBall 2.2s infinite linear"></div>
+   <div class="demoTip">Oyuncu topu öne bırakır ve çizgi boyunca hızlanır.</div></div>`;
+ }
+ return `<div class="demoBox">${base}
+   <div class="playerDot blue" style="animation:b1 3.4s infinite ease-in-out"></div>
+   <div class="playerDot blue" style="animation:b2 3.4s infinite ease-in-out"></div>
+   <div class="playerDot yellow" style="animation:y1 3.4s infinite ease-in-out"></div>
+   <div class="playerDot yellow" style="animation:y2 3.4s infinite ease-in-out"></div>
+   <div class="ballDot" style="animation:ball22 4.2s infinite linear"></div>
+   <div class="demoTip">2 mavi + 2 sarı oyuncu sürekli açı değiştirir; top pasla dolaşır.</div></div>`;
+}
+function toggleDemo(id){
+ const el=document.getElementById(id); if(el)el.classList.toggle('active');
+}
+
+const coachSessionTemplates={
+ pas:[
+  {name:'Dinamik ısınma + top',ratio:.16,setup:'Her oyuncuya top / 15x15 alan',desc:'Hafif koşu, yön değiştirme ve iki ayak top hakimiyeti.'},
+  {name:'4 köşe pas istasyonu',ratio:.24,setup:'4 koni, 2–3 top',desc:'Kontrol yönü, destek açısı ve pas sonrası hareket.'},
+  {name:'3v1 / 4v2 rondo',ratio:.25,setup:'12x12 alan, gruplar',desc:'Tek/iki dokunuş, çevre kontrolü ve hızlı pas açısı.'},
+  {name:'Oyun yönü değiştirme',ratio:.20,setup:'35x25 alan, 2 hedef bölge',desc:'Bir kanattan diğerine geçiş ve dikey pas seçimi.'},
+  {name:'Serbest oyun',ratio:.15,setup:'Küçük saha',desc:'3 pas sonrası gol serbest gibi basit kural ekle.'}
+ ],
+ '1v1':[
+  {name:'Toplu ısınma + çalım',ratio:.16,setup:'Her oyuncuya top',desc:'Body feint, step-over ve iç-dış hareketleri.'},
+  {name:'1v1 koridor',ratio:.24,setup:'8x15 m koridorlar',desc:'Hücumcu adam eksiltir, savunmacı yönlendirir.'},
+  {name:'2v2 geçiş',ratio:.22,setup:'20x20 alan, mini kaleler',desc:'Top kazanılır kazanılmaz hızlı hücum.'},
+  {name:'Kanat 1v1 + bitiriş',ratio:.22,setup:'Ceza sahası yanı',desc:'Adam eksiltme sonrası orta veya şut.'},
+  {name:'Serbest oyun',ratio:.16,setup:'Küçük saha',desc:'1v1 kazanan takıma ekstra puan.'}
+ ],
+ bitiricilik:[
+  {name:'Dinamik ısınma + pas',ratio:.15,setup:'2 top, koniler',desc:'Kontrol ve kısa pas.'},
+  {name:'Kontrol + şut istasyonu',ratio:.25,setup:'Kale, koniler, toplar',desc:'İlk kontrolü vuruş yönüne alıp ikinci aksiyonda şut.'},
+  {name:'Tek vuruş bitiriş',ratio:.20,setup:'Kanat servisleri',desc:'İç ayak, üst ayak ve zayıf ayak bitirişleri.'},
+  {name:'2v1 + bitiriş',ratio:.25,setup:'25x20 alan',desc:'Hızlı karar, pas veya şut seçimi.'},
+  {name:'Bitiriş oyunu',ratio:.15,setup:'Küçük saha',desc:'Gol sadece tek/iki dokunuş sonrası geçerli.'}
+ ],
+ gecis:[
+  {name:'Reaksiyon ısınması',ratio:.15,setup:'Koni, iki renk yelek',desc:'Komuta göre yön ve tempo değiştir.'},
+  {name:'3v2 geçiş',ratio:.25,setup:'25x20 alan',desc:'Top kazanıldığında 6–8 saniyede hedefe git.'},
+  {name:'4v4 + joker',ratio:.25,setup:'30x25 alan',desc:'Top kaybında 5 sn karşı pres.'},
+  {name:'Dalga hücumu',ratio:.20,setup:'Yarım saha',desc:'Bir hücum biter bitmez diğer takım çıkar.'},
+  {name:'Serbest oyun',ratio:.15,setup:'Orta saha',desc:'Geçişten gelen gole ekstra puan.'}
+ ],
+ savunma:[
+  {name:'Ayak çalışması ısınma',ratio:.15,setup:'Koniler',desc:'Yan adım, geri koşu, yön değiştirme.'},
+  {name:'1v1 savunma',ratio:.25,setup:'8x15 koridor',desc:'Mesafe, vücut açısı, rakibi dışa yönlendirme.'},
+  {name:'2v2 kayma',ratio:.22,setup:'20x20 alan',desc:'Baskı + kademe ilişkisi.'},
+  {name:'4v4 alan savunması',ratio:.23,setup:'30x25 alan',desc:'Takım boyu, merkez kapatma ve iletişim.'},
+  {name:'Serbest oyun',ratio:.15,setup:'Küçük saha',desc:'Top kazanımından sonra 5 sn içinde pas şartı.'}
+ ],
+ duran:[
+  {name:'Teknik ısınma',ratio:.15,setup:'Toplar ve koniler',desc:'Pas ve ilk kontrol.'},
+  {name:'Korner organizasyonu',ratio:.25,setup:'Kale, 6–10 oyuncu',desc:'Ön direk, arka direk ve seken top koşuları.'},
+  {name:'Direkt / indirekt frikik',ratio:.20,setup:'Manken veya koni baraj',desc:'2–3 farklı varyasyon çalış.'},
+  {name:'Savunma duran topu',ratio:.25,setup:'Ceza sahası',desc:'Adam/alan paylaşımı ve ikinci top.'},
+  {name:'Penaltı rutini',ratio:.15,setup:'Kale',desc:'Her oyuncu sabit yaklaşma rutini uygular.'}
+ ],
+ surat:[
+  {name:'Dinamik sprint ısınması',ratio:.18,setup:'20 m hat',desc:'Skipping, yan adım, düşük şiddetli çıkışlar.'},
+  {name:'5–10 m patlayıcı çıkış',ratio:.24,setup:'Başlangıç çizgileri',desc:'Tam dinlenmeyle kaliteli sprint.'},
+  {name:'Yön değiştirme parkuru',ratio:.22,setup:'5–6 koni',desc:'Merkezi alçalt, dış ayakla güçlü itiş.'},
+  {name:'Topla sprint',ratio:.20,setup:'20 m koridor',desc:'Topu boş alanda öne açıp hızlan.'},
+  {name:'Hızlı küçük oyun',ratio:.16,setup:'20x20 alan',desc:'Kısa süreli, yüksek tempolu oyun.'}
+ ]
+};
+
+
+
+const weekDayNames=['Pazar','Pazartesi','Salı','Çarşamba','Perşembe','Cuma','Cumartesi'];
+const focusCycle={
+ balanced:['pas','1v1','gecis','bitiricilik','savunma','surat','pas','duran'],
+ pas:['pas','pas','1v1','gecis','pas','bitiricilik'],
+ '1v1':['1v1','surat','1v1','bitiricilik','gecis','pas'],
+ bitiricilik:['pas','bitiricilik','1v1','bitiricilik','gecis','surat'],
+ gecis:['pas','gecis','savunma','gecis','surat','bitiricilik'],
+ savunma:['savunma','pas','gecis','savunma','surat','duran'],
+ surat:['surat','1v1','pas','surat','bitiricilik','gecis']
+};
+let currentPeriodPlan=null;
+function trainingWeekDays(count,match){
+ const candidates=match===0?[2,4,6,1,3]:match===6?[1,3,5,2,4]:[1,3,5,2,4];
+ return candidates.slice(0,count).sort((a,b)=>a-b);
+}
+function intensityFor(day,match,weekIndex){
+ if(match<0)return weekIndex===3?'Orta':'Orta-Yüksek';
+ let dist=(match-day+7)%7;
+ if(dist===1)return 'Hafif';
+ if(dist===2)return 'Orta';
+ return weekIndex===3?'Orta':'Yüksek';
+}
+function durationFor(intensity,base){
+ if(intensity==='Hafif')return Math.max(45,base-20);
+ if(intensity==='Orta')return Math.max(55,base-10);
+ return base;
+}
+function pickTarget(focus,idx,used){
+ const cyc=focusCycle[focus]||focusCycle.balanced;
+ for(let k=0;k<cyc.length;k++){
+   let t=cyc[(idx+k)%cyc.length];
+   if(used.slice(-2).indexOf(t)<0)return t;
+ }
+ return cyc[idx%cyc.length];
+}
+function generatePeriodPlan(){if(!requireCoachPro())return;
+ const type=planType.value,weeks=type==='month'?4:1,days=+planDays.value,match=+matchDay.value,focus=planFocus.value;
+ const age=coachAgeGroup.value,players=+coachPlayers.value||16,base=+coachDuration.value;
+ const trainDays=trainingWeekDays(days,match),used=[],weekArr=[];
+ let serial=0;
+ for(let w=0;w<weeks;w++){
+   const stage=progressionStages[w%4];
+   const sessions=[];
+   trainDays.forEach(day=>{
+     let target=pickTarget(focus,serial++,used);used.push(target);
+     let intensity=intensityFor(day,match,w),dur=durationFor(intensity,base);
+     let blocks=makeProgressedBlocks(target,w%4,'period');
+     sessions.push({day,target,intensity,duration:dur,stage:stage.name,blocks});
+   });
+   if(match>=0)sessions.push({day:match,match:true,duration:0,target:'match'});
+   sessions.sort((a,b)=>a.day-b.day);
+   weekArr.push({week:w+1,stage:stage.name,note:stage.note,sessions});
+ }
+ currentPeriodPlan={type,weeks,days,match,focus,age,players,base,created:Date.now(),weekArr};
+ renderPeriodPlan();
+}
+function renderPeriodPlan(){
+ if(!currentPeriodPlan||!document.getElementById('periodPlanCard'))return;
+ const p=currentPeriodPlan;periodPlanCard.style.display='block';
+ periodBadge.textContent=p.type==='month'?'4 HAFTA':'1 HAFTA';
+ periodSummary.textContent=`${p.age} · ${p.players} oyuncu · Haftada ${p.days} idman${p.match>=0?' · Maç: '+weekDayNames[p.match]:''}`;
+ periodWeeks.innerHTML=p.weekArr.map((w,wi)=>`<div class="weekCard"><div class="weekHead"><b>${w.week}. Hafta · ${w.stage}</b><span class="pill">${w.note}</span></div>${
+   w.sessions.map((x,si)=>{
+    if(x.match)return `<div class="planDay match"><div class="planDayTop"><b>🏟️ ${weekDayNames[x.day]} · MAÇ</b><span class="loadPill">MAÇ</span></div><div class="planDetail">Antrenman yükü maça yaklaştıkça otomatik düşürüldü.</div></div>`;
+    const id=`period_${wi}_${si}`;
+    return `<div class="planDay"><div class="planDayTop"><b>⚽ ${weekDayNames[x.day]} · ${targetLabels[x.target]}</b><span class="loadPill">${x.intensity} · ${x.duration} dk</span></div><div class="planDetail">${x.stage} seviye · 🔥 Isınma + ⚽ Ana bölüm + 🧘 Soğuma<br>${x.blocks.slice(0,3).map(b=>b.name).join(' • ')}</div><button class="planOpen" onclick="togglePeriodDetail('${id}')">▶ Antrenmanı ve Ön Gösterimi Aç</button><div id="${id}" style="display:none">${renderPeriodSession(x,id)}</div></div>`;
+   }).join('')
+ }</div>`).join('');
+ periodPlanCard.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function renderPeriodSession(x,prefix){
+ let used=0;
+ return x.blocks.map((b,i)=>{
+   let mins=i===x.blocks.length-1?x.duration-used:Math.round(x.duration*b.ratio/5)*5;used+=mins;
+   const did=prefix+'_d_'+i,type=demoTypeFromName(b.name);
+   return `<div class="sessionBlock"><div class="sessionTop"><b>${i+1}. ${b.name}</b><span class="sessionMin">${mins} dk</span></div><div class="setup">Kurulum: ${b.setup}</div><div class="sessionDesc">${b.desc}</div><button class="demoBtn" onclick="toggleDemo('${did}')">▶ Hareketli Ön Gösterim</button>${demoHTML(type,b.name).replace('class="demoBox"','class="demoBox" id="'+did+'"')}</div>`;
+ }).join('');
+}
+function togglePeriodDetail(id){const e=document.getElementById(id);if(e)e.style.display=e.style.display==='none'?'block':'none';}
+function savePeriodPlan(){
+ if(!currentPeriodPlan)return;
+ s.teamPlans.push(currentPeriodPlan);if(s.teamPlans.length>12)s.teamPlans=s.teamPlans.slice(-12);save();renderSavedPeriodPlans();
+ alert('✅ Takım programı kaydedildi.');
+}
+function renderSavedPeriodPlans(){
+ const box=document.getElementById('savedPeriodPlans');if(!box)return;
+ const arr=(s.teamPlans||[]).slice().reverse();
+ box.innerHTML=arr.length?arr.map(p=>`<div class="savedPlan"><b>${p.type==='month'?'📅 4 Haftalık':'🗓️ Haftalık'} · ${p.age}</b><span>${p.players} oyuncu · Haftada ${p.days} idman · ${new Date(p.created).toLocaleDateString('tr-TR')}</span></div>`).join(''):'<div class="small">Henüz kayıtlı uzun dönem plan yok.</div>';
+}
+
+const progressionStages=[
+ {name:'Temel',note:'Teknik kalitesi ve doğru pozisyon öncelikli.',constraint:'Önce düşük baskı ve kontrollü tekrar.'},
+ {name:'Baskı Altında',note:'Aynı beceriyi daha az zaman ve alanla uygula.',constraint:'Alanı yaklaşık %15 küçült ve karar süresini kısalt.'},
+ {name:'Karar Verme',note:'Oyuncu artık pas, sürme veya bitiriş arasında karar vermeli.',constraint:'Her çalışmaya en az iki çözüm seçeneği ekle.'},
+ {name:'Maç Gerçekliği',note:'Yüksek baskı, skor ve geçiş şartları eklenir.',constraint:'Skor, zaman ve yön kuralıyla rekabet oluştur.'}
+];
+const targetLabels={pas:'Pas & oyun yönü','1v1':'1v1 adam eksiltme',bitiricilik:'Şut & bitiricilik',gecis:'Geçiş oyunu',savunma:'Savunma',duran:'Duran top',surat:'Sürat & çeviklik'};
+let currentCoachSession=null;
+
+function getTargetCount(target){
+ return (s.teamCoachHistory||[]).filter(x=>x.target===target).length;
+}
+function makeProgressedBlocks(target,stageIndex,mode){
+ const base=coachSessionTemplates[target];
+ const st=progressionStages[stageIndex%progressionStages.length];
+ const variants=[
+   ['Teknik odak','Kalite düşerse tempoyu azalt.'],
+   ['Baskılı','Rakip baskısı veya süre sınırı ekle.'],
+   ['Karar verme','Oyuncuya en az iki farklı çözüm bırak.'],
+   ['Maç temposu','Skor, yön ve zaman şartı ekle.']
+ ];
+ const v=variants[stageIndex%variants.length];
+ return base.map((b,i)=>({
+   ...b,
+   name:(i===0?b.name:`${b.name} · ${v[0]}`),
+   desc:b.desc+' '+(i===0?st.constraint:v[1])
+ }));
+}
+function chooseAutoTarget(requested){
+ const seven=Date.now()-7*86400000;
+ const recent=(s.teamCoachHistory||[]).filter(x=>x.ts>=seven);
+ const counts={pas:0,'1v1':0,bitiricilik:0,gecis:0,savunma:0,duran:0,surat:0};
+ recent.forEach(x=>counts[x.target]=(counts[x.target]||0)+1);
+ if(requested && counts[requested]<2)return requested;
+ return Object.keys(counts).sort((a,b)=>counts[a]-counts[b])[0];
+}
+function generateCoachSession(mode='new'){if(!requireCoachPro())return;
+ let target=coachTarget.value, duration=+coachDuration.value, players=+coachPlayers.value||16, age=coachAgeGroup.value;
+ if(mode==='tomorrow') target=chooseAutoTarget(target);
+ const count=getTargetCount(target);
+ let stageIndex=count%progressionStages.length;
+ if(mode==='progress' && s.teamCoachHistory.length){
+   const last=s.teamCoachHistory[s.teamCoachHistory.length-1];
+   target=last.target; coachTarget.value=target; stageIndex=(last.stageIndex+1)%progressionStages.length;
+ }
+ const temp=makeProgressedBlocks(target,stageIndex,mode);
+ const stage=progressionStages[stageIndex];
+ const isTomorrow=mode==='tomorrow';
+ coachSessionCard.style.display='block';coachSessionBadge.textContent=duration+' dk';
+ coachSessionHeading.textContent=isTomorrow?'Yarının Takım Antrenmanı':(mode==='progress'?'Geliştirilmiş Takım Antrenmanı':'Bugünkü Takım Antrenmanı');
+ coachSessionSummary.textContent=age+' · '+players+' oyuncu · '+targetLabels[target]+' · '+stage.name+' seviye';
+ coachProgressNote.style.display='block';
+ coachProgressNote.textContent='📈 '+stage.name+': '+stage.note+' '+(count>0?`Bu hedef daha önce ${count} kez çalışıldı; plan aynı bırakılmadı.`:'Bu hedef için ilk kayıt.');
+ let used=0;
+ const blocks=temp.map((b,i)=>{
+   let mins=(i===temp.length-1)?duration-used:Math.round(duration*b.ratio/5)*5; used+=mins;
+   return {...b,mins};
+ });
+ coachSessionBlocks.innerHTML=blocks.map((b,i)=>{const id='coachdemo_'+i;const type=demoTypeFromName(b.name);return `<div class="sessionBlock"><div class="sessionTop"><b>${i+1}. ${b.name}</b><span class="sessionMin">${b.mins} dk</span></div><div class="setup">Kurulum: ${b.setup}</div><div class="sessionDesc">${b.desc}</div><button class="demoBtn" onclick="toggleDemo('${id}')">▶ Ön Gösterimi Aç / Kapat</button>${demoHTML(type,b.name).replace('class="demoBox"','class="demoBox" id="'+id+'"')}</div>`}).join('');
+ currentCoachSession={target,duration,players,age,stageIndex,stage:stage.name,blocks,plannedFor:isTomorrow?'Yarın':'Bugün',warmup:ageWarmup(age.replace(/\D/g,'')||12),cooldown:cooldownBlock(age.replace(/\D/g,'')||12)};
+ coachSessionCard.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function saveCurrentCoachSession(){
+ if(!currentCoachSession)return;
+ const entry={...currentCoachSession,ts:Date.now(),id:Date.now()+Math.random()};
+ s.teamCoachHistory.push(entry);
+ if(s.teamCoachHistory.length>30)s.teamCoachHistory=s.teamCoachHistory.slice(-30);
+ save();renderTeamHistory();renderWeeklyLoad();
+ alert('✅ Antrenman geçmişe kaydedildi. Bir sonraki plan bu kaydı dikkate alacak.');
+}
+function renderTeamHistory(){
+ const box=document.getElementById('teamHistoryList'); if(!box)return;
+ const arr=(s.teamCoachHistory||[]).slice().reverse().slice(0,8);
+ if(!arr.length){box.innerHTML='<div class="small" style="margin-top:12px">Henüz kaydedilmiş takım antrenmanı yok.</div>';return}
+ box.innerHTML=arr.map(x=>`<div class="historyItem"><div class="historyTop"><div class="historyTitle">${targetLabels[x.target]}</div><span class="historyStage">${x.stage}</span></div><div class="historyMeta">${new Date(x.ts).toLocaleDateString('tr-TR')} · ${x.age} · ${x.players} oyuncu · ${x.duration} dk</div></div>`).join('');
+}
+function renderWeeklyLoad(){
+ const seven=Date.now()-7*86400000, recent=(s.teamCoachHistory||[]).filter(x=>x.ts>=seven);
+ const total=recent.reduce((a,x)=>a+x.duration,0);
+ if(document.getElementById('weeklyLoadBadge'))weeklyLoadBadge.textContent=total+' dk';
+ if(document.getElementById('weeklyLoadText'))weeklyLoadText.textContent=recent.length?`Son 7 günde ${recent.length} takım antrenmanı kaydedildi. Aynı hedefin gereksiz tekrarını azaltmak için yeni planlar geçmişe göre değişir.`:'Henüz takım antrenmanı kaydı yok.';
+ const counts={pas:0,'1v1':0,bitiricilik:0,gecis:0,savunma:0,duran:0,surat:0};
+ recent.forEach(x=>counts[x.target]+=x.duration);
+ const max=Math.max(1,...Object.values(counts));
+ if(document.getElementById('loadBars'))loadBars.innerHTML=Object.entries(counts).filter(([,v])=>v>0).map(([k,v])=>`<div class="loadRow"><div class="loadRowTop"><span>${targetLabels[k]}</span><b>${v} dk</b></div><div class="loadTrack"><div class="loadFill" style="width:${Math.round(v/max*100)}%"></div></div></div>`).join('')||'<div class="small">Kayıt yaptıkça yük dağılımı burada görünecek.</div>';
+}
+function clearTeamHistory(){
+ if(!confirm('Antrenör geçmişi silinsin mi?'))return;
+ s.teamCoachHistory=[];save();renderTeamHistory();renderWeeklyLoad();
+}
+function initTrainerHistory(){renderTeamHistory();renderWeeklyLoad();renderSavedPeriodPlans();renderTests();}
+
+const coachTemplates={
+  today:{
+    'Kaleci':['Reaksiyon','Ayakla oyun','Yan adım'],
+    'Stoper':['İlk kontrol','Dikey pas','5 m çıkış'],
+    'Bek':['Topla sprint','Duvar pası','Yön değiştirme'],
+    'Orta Saha':['İlk kontrol','Tek dokunuş','Çeviklik'],
+    'Kanat':['Slalom','Topla sprint','İç-dış dokunuş'],
+    'Forvet':['İlk kontrol','5 m çıkış','Tek dokunuş']
+  },
+  weak:['Zayıf ayak dokunuş','Zayıf ayak duvar pası','Zayıf ayak kontrol'],
+  prematch:['Hafif top hakimiyeti','Kısa pas aktivasyonu','3 kısa hızlanma'],
+  tired:['Hafif top kontrolü','Esnek mobilite','Düşük tempolu pas'],
+  improve:['Ball mastery','İlk kontrol','Patlayıcı çıkış']
+};
+
+function pushCoach(role,text){
+  s.coachHistory.push({role,text,time:Date.now()});
+  if(s.coachHistory.length>20)s.coachHistory=s.coachHistory.slice(-20);
+  save();renderCoachChat();
+}
+function renderCoachChat(){
+  const box=document.getElementById('coachChat'); if(!box)return;
+  box.innerHTML=s.coachHistory.map(m=>`<div class="msg ${m.role}">${m.text}</div>`).join('');
+  box.scrollTop=box.scrollHeight;
+}
+function buildCoachPlan(items,intensity='Orta'){
+  s.coachPlan=items.map((x,i)=>({name:x,mins:i===0?8:6,intensity}));
+  save();renderCoachPlan();
+}
+function renderCoachPlan(){
+  const box=document.getElementById('coachPlan'); if(!box)return;
+  if(!s.coachPlan||!s.coachPlan.length){
+    box.innerHTML='<div class="small">Koçtan bir öneri seçtiğinde bugünkü plan burada oluşacak.</div>'; return;
+  }
+  box.innerHTML=s.coachPlan.map((x,i)=>`<div class="coachPlanItem"><b>${i+1}. ${x.name}</b><span>${x.mins} dk</span><br><span class="intensity">${x.intensity} yoğunluk</span></div>`).join('');
+}
+function coachQuick(kind){if(!requirePro('coachQuick'))return;
+  let items=[],reply='';
+  if(kind==='today'){
+    items=coachTemplates.today[s.pos]||coachTemplates.today['Orta Saha'];
+    reply=`Bugün ${s.pos} için ${items.join(', ')} çalışmanı öneriyorum. Toplam yaklaşık 20 dakika. İlk bölüm teknik, son bölüm daha tempolu olsun.`;
+    buildCoachPlan(items,'Orta');
+  }else if(kind==='weak'){
+    items=coachTemplates.weak;
+    reply='Zayıf ayağını geliştirmek için hacmi düşük ama sık tekrar daha iyi. Bugün tüm çalışmayı sadece zayıf ayağınla yap.';
+    buildCoachPlan(items,'Orta');
+  }else if(kind==='prematch'){
+    items=coachTemplates.prematch;
+    reply='Maç öncesi ağır antrenman yapma. Amaç yorulmak değil, sinir sistemini ve top hissini uyandırmak. Bu planı maçtan 3-6 saat önce kısa tut.';
+    buildCoachPlan(items,'Hafif');
+  }else if(kind==='tired'){
+    items=coachTemplates.tired;
+    reply='Bugün yoğunluğu düşürdüm. Keskin ağrı veya sakatlık hissi varsa antrenmanı zorlamadan bırak. Sadece hafif teknik ve mobilite yap.';
+    buildCoachPlan(items,'Hafif');
+  }else if(kind==='evaluate'){
+    reply=`Şu ana kadar ${s.totalE||0} antrenman, ${s.totalM||0} dakika ve ${s.xp||0} XP görünüyor. Düzenlilik arttıkça değerlendirme daha anlamlı olacak. Bugünkü çalışmadan sonra "kolay / normal / zor" diye bana yaz.`;
+  }else{
+    items=coachTemplates.improve;
+    reply='Daha hızlı gelişmek için her gün farklı şey yapmak yerine temel becerileri haftada birkaç kez tekrar etmek daha mantıklı. Teknik + ilk kontrol + kısa sürat üçlüsünü koruyalım.';
+    buildCoachPlan(items,'Orta-Yüksek');
+  }
+  pushCoach('coach',reply);
+}
+function askCoach(){if(!requirePro('askCoach'))return;
+  const q=(coachQuestion.value||'').trim(); if(!q)return;
+  pushCoach('user',q); coachQuestion.value='';
+  const t=q.toLocaleLowerCase('tr-TR');
+  let reply='',items=null,intensity='Orta';
+  if(t.includes('sol ayak')||t.includes('zayıf ayak')){
+    reply='Sol/zayıf ayak için önce doğruluk, sonra hız. 8 dk kısa dokunuş + 8 dk duvar pası + 6 dk ilk kontrol yap. Hepsini zayıf ayakla uygula.';
+    items=coachTemplates.weak;
+  }else if(t.includes('yorgun')||t.includes('ağrı')){
+    reply='Yorgunlukta yoğunluğu düşür. Ağrı keskinse veya hareketle artıyorsa zorlamamak daha doğru. Bugün hafif teknik çalışma yeterli.';
+    items=coachTemplates.tired; intensity='Hafif';
+  }else if(t.includes('maç')&&t.includes('önce')){
+    reply='Maç öncesinde uzun ve yorucu çalışma yerine kısa top hissi, kısa pas ve 2-3 patlayıcı çıkış yap. Bitirdiğinde enerjik kalmalısın.';
+    items=coachTemplates.prematch; intensity='Hafif';
+  }else if(t.includes('hız')||t.includes('sürat')){
+    reply='Süratte kalite tekrar sayısından önemli. 5-10 metrelik kısa sprintler yap ve her tekrar arasında tam dinlen. Yorulup hızın düşüyorsa seti bitir.';
+    items=['Hazır pozisyon','5 m patlayıcı çıkış','Yön değiştirme'];
+  }else if(t.includes('pas')){
+    reply='Pas için destek ayağı hedefe dönük, bilek kilitli ve ilk kontrol pas yönüne olmalı. Sağ-sol ayak arasında dengeli tekrar yap.';
+    items=['Sağ ayak duvar pası','Sol ayak duvar pası','Kontrol + pas'];
+  }else if(t.includes('şut')||t.includes('bitir')){
+    reply='Bitiricilikte önce temiz temas ve köşe seçimi. Gücü sonradan artır. Kontrol + vuruş, tek dokunuş ve zayıf ayak seti uygula.';
+    items=['Kontrol + vuruş','Tek dokunuş','Zayıf ayak bitiriş'];
+  }else{
+    reply=`${s.age} yaş ${s.pos} profiline göre temel önceliğim teknik kalite, iki ayak kullanımı ve kısa patlayıcı hareketler. Sorunu biraz daha özel yazarsan demo koç planı daraltabilir.`;
+  }
+  if(items)buildCoachPlan(items,intensity);
+  setTimeout(()=>pushCoach('coach',reply),150);
+}
+function clearCoach(){s.coachHistory=[];s.coachPlan=[];save();renderCoachChat();renderCoachPlan();}
+function initCoach(){
+  const pos=document.getElementById('coachPos'); if(pos)pos.textContent=s.pos;
+  const intro=document.getElementById('coachIntro');
+  if(intro)intro.textContent=`${s.age} yaş · ${s.pos} profiline göre bugünkü çalışmanı önerir.`;
+  if(!s.coachHistory.length){
+    s.coachHistory=[{role:'coach',text:`Merhaba ${s.name==='Yeni Oyuncu'?'futbolcu':s.name}. Profilini gördüm: ${s.age} yaş, ${s.pos}. Bugün neye odaklanmak istediğini seç.`,time:Date.now()}];
+    save();
+  }
+  renderCoachChat();renderCoachPlan();
+}
+
+
+
+function initOnboarding(){
+ if(!s.appSettings)s.appSettings={role:'',consent:false,onboarded:false,notifications:false};if(typeof s.proUnlocked==='undefined')s.proUnlocked=false;
+ if(!s.appSettings.onboarded){onboarding.style.display='grid';}
+}
+function finishOnboarding(){
+ if(!onboardConsent.checked){alert('Devam etmek için gizlilik ve kullanım koşullarını kabul etmelisin.');return}
+ s.appSettings.role=onboardRole.value;s.appSettings.goal=onboardGoal.value;s.appSettings.daysPerWeek=+onboardDays.value;s.appSettings.matchDay=onboardMatchDay.value;s.appSettings.equipment=onboardEquipment.value;s.appSettings.consent=true;s.appSettings.onboarded=true;save();
+ onboarding.style.display='none';
+}
+function saveSettingsRole(){s.appSettings.role=settingsRole.value;save();}
+function renderSettings(){
+ if(!document.getElementById('settingsRole'))return;
+ settingsRole.value=s.appSettings?.role||'player';if(document.getElementById('ownerStatus'))ownerStatus.textContent=(isPro()&&isCoachPro())?'Açık (Oyuncu + Antrenör)':'Kilitli';
+}
+
+function shareFeedback(){
+ const type=(fbType.value||'Sorun').trim();
+ const text=(fbText.value||'').trim();
+ if(!text){alert('Kısa bir açıklama yaz.');return}
+ const msg=`⚽ Futbolcu Gelişim V27 Test Geri Bildirimi\nKonu: ${type}\nDetay: ${text}\nSürüm: V29 Final Release`;
+ if(navigator.share)navigator.share({title:'Futbolcu Gelişim Test',text:msg});
+ else navigator.clipboard?.writeText(msg).then(()=>alert('Geri bildirim kopyalandı.'));
+}
+
+function exportMyData(){
+ const payload=JSON.stringify({exportedAt:new Date().toISOString(),app:'Futbolcu Gelişim',version:'v30',data:s},null,2);
+ const blob=new Blob([payload],{type:'application/json'});const url=URL.createObjectURL(blob);
+ const a=document.createElement('a');a.href=url;a.download='futbolcu-gelisim-verilerim.json';a.click();URL.revokeObjectURL(url);
+}
+function resetAllData(){
+ if(!confirm('Bu cihazdaki tüm Futbolcu Gelişim verileri silinsin mi? Bu işlem geri alınamaz.'))return;
+ localStorage.removeItem(K);
+ alert('Veriler silindi. Uygulama yeniden başlayacak.');location.reload();
+}
+
+
+const OWNER_CODE='2608';
+const PRO_PAGES=new Set(['tests','playercard','parent','club']);
+function isPro(){return !!s.proUnlocked}
+function isCoachPro(){return !!s.coachProUnlocked}
+function requirePro(action){
+ if(isPro())return true;
+ resetProGateCopy();proGate.style.display='grid';return false;
+}
+
+function requireCoachPro(){
+ if(isCoachPro())return true;
+ proGate.style.display='grid';
+ const card=proGate.querySelector('.proGateCard');
+ const h=card?.querySelector('h2'), price=card?.querySelector('.proPrice'), para=card?.querySelector('p');
+ if(h)h.textContent='Antrenör PRO';
+ if(price)price.innerHTML='299 TL <small>/ ay</small>';
+ if(para)para.textContent='Takım antrenmanı üretimi, haftalık/aylık plan, oyuncu sayısına göre otomatik uyarlama, plan paylaşımı ve gelişmiş antrenör araçları Antrenör PRO kapsamındadır.';
+ return false;
+}
+function resetProGateCopy(){
+ const card=proGate.querySelector('.proGateCard');
+ const h=card?.querySelector('h2'), price=card?.querySelector('.proPrice'), para=card?.querySelector('p');
+ if(h)h.textContent='Futbolcu Gelişim PRO';
+ if(price)price.innerHTML='199 TL <small>/ ay</small>';
+ if(para)para.textContent='AI Koç, kişisel gelişim planları, gelişmiş oyuncu raporları, performans testleri ve oyuncu gelişim araçları Oyuncu PRO kapsamındadır.';
+}
+
+function closeProGate(){proGate.style.display='none';resetProGateCopy()}
+function openOwnerAccess(){proGate.style.display='none';ownerGate.style.display='grid';ownerCode.value='';setTimeout(()=>ownerCode.focus(),100)}
+function unlockOwner(){
+ if(ownerCode.value===OWNER_CODE){s.proUnlocked=true;s.coachProUnlocked=true;save();ownerGate.style.display='none';alert('✅ Yönetici erişimi açıldı: Oyuncu PRO + Antrenör PRO.');render();}
+ else alert('Yönetici kodu yanlış.');
+}
+function showProComingSoon(){
+ const coach=proGate.querySelector('h2')?.textContent==='Antrenör PRO';
+ alert((coach?'Antrenör PRO 299 TL/ay':'Oyuncu PRO 199 TL/ay')+' olarak hazırlanıyor. Google Play ödeme sistemi yayın aşamasında etkinleştirilecek.');
+}
+function lockProAgain(){s.proUnlocked=false;s.coachProUnlocked=false;save();alert('Tüm PRO test erişimi kapatıldı.');render();}
+
+
+function readinessLabel(v){return v==='fresh'?'Dinç':v==='tired'?'Yorgun':'Normal'}
+function setReadiness(v){
+ s.appSettings.readiness=v;save();renderReadiness();renderAdaptiveHome();
+}
+function renderReadiness(){
+ if(!document.getElementById('readinessBadge'))return;
+ const v=s.appSettings?.readiness||'normal';
+ readinessBadge.textContent=readinessLabel(v);
+ readinessNote.textContent=v==='fresh'?'Bugün normal planı tam yoğunlukta yapabilirsin.':v==='tired'?'Bugün ana bölüm süresi ve yoğunluğu azaltılmalı; keskin ağrı varsa antrenmanı zorlama.':'Plan standart yoğunlukta kalacak.';
+}
+function readinessFactor(){
+ const v=s.appSettings?.readiness||'normal';
+ return v==='fresh'?1:v==='tired'?.75:.9;
+}
+function equipmentFallback(name){
+ const eq=s.appSettings?.equipment||'full', n=(name||'').toLocaleLowerCase('tr-TR');
+ if(eq==='noWall' && (n.includes('duvar')||n.includes('pas')))return 'Duvar yoksa iki koni arasında hedef pası veya bir arkadaşla kısa pas kullan.';
+ if(eq==='ball')return 'Koni yerine ayakkabı/su şişesi gibi güvenli işaretler kullan; ana çalışma top ile yapılabilir.';
+ if(eq==='none')return 'Ekipman yoksa topsuz koordinasyon, kısa sprint ve vücut ağırlığıyla teknik ayak çalışmasına dönüştür.';
+ return '';
+}
+function saveSessionDifficulty(level){
+ s.sessionFeedback.push({level,ts:Date.now()});if(s.sessionFeedback.length>50)s.sessionFeedback=s.sessionFeedback.slice(-50);save();
+ sessionFeedbackNote.textContent=level==='hard'?'Kaydedildi: sonraki programda progresyon/yoğunluk düşürülecek.':level==='easy'?'Kaydedildi: sonraki programda progresyon kademeli artırılacak.':'Kaydedildi: mevcut progresyon seviyesi korunacak.';
+}
+function adaptLastCoachSession(){if(!requireCoachPro())return;
+ if(!currentCoachSession){attendanceNote.textContent='Önce bir takım antrenmanı oluştur.';return}
+ const actual=+actualPlayers.value||currentCoachSession.players;
+ const diff=currentCoachSession.players-actual;
+ currentCoachSession.players=actual;
+ if(diff<=0){attendanceNote.textContent=`Plan ${actual} oyuncuya göre korunabilir.`;return}
+ currentCoachSession.blocks=currentCoachSession.blocks.map(b=>{
+   let setup=b.setup;
+   if(actual<=8)setup=setup.replace(/4v4|3v3/gi,'2v2').replace(/4v2/gi,'3v1');
+   else if(actual<=12)setup=setup.replace(/4v4/gi,'3v3').replace(/4v2/gi,'3v1');
+   return {...b,setup,desc:b.desc+` Katılım ${actual} oyuncuya düştüğü için grup sayısını azalt ve bekleme süresini kısa tut.`};
+ });
+ coachSessionSummary.textContent=currentCoachSession.age+' · '+actual+' oyuncu · '+targetLabels[currentCoachSession.target]+' · '+currentCoachSession.stage+' seviye';
+ coachSessionBlocks.innerHTML=currentCoachSession.blocks.map((b,i)=>{const id='coachdemo_adapt_'+i;const type=demoTypeFromName(b.name);return `<div class="sessionBlock"><div class="sessionTop"><b>${i+1}. ${b.name}</b><span class="sessionMin">${b.mins||''} dk</span></div><div class="setup">Kurulum: ${b.setup}</div><div class="sessionDesc">${b.desc}</div><button class="demoBtn" onclick="toggleDemo('${id}')">▶ Ön Gösterimi Aç / Kapat</button>${demoHTML(type,b.name).replace('class="demoBox"','class="demoBox" id="'+id+'"')}</div>`}).join('');
+ attendanceNote.textContent=`✅ Plan ${actual} oyuncuya uyarlandı.`;
+}
+function shareCurrentCoachSession(){if(!requireCoachPro())return;
+ if(!currentCoachSession)return alert('Önce bir antrenman oluştur.');
+ const x=currentCoachSession;
+ const txt=`⚽ Futbolcu Gelişim Takım Antrenmanı\n${x.age} · ${x.players} oyuncu · ${targetLabels[x.target]}\nSüre: ${x.duration} dk · Seviye: ${x.stage}\n\n${x.blocks.map((b,i)=>(i+1)+'. '+b.name+' — '+(b.mins||'')+' dk\nKurulum: '+b.setup+'\n'+b.desc).join('\n\n')}`;
+ if(navigator.share)navigator.share({title:'Takım Antrenman Planı',text:txt});else navigator.clipboard?.writeText(txt).then(()=>alert('Plan kopyalandı.'));
+}
+
+function openExtra(id){if(PRO_PAGES.has(id)&&!requirePro(id))return;head.style.display='none';nav.style.display='none';showRaw(id);if(id==='playercard')renderPlayerCard();if(id==='parent')renderParentReport();if(id==='club')renderClub();if(id==='settings')renderSettings();}
+function latestMetric(type){
+ if(!s.testResults)return null;const a=s.testResults.filter(x=>x.type===type);return a.length?a[a.length-1].value:null;
+}
+function skillScores(){
+ const sprint=latestMetric('sprint20'),slalom=latestMetric('slalom'),wall=latestMetric('wallpass'),weak=latestMetric('weakpass'),shot=latestMetric('shot');
+ const norm=(v,min,max,reverse=false)=>v==null?60:Math.max(40,Math.min(95,Math.round((reverse?(max-v):(v-min))/(max-min)*55+40)));
+ return {
+   Hız:norm(sprint,3.2,6.5,true),
+   Pas:norm(wall,20,70,false),
+   Dribbling:norm(slalom,8,22,true),
+   Şut:norm(shot,2,10,false),
+   'Zayıf Ayak':norm(weak,5,20,false),
+   Çeviklik:Math.round((norm(slalom,8,22,true)+norm(sprint,3.2,6.5,true))/2)
+ };
+}
+function renderPlayerCard(){
+ if(!document.getElementById('skillGrid'))return;const sc=skillScores(),vals=Object.values(sc),ov=Math.round(vals.reduce((a,b)=>a+b,0)/vals.length);
+ pcName.textContent=(s.name||'Futbolcu')+' · '+(s.pos||'');pcOverall.textContent=ov;
+ skillGrid.innerHTML=Object.entries(sc).map(([k,v])=>`<div class="skillBox"><b>${v}</b><span>${k}</span></div>`).join('');
+ const badges=[
+  ['🔥','Seri Başlangıcı',(s.streak||s.days||1)>=3],
+  ['⚽','İlk 10 Antrenman',(s.totalE||0)>=10],
+  ['🦶','Zayıf Ayak Öğrencisi',(s.testResults||[]).some(x=>x.type==='weakpass')],
+  ['🚀','Sprint Testi',(s.testResults||[]).some(x=>x.type==='sprint20')],
+  ['🎯','Şut Testi',(s.testResults||[]).some(x=>x.type==='shot')],
+  ['🏆','1000 XP',(s.xp||0)>=1000]
+ ];
+ badgeGrid.innerHTML=badges.map(b=>`<div class="badge" style="${b[2]?'':'opacity:.45'}"><div class="emoji">${b[0]}</div><b>${b[1]}</b><small>${b[2]?'Kazanıldı':'Henüz kilitli'}</small></div>`).join('');
+}
+function sharePlayerCard(){
+ const sc=skillScores();const txt=`⚽ Futbolcu Gelişim Oyuncu Kartı\n${s.name||'Futbolcu'} · ${s.pos||''}\n${Object.entries(sc).map(([k,v])=>k+': '+v).join('\n')}\nXP: ${s.xp||0}`;
+ if(navigator.share)navigator.share({title:'Oyuncu Kartım',text:txt});else navigator.clipboard?.writeText(txt).then(()=>alert('Oyuncu kartı kopyalandı.'));
+}
+function renderParentReport(){
+ if(!document.getElementById('parentReport'))return;const sc=skillScores(),weak=Object.entries(sc).sort((a,b)=>a[1]-b[1])[0],strong=Object.entries(sc).sort((a,b)=>b[1]-a[1])[0];
+ parentReport.innerHTML=`<div class="parentStat"><span>Oyuncu</span><b>${s.name||'Futbolcu'} · ${s.pos||''}</b></div><div class="parentStat"><span>Toplam antrenman</span><b>${s.totalE||0}</b></div><div class="parentStat"><span>Toplam dakika</span><b>${s.totalM||0}</b></div><div class="parentStat"><span>Toplam XP</span><b>${s.xp||0}</b></div><div class="parentStat"><span>En güçlü alan</span><b>${strong[0]} ${strong[1]}</b></div><div class="parentStat"><span>Gelişim önceliği</span><b>${weak[0]} ${weak[1]}</b></div><div class="testCoachComment" style="margin-top:12px">Bu rapor test sonuçları ve uygulama içi antrenman geçmişinden oluşturulur. Daha fazla veri girdikçe anlamlı hale gelir.</div>`;
+}
+function shareParentReport(){
+ const sc=skillScores(),txt=`📋 Futbolcu Gelişim Veli Raporu\n${s.name||'Futbolcu'} · ${s.age||''} yaş · ${s.pos||''}\nAntrenman: ${s.totalE||0}\nDakika: ${s.totalM||0}\nXP: ${s.xp||0}\n${Object.entries(sc).map(([k,v])=>k+': '+v).join('\n')}`;
+ if(navigator.share)navigator.share({title:'Veli Raporu',text:txt});else navigator.clipboard?.writeText(txt).then(()=>alert('Rapor kopyalandı.'));
+}
+function addClubPlayer(){
+ const n=(clubPlayerName.value||'').trim();if(!n)return alert('Oyuncu adı gir.');
+ s.clubPlayers.push({id:Date.now(),name:n,pos:clubPlayerPos.value,tasks:[]});save();clubPlayerName.value='';renderClub();
+}
+function assignTask(id){
+ const p=s.clubPlayers.find(x=>x.id===id);if(!p)return;
+ const task=prompt(`${p.name} için bireysel ödev yaz:`,'Zayıf ayak 15 dk');
+ if(task){p.tasks.push({text:task,ts:Date.now()});save();renderClub();}
+}
+function renderClub(){
+ if(!document.getElementById('clubPlayerList'))return;
+ clubPlayerList.innerHTML=s.clubPlayers.length?s.clubPlayers.map(p=>`<div class="clubPlayer"><div class="row"><div><b>${p.name}</b><div class="small">${p.pos}</div></div><button onclick="assignTask(${p.id})">+ Ödev</button></div>${p.tasks.slice(-2).map(t=>`<div class="clubTask">📌 ${t.text}</div>`).join('')}</div>`).join(''):'<div class="small">Henüz oyuncu eklenmedi.</div>';
+}
+function buildMatchDayPlan(){
+ const v=matchWindow.value;let items=[];
+ if(v==='24')items=['10 dk hafif top hakimiyeti','8 dk pas ve ilk kontrol','3 x 10 m kısa hızlanma','Erken bitir, yorgunluk oluşturma'];
+ else if(v==='6')items=['5 dk mobilite','5 dk top hissi','2 x kısa hızlanma','Bol sıvı ve normal öğün'];
+ else if(v==='3')items=['Ağır antrenman yok','5 dk hafif aktivasyon','Kısa teknik dokunuş','Enerjiyi maça sakla'];
+ else items=['10 dk hafif yürüyüş / bisiklet','Mobilite','Sıvı ve normal öğün','Ertesi gün yüksek yük verme'];
+ matchDayPlan.innerHTML=items.map((x,i)=>`<div class="coachPlanItem"><b>${i+1}. ${x}</b></div>`).join('');
+}
+
+
+function renderProGateState(){
+ const unlocked=isPro();
+ const note=document.getElementById('proPreviewNotice');
+ if(note)note.textContent=unlocked?'✅ Yönetici PRO erişimi açık. Tüm PRO özelliklerini test edebilirsin.':'🔒 PRO özelliklerini inceleyebilirsin. Oyuncu PRO için planlanan fiyat 199 TL/ay. Ödeme sistemi Play Store yayınıyla etkinleşecek.';
+ document.querySelectorAll('[data-pro-action]').forEach(el=>{
+   el.classList.toggle('proLocked',!unlocked);
+ });
+}
+
+function render(){heroName.textContent=s.name;count.textContent=s.done.length+'/'+plan.length;lvl.textContent='Seviye '+(Math.floor(s.xp/250)+1);xp.textContent=(s.xp%250)+' / 250 XP';xpbar.style.width=((s.xp%250)/250*100)+'%';renderAdaptiveHome();
+pname.value=s.name==='Yeni Oyuncu'?'':s.name;page.value=s.age;ppos.value=s.pos;sx.textContent=s.xp;se.textContent=s.totalE;sm.textContent=s.totalM;sd.textContent=s.days;renderProPlan();initCoach();initTrainerHistory();renderReadiness()}
+
+
+
+
+const stageYoutube={
+'inside':      {id:'T7iOji3xexM',label:'Ayak İçi Dokunuş'},
+'sole':        {id:'e5RxAJM-oxc',label:'Taban Çekme'},
+'inout':       {id:'x_jiRxuUHIY',label:'İç-Dış Dokunuş'},
+'vdrag':       {id:'B9I0i70WcXM',label:'V Çekiş'},
+'slalom':      {id:'qM7mpPEekac',label:'Slalom / Ball Mastery'},
+'rightpass':   {id:'xJGHMjrHU3c',label:'Sağ Ayak Duvar Pası'},
+'leftpass':    {id:'quDH7EgDWRI',label:'Sol Ayak Duvar Pası'},
+'controlpass': {id:'RJLGeWgERQU',label:'Kontrol + Pas'},
+'onetouch':    {id:'0-pASz1Z3-8',label:'Tek Dokunuş / First Touch'},
+'fastfeet':    {id:'hlJW5q8s2z0',label:'Merdiven Hızlı Ayak'},
+'sidefeet':    {id:'tMY5Cj39xN8',label:'Yan Adım'},
+'doublefeet':  {id:'iICTuTZCJyM',label:'Çift Ayak'},
+'crossfeet':   {id:'oxjC-0yuSHM',label:'Çapraz Adım'},
+'ready':       {id:'6a4WJ4YQMBU',label:'Sprint Hazır Pozisyon'},
+'burst':       {id:'3ew2m3m5f0M',label:'5 Metre Patlayıcı Çıkış'},
+'change':      {id:'-XDegE6u10g',label:'Yön Değiştirme'},
+'ballsprint':  {id:'9xwSUHLCxcA',label:'Sprint Tekniği / Hız'}
+};
+
+const stageVideoPages={
+'inside':{title:'Ayak İçi Dokunuş',url:'https://www.pexels.com/video/close-up-of-soccer-dribbling-on-grass-field-30147550/'},
+'sole':{title:'Taban Çekme',url:'https://www.pexels.com/video/a-person-playing-with-a-soccer-ball-5449935/'},
+'inout':{title:'İç-Dış Dokunuş',url:'https://www.pexels.com/video/man-training-soccer-on-a-soccer-field-7187049/'},
+'vdrag':{title:'V Çekiş',url:'https://www.pexels.com/video/man-playing-soccer-on-a-soccer-field-7187083/'},
+'slalom':{title:'Slalom',url:'https://www.pexels.com/video/a-man-playing-a-soccer-ball-7187118/'},
+'rightpass':{title:'Sağ Ayak Pas',url:'https://www.pexels.com/video/guys-passing-football-to-each-other-5449927/'},
+'leftpass':{title:'Sol Ayak Pas',url:'https://www.pexels.com/video/soccer-players-training-on-the-field-6078268/'},
+'controlpass':{title:'Kontrol + Pas',url:'https://www.pexels.com/video/soccer-players-training-6077705/'},
+'onetouch':{title:'Tek Dokunuş',url:'https://www.pexels.com/video/football-players-having-training-6077689/'},
+'fastfeet':{title:'Merdiven - Hızlı Ayak',url:'https://www.pexels.com/video/a-person-using-an-agility-ladder-9943213/'},
+'sidefeet':{title:'Yan Adım',url:'https://www.pexels.com/video/a-male-person-working-out-using-an-agility-ladder-8402091/'},
+'doublefeet':{title:'Çift Ayak',url:'https://www.pexels.com/video/extreme-football-practices-and-workout-6077700/'},
+'crossfeet':{title:'Çapraz Adım',url:'https://www.pexels.com/video/football-players-having-training-6077689/'},
+'ready':{title:'Hazır Pozisyon',url:'https://www.pexels.com/video/men-practicing-football-11470360/'},
+'burst':{title:'5 Metre Çıkış',url:'https://www.pexels.com/video/soccer-team-running-on-the-field-6077695/'},
+'change':{title:'Yön Değiştirme',url:'https://www.pexels.com/video/football-players-practicing-6077698/'},
+'ballsprint':{title:'Topla Sprint',url:'https://www.pexels.com/video/man-training-soccer-on-a-soccer-field-7187046/'}
+};
+function sceneHTML(type,title){
+ const v=stageYoutube[type]||stageYoutube.inside;
+ return `<div class="realVideoBox">
+   <div class="videoTop"><span class="videoTag">${v.label.toUpperCase()}</span><span class="videoTag videoGood">UYGULAMA İÇİNDE VİDEO</span></div>
+   <iframe class="ytFrame" src="https://www.youtube-nocookie.com/embed/${v.id}?playsinline=1&rel=0"
+     title="${v.label}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+     allowfullscreen></iframe>
+ </div>
+ <div class="videoHint">👀 Bu video yalnızca seçtiğin aşamaya ait. İstersen diğer aşamaları aşağıdaki önizleme tuşlarından da hemen görebilirsin.</div>`;
+}
+function toggleScene(){
+ const v=document.getElementById('drillVideo');
+ if(!v)return;
+ if(v.paused){v.play();}else{v.pause();}
+}
+function openWorkout(i){active=i;stepIndex=0;clearInterval(timerId);running=false;stepFinished=false;scenePlaying=true;let w=plan[i];total=w.steps.reduce((a,b)=>a+b[1],0);remaining=w.steps[0][1];dtitle.textContent=w.icon+' '+w.name;dmeta.textContent=w.mins+' dk · '+w.steps.length+' aşama · +'+w.xp+' XP';draw();head.style.display='none';nav.style.display='none';showRaw('detail')}
+function draw(){
+ let w=plan[active],q=w.steps[stepIndex];
+ sceneSlot.innerHTML=sceneHTML(q[6],q[0]);
+ previewNav.innerHTML=`<div class="previewNote">Aşamaları önceden görebilirsin; bu sadece önizlemedir, ilerlemeyi tamamlamaz.</div><div class="previewNav">${
+   w.steps.map((x,i)=>`<button class="${i===stepIndex?'active':''}" onclick="previewStep(${i})">${i+1}</button>`).join('')
+ }</div>`;
+ steps.innerHTML=w.steps.map((x,i)=>`<div class="step ${i===stepIndex?'active':''} ${i<stepIndex?'doneStep':''}"><b>${i+1}. ${x[0]}</b><div class="small">${x[2]}</div></div>`).join('');
+ techniqueBox.innerHTML=`<div class="info good"><b>✅ Doğru yapılış</b><div class="small">${q[3]}</div></div><div class="info bad"><b>❌ Sık yapılan hata</b><div class="small">${q[4]}</div></div><div class="info tip"><b>💡 Koç ipucu</b><div class="small">${q[5]}</div></div>`;
+ updateTimer();
+}
+function previewStep(i){
+ let w=plan[active],q=w.steps[i];
+ sceneSlot.innerHTML=sceneHTML(q[6],q[0]);
+ previewNav.querySelectorAll('button').forEach((b,idx)=>b.classList.toggle('active',idx===i));
+ techniqueBox.innerHTML=`<div class="info good"><b>✅ Doğru yapılış</b><div class="small">${q[3]}</div></div><div class="info bad"><b>❌ Sık yapılan hata</b><div class="small">${q[4]}</div></div><div class="info tip"><b>💡 Koç ipucu</b><div class="small">${q[5]}</div></div>`;
+}
+function updateTimer(){let m=Math.floor(remaining/60),sec=remaining%60;timer.textContent=String(m).padStart(2,'0')+':'+String(sec).padStart(2,'0');let w=plan[active],before=w.steps.slice(0,stepIndex).reduce((a,b)=>a+b[1],0),curr=w.steps[stepIndex][1]-remaining;tbar.style.width=((before+curr)/total*100)+'%';progressText.textContent=(stepIndex+1)+' / '+w.steps.length+' aşama';startBtn.textContent=running?'⏸ Duraklat':(stepFinished?'✓ Süre Tamamlandı':'▶ Antrenmana Başla');startBtn.disabled=stepFinished;nextBtn.disabled=!stepFinished;lockNote.style.display=stepFinished?'none':'block'}
+function toggleTimer(){if(stepFinished)return;if(running){running=false;clearInterval(timerId);updateTimer();return}running=true;updateTimer();timerId=setInterval(()=>{remaining--;if(remaining<=0){remaining=0;clearInterval(timerId);running=false;stepFinished=true;updateTimer()}else updateTimer()},1000)}
+function nextStep(){if(!stepFinished)return;let w=plan[active];if(stepIndex<w.steps.length-1){stepIndex++;remaining=w.steps[stepIndex][1];stepFinished=false;scenePlaying=true;draw();return}if(!s.done.includes(active)){s.done.push(active);s.xp+=w.xp;s.totalE++;s.totalM+=w.mins;save()}steps.innerHTML=`<div class="complete">🏆 Antrenman tamamlandı! +${w.xp} XP</div><div class="sessionFeedbackBox"><h3>Bu antrenman nasıldı?</h3><div class="readinessGrid"><button onclick="finishBasicWorkout('easy')">Kolay</button><button onclick="finishBasicWorkout('normal')">Normal</button><button onclick="finishBasicWorkout('hard')">Zor</button></div><div class="small" style="margin-top:8px">Cevabın bir sonraki programın progresyonunu etkiler.</div></div>`;sceneSlot.innerHTML='';techniqueBox.innerHTML='';startBtn.disabled=true;nextBtn.disabled=true}
+function finishBasicWorkout(level){saveSessionDifficulty(level);backHome();render();}
+function backHome(){clearInterval(timerId);running=false;head.style.display='block';nav.style.display='flex';showRaw('home')}
+function saveProfile(){s.name=pname.value.trim()||'Yeni Oyuncu';s.age=+page.value||12;s.pos=ppos.value;s.done=[];save();render();alert('Profil ve plan güncellendi.')}
+function show(id,b){showRaw(id);document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active')}
+function showRaw(id){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');scrollTo(0,0)}
+render();renderProPlan();initCoach();initTrainerHistory();if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js'));
+</script>
+</body></html>

@@ -1,0 +1,27 @@
+# V30 FINAL QA
+
+- PASS — JS syntax
+- PASS — legacy home cards removed
+- PASS — adaptive render active
+- PASS — render no static plan map
+- PASS — progression counts real done
+- PASS — basic feedback drives progression
+- PASS — old demo toggle removed
+- PASS — player 199
+- PASS — coach 299
+- PASS — coach gated
+- PASS — owner both
+- PASS — owner code
+- PASS — warmup
+- PASS — cooldown
+- PASS — readiness
+- PASS — match safeguard
+- PASS — equipment fallback
+- PASS — attendance adaptation
+- PASS — plan sharing
+- PASS — PRO modal scroll
+- PASS — settings available
+- PASS — privacy
+- PASS — terms
+- PASS — support
+- PASS — redirects
