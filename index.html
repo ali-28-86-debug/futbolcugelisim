@@ -410,9 +410,25 @@ button:active{transform:scale(.985)}
 @media(max-width:520px){.stageCard{grid-template-columns:1fr}.pitchInfo{min-height:205px}.stageCopy{padding:3px 2px}.stageDesc{font-size:13px}.drillTabs span{flex:1;text-align:center;padding:10px 4px}.drillTabs span:nth-child(2),.drillTabs span:nth-child(3){display:block}#techniqueBox{grid-template-columns:1fr}.timer{font-size:46px}}
 </style>
 
-<style id="v37-tabs">
-.drillTabs{display:grid!important;grid-template-columns:repeat(3,1fr);gap:6px;padding:8px;background:#07131f;border-radius:14px;margin-bottom:10px;position:sticky;top:0;z-index:25}.drillTabs button{padding:11px 5px;border-radius:10px;background:#102231;border:1px solid #294255;color:#b9c7d2;font-weight:900;font-size:11px}.drillTabs button.active{background:#61c71f;color:#071205;border-color:#7ee436}.tabPanel{display:none}.tabPanel.active{display:block}.infoGridV37,.gainGridV37{display:grid;grid-template-columns:1fr 1fr;gap:9px}.infoTileV37,.gainTileV37{background:#0e1d29;border:1px solid #294255;border-radius:14px;padding:13px}.infoTileV37 b,.gainTileV37 b{display:block;color:#9bf365;margin-bottom:5px}.infoTileV37 span,.gainTileV37 span{font-size:12px;line-height:1.45;color:#d7e1e8}.howBoxV37{margin-top:10px;padding:14px;border-radius:14px;background:#10261a;border:1px solid #3d6630}.howBoxV37 b{color:#a9f57a}.gainHeroV37{padding:15px;border-radius:15px;background:linear-gradient(135deg,#11261a,#102131);border:1px solid #35523d;margin-bottom:10px}.gainHeroV37 h3{margin:0 0 5px}.gainHeroV37 p{margin:0;color:#b8c7d2;font-size:12px;line-height:1.45}@media(max-width:430px){.infoGridV37,.gainGridV37{grid-template-columns:1fr}}
+<style id="v38-detail-tabs">
+.detailTabs{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:14px 0 12px;position:sticky;top:78px;z-index:18;background:#071019;padding:7px;border-radius:15px;border:1px solid #203548}
+.detailTabs button{padding:11px 5px;border:1px solid #2a4053;background:#0e1a25;color:#9fb0bf;font-weight:900;font-size:12px}
+.detailTabs button.active{background:#2e5f17;color:#caffaa;border-color:#6db53d}
+.detailPanel{min-height:220px}
+.infoHeroV38{padding:16px;border-radius:18px;background:linear-gradient(135deg,#10251a,#0d1b27);border:1px solid #31532d;margin-bottom:12px}
+.infoHeroV38 h3{margin:6px 0 5px;font-size:21px}.infoHeroV38 p{margin:0;color:#aec0cd;line-height:1.5}
+.infoGridV38{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.infoTileV38{padding:13px;border-radius:15px;background:#0d1924;border:1px solid #243a4d}
+.infoTileV38 span{display:block;color:#8fa3b4;font-size:11px;margin-bottom:5px}.infoTileV38 b{font-size:15px;color:#f5f8fa}
+.benefitGridV38{display:grid;gap:9px}
+.benefitV38{display:flex;gap:11px;align-items:flex-start;padding:13px;border-radius:15px;background:#0d1924;border:1px solid #243a4d}
+.benefitV38 .num{width:31px;height:31px;flex:0 0 31px;border-radius:50%;display:grid;place-items:center;background:#2f6218;color:#caffaa;font-weight:900}
+.benefitV38 b{display:block;margin-bottom:3px}.benefitV38 p{margin:0;color:#9fb1c0;font-size:13px;line-height:1.4}
+.coachNoteV38{margin-top:12px;padding:13px;border-radius:15px;background:#172419;border:1px solid #3b6032;color:#c9e7b7}
+.stageCard{margin-bottom:11px}
+@media(max-width:390px){.infoGridV38{grid-template-columns:1fr}.detailTabs{top:70px}}
 </style>
+
 </head>
 <body>
 <div id="onboarding" class="onboarding" style="display:none">
@@ -528,7 +544,12 @@ button:active{transform:scale(.985)}
 
 <section id="detail" class="page"><div class="card">
 <button class="secondary" onclick="backHome()">← Geri</button><h2 id="dtitle"></h2><div id="dmeta" class="small"></div>
-<div id="sceneSlot"></div>
+<div class="detailTabs" id="detailTabs">
+<button class="active" onclick="setDetailTab('stages',this)">AŞAMALAR</button>
+<button onclick="setDetailTab('info',this)">BİLGİLER</button>
+<button onclick="setDetailTab('benefits',this)">KAZANIMLAR</button>
+</div>
+<div id="sceneSlot" class="detailPanel"></div>
 <div class="timer" id="timer">00:00</div><div class="bar"><span id="tbar" style="width:0%"></span></div><div class="progressText" id="progressText"></div>
 <div id="previewNav"></div><div id="steps"></div>
 <div class="row"><button id="startBtn" onclick="toggleTimer()">▶ Antrenmana Başla</button><button id="nextBtn" class="secondary" onclick="nextStep()" disabled>Sonraki Adım</button></div>
@@ -922,7 +943,7 @@ button:active{transform:scale(.985)}
 </div>
 
 <script>
-const K='futbolcu_v36';
+const K='futbolcu_v38';
 let old=JSON.parse(localStorage.getItem('futbolcu_v20')||'null')||JSON.parse(localStorage.getItem('futbolcu_v19')||'null')||JSON.parse(localStorage.getItem('futbolcu_v18')||'null')||JSON.parse(localStorage.getItem('futbolcu_v17')||'null')||JSON.parse(localStorage.getItem('futbolcu_v16')||'null')||JSON.parse(localStorage.getItem('futbolcu_v15')||'null')||JSON.parse(localStorage.getItem('futbolcu_v14')||'null')||JSON.parse(localStorage.getItem('futbolcu_v13')||'null')||JSON.parse(localStorage.getItem('futbolcu_v12_2')||'null')||JSON.parse(localStorage.getItem('futbolcu_v12_1')||'null')||JSON.parse(localStorage.getItem('futbolcu_v12')||'null')||JSON.parse(localStorage.getItem('futbolcu_v11')||'null')||JSON.parse(localStorage.getItem('futbolcu_v10')||'null')||JSON.parse(localStorage.getItem('futbolcu_v9')||'null')||JSON.parse(localStorage.getItem('futbolcu_v8')||'null')||JSON.parse(localStorage.getItem('futbolcu_v7')||'null');
 let s=JSON.parse(localStorage.getItem(K)||'null')||JSON.parse(localStorage.getItem('futbolcu_v31')||'null')||JSON.parse(localStorage.getItem('futbolcu_v30')||'null')||JSON.parse(localStorage.getItem('futbolcu_v29')||'null')||JSON.parse(localStorage.getItem('futbolcu_v28')||'null')||JSON.parse(localStorage.getItem('futbolcu_v27_1')||'null')||JSON.parse(localStorage.getItem('futbolcu_v27')||'null')||JSON.parse(localStorage.getItem('futbolcu_v26')||'null')||old||{name:'Yeni Oyuncu',age:12,pos:'Orta Saha',xp:0,done:[],totalE:0,totalM:0,days:1,pro:false};
 if(!s.proPlan)s.proPlan=null;if(!s.streak)s.streak=1;if(!s.coachHistory)s.coachHistory=[];if(!s.coachPlan)s.coachPlan=[];if(!s.teamCoachHistory)s.teamCoachHistory=[];if(!s.teamPlans)s.teamPlans=[];if(!s.testResults)s.testResults=[];
@@ -2211,8 +2232,6 @@ const stageVideoPages={
 'change':{title:'Yön Değiştirme',url:'https://www.pexels.com/video/football-players-practicing-6077698/'},
 'ballsprint':{title:'Topla Sprint',url:'https://www.pexels.com/video/man-training-soccer-on-a-soccer-field-7187046/'}
 };
-const V37_META={"Yakın Top Kontrolü": [["1 oyuncu", "4×4–6×6 m", "1 top · 4 koni", "8 dk", "30–45 sn set / 20 sn dinlenme", "Temel–orta"], ["Yakın top hakimiyeti", "İki ayağı dengeli kullanma", "Dar alanda yön değiştirme", "Denge ve koordinasyon", "Topa bakmadan çevreyi görme", "Baskı altında kontrol"]], "1v1 Adam Eksiltme": [["2 oyuncu veya 1 oyuncu + hedef", "8×12 m koridor", "1 top · 4 koni · mini kale", "10 dk", "45–60 sn set / 30 sn dinlenme", "Orta"], ["Rakibi yanıltma", "Patlayıcı ilk adım", "Vücut çalımı", "Topu koruma", "Doğru zamanda hızlanma", "1v1 özgüveni"]], "Yön Değiştirme": [["1 oyuncu", "8×8 m", "1 top · 5 koni", "8 dk", "30–40 sn set / 20 sn dinlenme", "Temel–orta"], ["Keskin yön değiştirme", "İç/dış ayak kullanımı", "Taban kontrolü", "Ağırlık merkezi kontrolü", "Çeviklik", "Topla hızlanma"]], "Çevre Kontrolü + İlk Dokunuş": [["1–2 oyuncu", "6×8 m", "1 top · 4 renkli koni", "9 dk", "45 sn set / 20 sn dinlenme", "Orta"], ["Omuz kontrolü", "Açık vücut pozisyonu", "Yönlü ilk dokunuş", "Hızlı karar", "Baskıdan çıkış", "Oyun görüşü"]], "Baskı Altında Pas": [["2–3 oyuncu", "8×10 m", "1 top · koniler", "10 dk", "60 sn set / 30 sn dinlenme", "Orta–ileri"], ["Pas kalitesi", "İlk kontrol", "Destek açısı", "Baskı altında karar", "Tek dokunuş", "Pas sonrası hareket"]], "Duvar Pası + Kaçış": [["1 oyuncu + duvar/partner", "5×8 m", "1 top · duvar/partner · 2 koni", "9 dk", "45 sn set / 20 sn dinlenme", "Temel–orta"], ["Ver-kaç zamanlaması", "Pas şiddeti", "Zayıf ayak", "Tek dokunuş", "Pas sonrası koşu", "Yeni açı oluşturma"]], "Bitiricilik": [["1–3 oyuncu", "Ceza alanı çevresi", "Toplar · kale · 3 hedef", "10 dk", "5 vuruşluk seriler", "Orta"], ["İsabetli bitiriş", "İlk dokunuşla şut açısı", "Uzak köşe tekniği", "Hızlı karar", "Baş kaldırma", "İki ayakla bitiriş"]], "Zayıf Ayak Gelişimi": [["1–2 oyuncu", "5×8 m", "1 top · 4 koni/duvar", "9 dk", "45 sn set / 20 sn dinlenme", "Tüm seviyeler"], ["Zayıf ayak kontrolü", "Zayıf ayak pası", "Yönlü ilk dokunuş", "Ayak bileği kontrolü", "İki ayaklı oyun", "Teknik özgüven"]], "Patlayıcı Sürat": [["1–4 oyuncu", "5–12 m koridor", "Top · 4 koni", "8 dk", "5–8 sn efor / tam dinlenme", "Orta"], ["İlk 3 adım gücü", "Hızlanma mekaniği", "Reaksiyon", "Topla sprint", "Patlayıcılık", "Sprintte top mesafesi"]], "Reaksiyon + Çeviklik": [["1–4 oyuncu", "6×6 m", "4 renkli koni · 1 top", "7 dk", "10–15 sn efor / 30 sn dinlenme", "Tüm seviyeler"], ["Görsel/işitsel reaksiyon", "Yan adım", "Denge", "Hızlı ilk adım", "Yön değiştirme", "Top reaksiyonu"]], "2v2 Dar Alan Oyunu": [["4 oyuncu", "12×15 m", "1 top · 8 koni · 2 mini kale", "12 dk", "3×3 dk / 60 sn dinlenme", "Orta"], ["Pas ve iletişim", "Destek açısı", "Boş alan yaratma", "Baskı altında karar", "Top kaybı sonrası baskı", "Hücum-savunma geçişi"]], "3v3 Karar Oyunu": [["6 oyuncu", "15×20 m", "1 top · 8 koni · 2 mini kale", "12 dk", "3×3 dk / 60 sn dinlenme", "Orta–ileri"], ["Üçgen destek", "Oyun yönünü değiştirme", "Çevre kontrolü", "Hızlı geçiş", "Sayısal ilişki kurma", "Maç içi karar verme"]], "Savunma 1v1": [["2 oyuncu", "8×12 m", "1 top · 4 koni · mini kale", "9 dk", "40 sn set / 30 sn dinlenme", "Orta"], ["Yaklaşma açısı", "Savunma mesafesi", "Rakibi yönlendirme", "Ayna savunması", "Top kazanma zamanı", "Kazanım sonrası çıkış"]], "Orta + Son Aksiyon": [["2–4 oyuncu", "Kanat + ceza alanı", "Toplar · kale · koniler", "10 dk", "4–6 tekrar / taraf", "Orta"], ["Çizgiye iniş", "Yerden orta", "Geriye çıkarma", "Baş kaldırma", "Hedef bölge seçimi", "Son aksiyon kalitesi"]], "Duran Top Tekniği": [["1–5 oyuncu", "Kale çevresi", "Toplar · kale · hedef/baraj", "10 dk", "5 vuruşluk seriler", "Orta"], ["Servis isabeti", "Serbest vuruş tekniği", "Destek ayağı kontrolü", "Duran top kararı", "Hedef bölge kullanımı", "Tekrarlanabilir vuruş rutini"]], "Kaleci Ayakla Oyun + Reaksiyon": [["1 kaleci + 1–3 servis oyuncusu", "Ceza alanı", "Toplar · 4 koni · kale", "10 dk", "45 sn set / 30 sn dinlenme", "Orta"], ["Açık vücutla ilk kontrol", "İki ayakla pas", "Baskı altında çıkış", "Hızlı hedef seçimi", "Hazır pozisyon", "Yakın mesafe reaksiyon"]]};
-function v37InfoHTML(w){const m=V37_META[w.name]||[['—','—','—',w.mins+' dk','—','—'],[]],a=m[0];return `<div class="infoGridV37"><div class="infoTileV37"><b>👥 Oyuncu</b><span>${a[0]}</span></div><div class="infoTileV37"><b>📐 Alan</b><span>${a[1]}</span></div><div class="infoTileV37"><b>⚽ Ekipman</b><span>${a[2]}</span></div><div class="infoTileV37"><b>⏱ Süre</b><span>${a[3]}</span></div><div class="infoTileV37"><b>🔁 Set / Dinlenme</b><span>${a[4]}</span></div><div class="infoTileV37"><b>🎯 Seviye</b><span>${a[5]}</span></div></div><div class="howBoxV37"><b>Nasıl uygulanır?</b><div class="small" style="margin-top:6px">${w.steps.map((x,i)=>(i+1)+'. '+x[2]).join('<br>')}</div></div>`}function v37GainsHTML(w){const g=(V37_META[w.name]||[[],[]])[1];return `<div class="gainHeroV37"><h3>🎯 ${w.name}</h3><p>Bu çalışmanın hedeflediği teknik, taktik ve fiziksel kazanımlar.</p></div><div class="gainGridV37">${g.map((x,i)=>`<div class="gainTileV37"><b>${['⚽','🧠','⚡','👀','🔄','🏆'][i%6]} Kazanım ${i+1}</b><span>${x}</span></div>`).join('')}</div>`}function setDrillTab(tab){document.querySelectorAll('.drillTabs button').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));document.querySelectorAll('.tabPanel').forEach(p=>p.classList.toggle('active',p.dataset.panel===tab))}
 function teamPlayer(team,cls,left,top,n){return `<div class="p2 ${team} ${cls}" style="left:${left}%;top:${top}%"><b>${n}</b></div>`}
 function teamSceneHTML(workoutName,title){
  const is2=workoutName.includes('2v2'), is3=workoutName.includes('3v3');
@@ -2250,6 +2269,64 @@ function oneVoneHTML(workoutName,title){
   <div class="teamCaption">${title} — hücumcu ve savunmacı karşı karşıya; topun ve oyuncuların yönü ayrı gösterilir.</div>
  </div>`;
 }
+
+const WORKOUT_GUIDE={
+'Yakın Top Kontrolü':{players:'1 oyuncu',area:'4 × 4 m',equipment:'1 top · 4 koni',sets:'3 × 2 dk',rest:'30 sn',level:'Başlangıç–Orta',purpose:'Topu baskı gelmeden yakın ve kontrollü tutmak.',benefits:[['Yakın kontrol','Topu iki ayağın içi ve dışıyla vücuda yakın kullanma.'],['İlk dokunuş','İlk temasla bir sonraki aksiyonu hazırlama.'],['Çevre kontrolü','Topa kilitlenmeden başı kaldırabilme.'],['İki ayak','Sağ ve sol ayağı dengeli kullanma.'],['Yön değiştirme','Dar alanda top kaybetmeden çıkış yönü bulma.'],['Özgüven','Topla daha rahat ve kontrollü hareket etme.']]},
+'1v1 Adam Eksiltme':{players:'2 oyuncu',area:'8 × 12 m',equipment:'1 top · 4 koni · 2 mini kale',sets:'3 × 2,5 dk',rest:'45 sn',level:'Orta',purpose:'Rakibi yanıltıp ilk iki adımda avantaj yaratmak.',benefits:[['1v1 hücum','Rakibi bire birde geçme becerisi.'],['Vücut çalımı','Gövde hareketiyle rakibin dengesini bozma.'],['Patlayıcılık','Çalım sonrası hızlanma.'],['Top sürme','Hızlı giderken topu kontrol altında tutma.'],['Rakip okuma','Savunmacının ağırlık verdiği tarafı fark etme.'],['Son aksiyon','Çalımı pas, orta veya şutla tamamlama.']]},
+'Yön Değiştirme':{players:'1 oyuncu',area:'6 × 8 m',equipment:'1 top · 5 koni',sets:'3 × 2 dk',rest:'30 sn',level:'Başlangıç–Orta',purpose:'Topla keskin ve dengeli yön değişiklikleri yapmak.',benefits:[['Çeviklik','Ağırlık merkezini hızlı değiştirme.'],['Top kontrolü','Dönüş sırasında topu yakın tutma.'],['Frenleme','Yön değişmeden önce kontrollü yavaşlama.'],['V dönüşü','Taban ve iç ayak kombinasyonu.'],['Reaksiyon','Komuta göre son anda yön seçme.'],['Hızlanma','Dönüşten sonra yeniden süratlenme.']]},
+'Çevre Kontrolü + İlk Dokunuş':{players:'1–2 oyuncu',area:'8 × 8 m',equipment:'1 top · 4 renkli koni',sets:'3 × 2,25 dk',rest:'30 sn',level:'Orta',purpose:'Top gelmeden bilgi alıp ilk dokunuşu doğru yöne yapmak.',benefits:[['Tarama','Top gelmeden omuz üstü çevre kontrolü.'],['Açık vücut','Oyunu daha geniş açıyla görebilme.'],['İlk kontrol','Topu baskıdan uzağa yönlendirme.'],['Karar verme','Bilgiyi ilk dokunuşa dönüştürme.'],['Oyun görüşü','Boş alanı daha erken fark etme.'],['Tempo','Gereksiz dokunuşları azaltma.']]},
+'Baskı Altında Pas':{players:'2–3 oyuncu',area:'8 × 10 m',equipment:'1 top · 4 koni',sets:'3 × 2,5 dk',rest:'40 sn',level:'Orta',purpose:'Baskı yaklaşırken doğru açı ve tempoda pas çıkarmak.',benefits:[['Pas kalitesi','Doğru şiddet ve isabet.'],['Kontrol + pas','İki dokunuşu tek aksiyon gibi kullanma.'],['Tek dokunuş','Uygun topu bekletmeden oynama.'],['Destek açısı','Pas sonrası yeni açıya çıkma.'],['Baskı farkındalığı','Rakibin geliş yönünü sezme.'],['Oyun hızı','Topu daha hızlı dolaştırma.']]},
+'Duvar Pası + Kaçış':{players:'1–2 oyuncu',area:'6 × 10 m',equipment:'1 top · duvar/partner · 2 koni',sets:'3 × 2,25 dk',rest:'30 sn',level:'Başlangıç–Orta',purpose:'Pas verdikten sonra boş alana kaçıp topu yeniden almak.',benefits:[['Ver-kaç','Pas ve koşuyu zamanlama.'],['Hareketlilik','Pas sonrası sabit kalmama.'],['Zayıf ayak','İki ayakla pas kalitesi.'],['Tek dokunuş','Akıcı kombinasyon oyunu.'],['Açı yaratma','Topun dönüş hattından çıkarak destek olma.'],['Maç bağlantısı','Üçüncü adam ve duvar pası alışkanlığı.']]},
+'Bitiricilik':{players:'1–2 oyuncu',area:'Ceza sahası çevresi',equipment:'3–5 top · kale · koni',sets:'3 × 2,5 dk',rest:'45 sn',level:'Orta',purpose:'Kontrol sonrası hızlı ve isabetli son vuruş yapmak.',benefits:[['Şut tekniği','Destek ayağı ve vuruş yüzeyini doğru kullanma.'],['İsabet','Köşeleri hedefleme.'],['İlk dokunuş','Topu şut açısına hazırlama.'],['Hızlı bitiriş','Fazla dokunuş yapmadan vurma.'],['Baş kaldırma','Kaleci ve hedefi görme.'],['Karar','Güç mü yerleştirme mi seçebilme.']]},
+'Zayıf Ayak Gelişimi':{players:'1 oyuncu',area:'5 × 8 m',equipment:'1 top · duvar · 4 koni',sets:'3 × 2,25 dk',rest:'30 sn',level:'Tüm seviyeler',purpose:'Zayıf ayağı maç içinde güvenle kullanılabilir hale getirmek.',benefits:[['İki yönlü oyun','Tek ayağa bağımlılığı azaltma.'],['Pas','Zayıf ayakla isabet.'],['Kontrol','İlk dokunuş güveni.'],['Top hakimiyeti','Zayıf ayak temas sayısını artırma.'],['Yönlü kontrol','Topu farklı yönlere taşıma.'],['Özgüven','Maçta zayıf ayağı kullanma cesareti.']]},
+'Patlayıcı Sürat':{players:'1 oyuncu',area:'5–12 m koridor',equipment:'4 koni · 1 top',sets:'6–8 tekrar',rest:'45–60 sn',level:'Orta',purpose:'İlk metrelerde daha hızlı ivmelenmek.',benefits:[['İlk adım','Çıkış reaksiyonunu hızlandırma.'],['İvmelenme','İlk 5–10 metrede sürat kazanma.'],['Koşu mekaniği','Kısa ve güçlü ilk adımlar.'],['Reaksiyon','Komuta hızlı cevap.'],['Topla hız','Sprintte dokunuş mesafesini ayarlama.'],['Dinlenme kalitesi','Maksimum tekrar için tam dinlenme alışkanlığı.']]},
+'Reaksiyon + Çeviklik':{players:'1–2 oyuncu',area:'6 × 6 m',equipment:'4 renkli koni · 1 top',sets:'3 × 1,75 dk',rest:'40 sn',level:'Tüm seviyeler',purpose:'Görsel veya sesli uyarana hızlı ve dengeli tepki vermek.',benefits:[['Reaksiyon','Komuta hızlı cevap verme.'],['Yan adım','Savunma ayaklarını geliştirme.'],['Denge','Yön değiştirirken gövde kontrolü.'],['Çeviklik','Kısa alanda hızlı ayaklar.'],['Algı','Renk ve yön bilgisini işleme.'],['Hazır pozisyon','Harekete her yöne çıkabilecek duruş.']]},
+'2v2 Dar Alan Oyunu':{players:'4 oyuncu · 2 mavi + 2 sarı',area:'12 × 15 m',equipment:'1 top · 8 koni · 2 mini kale',sets:'3 × 3 dk',rest:'60 sn',level:'Orta',purpose:'Dar alanda pas açısı, destek ve hücum-savunma geçişini geliştirmek.',benefits:[['Pas & iletişim','Toplu oyuncuya sürekli iki seçenek oluşturma.'],['Destek açısı','Aynı çizgide kalmadan üçgen benzeri açı yaratma.'],['Boş alan','Pas sonrası yeni boşluğa hareket etme.'],['Karar verme','Baskı altında pas mı dripling mi seçme.'],['Geçiş','Top kaybında baskı, kazanımda ileri oyun.'],['1v1 cesareti','Alan açıldığında rakibi geçme kararını verme.']]},
+'3v3 Karar Oyunu':{players:'6 oyuncu · 3 mavi + 3 sarı',area:'15 × 20 m',equipment:'1 top · 8 koni · 2 mini kale',sets:'3 × 3 dk',rest:'60 sn',level:'Orta–İleri',purpose:'Üçgen destek, yön değiştirme ve hızlı geçiş kararlarını geliştirmek.',benefits:[['Üçgen destek','Topa iki pas açısı sağlama.'],['Oyun yönü','Sıkışan taraftan ters tarafa geçme.'],['Tarama','Pas öncesi seçenekleri görme.'],['Hızlı geçiş','Top kazanılınca hedefe çabuk gitme.'],['Takım iletişimi','Sözlü ve görsel iletişim.'],['Karar hızı','Az sürede doğru seçeneği bulma.']]},
+'Savunma 1v1':{players:'2 oyuncu',area:'8 × 12 m',equipment:'1 top · 4 koni · 1 mini kale',sets:'3 × 2,25 dk',rest:'45 sn',level:'Orta',purpose:'Rakibi geciktirip doğru anda top kazanmak.',benefits:[['Yaklaşma açısı','Rakibi istenen yöne yönlendirme.'],['Mesafe','Topa dalmadan savunma mesafesi koruma.'],['Ayak çalışması','Çaprazlamadan dengeli hareket.'],['Rakip okuma','Kalça ve top temasını izleme.'],['Top kazanma','Doğru anda müdahale.'],['Geçiş','Topu kazanınca ilk aksiyonu hücuma bağlama.']]},
+'Orta + Son Aksiyon':{players:'1–3 oyuncu',area:'Kanat koridoru + ceza alanı',equipment:'3–5 top · kale · koni',sets:'3 × 2,5 dk',rest:'45 sn',level:'Orta',purpose:'Kanattan doğru servis türünü seçip son aksiyonu kaliteli yapmak.',benefits:[['Çizgi koşusu','Topla doğru hız ve açı.'],['Yerden orta','Hedef bölgeye isabetli servis.'],['Geriye çıkarma','Savunma arkasındaki boşluğu bulma.'],['Baş kaldırma','Orta öncesi hedef tarama.'],['Karar','Ön direk, arka direk veya geriye pas seçimi.'],['Son aksiyon','Koşuyu kaliteli pasla tamamlama.']]},
+'Duran Top Tekniği':{players:'1–4 oyuncu',area:'Kale çevresi',equipment:'3–5 top · kale · hedef/duvar',sets:'3 × 2,5 dk',rest:'45 sn',level:'Orta',purpose:'Duran toplarda tekrarlanabilir teknik ve doğru karar geliştirmek.',benefits:[['Vuruş rutini','Yaklaşma açısını sabitleme.'],['İsabet','Belirli hedef bölgeye servis.'],['Serbest vuruş','Duvar üstü/yanı vuruş tekniği.'],['Köşe vuruşu','Doğru bölgeye orta.'],['Karar','Kısa mı direkt mi oynanacağını seçme.'],['Tekrar kalitesi','Her vuruşu aynı teknik temelle yapma.']]},
+'Kaleci Ayakla Oyun + Reaksiyon':{players:'1–3 oyuncu',area:'Ceza alanı',equipment:'3 top · 4 koni · kale',sets:'3 × 2,5 dk',rest:'45 sn',level:'Orta',purpose:'Kalecinin geri pas, baskı altında pas ve yakın reaksiyon kalitesini artırmak.',benefits:[['İlk kontrol','Geri pası baskıdan uzağa alma.'],['İki ayak','Sağ ve solla pas kullanma.'],['Baskı çıkışı','Forvet baskısında doğru hedefi seçme.'],['Tarama','Top gelmeden iki tarafı kontrol etme.'],['Reaksiyon','Yakın mesafede hızlı cevap.'],['Hazır duruş','Her tekrarda dengeli set pozisyonuna dönme.']]}
+};
+let detailTab='stages';
+function guideFor(w){return WORKOUT_GUIDE[w.name]||{players:'1+ oyuncu',area:'İhtiyaca göre',equipment:'Top · koni',sets:w.steps.length+' aşama',rest:'30–60 sn',level:'Tüm seviyeler',purpose:'Teknik ve karar verme kalitesini geliştirmek.',benefits:[['Teknik','Hareket kalitesini artırma.'],['Kontrol','Top hakimiyetini geliştirme.'],['Karar','Doğru seçeneği daha hızlı bulma.']]}}
+function renderStages(w){
+ return `<div class="drillBoard">${w.steps.map((q,i)=>`<div class="stageCard"><div class="stageCopy"><div class="stageTitle"><span class="stageNum">${i+1}</span>${q[0].toUpperCase()}</div><div class="stageDesc">${q[2]}</div><div class="stageTip"><b>💡 İpucu:</b> ${q[5]}</div><div class="stageMeta"><span><b>${Math.round(q[1]/60*10)/10}</b> dk</span><span>Doğru: ${q[3]}</span></div></div>${stagePitchHTML(w,q,i)}</div>`).join('')}</div>`;
+}
+function renderInfo(w){
+ const g=guideFor(w);
+ return `<div class="infoHeroV38"><div class="tag">ÇALIŞMA BİLGİSİ</div><h3>${w.icon} ${w.name}</h3><p>${g.purpose}</p></div>
+ <div class="infoGridV38">
+  <div class="infoTileV38"><span>OYUNCU SAYISI</span><b>${g.players}</b></div>
+  <div class="infoTileV38"><span>ALAN</span><b>${g.area}</b></div>
+  <div class="infoTileV38"><span>EKİPMAN</span><b>${g.equipment}</b></div>
+  <div class="infoTileV38"><span>SET / TEKRAR</span><b>${g.sets}</b></div>
+  <div class="infoTileV38"><span>DİNLENME</span><b>${g.rest}</b></div>
+  <div class="infoTileV38"><span>SEVİYE</span><b>${g.level}</b></div>
+  <div class="infoTileV38"><span>TOPLAM SÜRE</span><b>${w.mins} dk</b></div>
+  <div class="infoTileV38"><span>AŞAMA</span><b>${w.steps.length} aşama</b></div>
+ </div>
+ <div class="coachNoteV38"><b>Uygulama:</b> Aşamaları sırayla uygula. Kalite bozulursa tempoyu düşür; doğru teknik oturduğunda hızı artır.</div>`;
+}
+function renderBenefits(w){
+ const g=guideFor(w);
+ return `<div class="infoHeroV38"><div class="tag">BU ÇALIŞMA NE KAZANDIRIR?</div><h3>${w.name}</h3><p>Kazanımlar bu antrenmana özel hazırlanmıştır.</p></div>
+ <div class="benefitGridV38">${g.benefits.map((x,i)=>`<div class="benefitV38"><div class="num">${i+1}</div><div><b>${x[0]}</b><p>${x[1]}</p></div></div>`).join('')}</div>`;
+}
+function setDetailTab(tab,btn){
+ detailTab=tab;
+ document.querySelectorAll('#detailTabs button').forEach(b=>b.classList.remove('active'));
+ if(btn)btn.classList.add('active');
+ renderDetailPanel();
+}
+function renderDetailPanel(){
+ if(active===null)return;
+ const w=plan[active];
+ if(detailTab==='info')sceneSlot.innerHTML=renderInfo(w);
+ else if(detailTab==='benefits')sceneSlot.innerHTML=renderBenefits(w);
+ else sceneSlot.innerHTML=renderStages(w);
+}
+
 function stagePitchHTML(w, q, idx){
  const title=q[0], type=q[6], n=(w.name+' '+title).toLocaleLowerCase('tr-TR');
  const two=n.includes('2v2'), three=n.includes('3v3'), duel=n.includes('1v1')||n.includes('adam eksilt')||n.includes('savunma');
@@ -2260,17 +2337,17 @@ function stagePitchHTML(w, q, idx){
  else {players=teamPlayer('blue','a',25,58,1); if(['rightpass','leftpass','controlpass','onetouch'].includes(type))players+=teamPlayer('yellow','a',70,49,2); extras='<div class="passLine" style="left:31%;top:63%;width:40%;transform:rotate(-12deg)"></div>'; if(n.includes('şut')||n.includes('bitir')||n.includes('orta')||n.includes('duran'))extras+='<div class="miniGoal" style="right:3%;top:38%"></div>';}
  return `<div class="pitchInfo"><div class="miniLabel">${w.name.toUpperCase()}</div>${players}${ball}${extras}</div>`;
 }
-function sceneHTML(type,title,workoutName=''){const w=plan[active];return `<div class="drillBoard"><div class="drillTabs"><button class="active" data-tab="stages" onclick="setDrillTab('stages')">AŞAMALAR</button><button data-tab="info" onclick="setDrillTab('info')">BİLGİLER</button><button data-tab="gains" onclick="setDrillTab('gains')">KAZANIMLAR</button></div><div class="tabPanel active" data-panel="stages">${w.steps.map((q,i)=>`<div class="stageCard"><div class="stageCopy"><div class="stageTitle"><span class="stageNum">${i+1}</span>${q[0].toUpperCase()}</div><div class="stageDesc">${q[2]}</div><div class="stageTip"><b>💡 İpucu:</b> ${q[5]}</div><div class="stageMeta"><span><b>${Math.round(q[1]/60*10)/10}</b> dk</span><span>Doğru: ${q[3]}</span></div></div>${stagePitchHTML(w,q,i)}</div>`).join('')}</div><div class="tabPanel" data-panel="info">${v37InfoHTML(w)}</div><div class="tabPanel" data-panel="gains">${v37GainsHTML(w)}</div></div>`}
+function sceneHTML(type,title,workoutName=''){ return renderStages(plan[active]); }
 function toggleScene(){
  const v=document.getElementById('drillVideo');
  if(!v)return;
  if(v.paused){v.play();}else{v.pause();}
 }
 let workoutOrigin='home';
-function openWorkout(i){workoutOrigin=document.getElementById('library')?.classList.contains('active')?'library':'home';active=i;stepIndex=0;clearInterval(timerId);running=false;stepFinished=false;scenePlaying=true;let w=plan[i];total=w.steps.reduce((a,b)=>a+b[1],0);remaining=w.steps[0][1];dtitle.textContent=w.icon+' '+w.name;dmeta.textContent=w.mins+' dk · '+w.steps.length+' aşama · +'+w.xp+' XP';draw();head.style.display='none';nav.style.display='none';showRaw('detail')}
+function openWorkout(i){detailTab='stages';document.querySelectorAll('#detailTabs button').forEach((b,j)=>b.classList.toggle('active',j===0));workoutOrigin=document.getElementById('library')?.classList.contains('active')?'library':'home';active=i;stepIndex=0;clearInterval(timerId);running=false;stepFinished=false;scenePlaying=true;let w=plan[i];total=w.steps.reduce((a,b)=>a+b[1],0);remaining=w.steps[0][1];dtitle.textContent=w.icon+' '+w.name;dmeta.textContent=w.mins+' dk · '+w.steps.length+' aşama · +'+w.xp+' XP';draw();head.style.display='none';nav.style.display='none';showRaw('detail')}
 function draw(){
  let w=plan[active],q=w.steps[stepIndex];
- sceneSlot.innerHTML=sceneHTML(q[6],q[0],w.name);
+ renderDetailPanel();
  previewNav.innerHTML=`<div class="previewNote">Aşamaları önceden görebilirsin; bu sadece önizlemedir, ilerlemeyi tamamlamaz.</div><div class="previewNav">${
    w.steps.map((x,i)=>`<button class="${i===stepIndex?'active':''}" onclick="previewStep(${i})">${i+1}</button>`).join('')
  }</div>`;
@@ -2280,7 +2357,7 @@ function draw(){
 }
 function previewStep(i){
  let w=plan[active],q=w.steps[i];
- sceneSlot.innerHTML=sceneHTML(q[6],q[0],w.name);
+ if(detailTab==='stages')renderDetailPanel();
  previewNav.querySelectorAll('button').forEach((b,idx)=>b.classList.toggle('active',idx===i));
  techniqueBox.innerHTML=`<div class="info good"><b>✅ Doğru yapılış</b><div class="small">${q[3]}</div></div><div class="info bad"><b>❌ Sık yapılan hata</b><div class="small">${q[4]}</div></div><div class="info tip"><b>💡 Koç ipucu</b><div class="small">${q[5]}</div></div>`;
 }
@@ -2294,11 +2371,11 @@ function show(id,b){showRaw(id);document.querySelectorAll('.nav button').forEach
 function showRaw(id){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');scrollTo(0,0)}
 render();renderTrainingLibrary();renderProPlan();initCoach();initTrainerHistory();
 
-const APP_VERSION='v37-20260816-0315';
+const APP_VERSION='v38-20260816-2358';
 (function ensureFreshApp(){
  try{
    const old=localStorage.getItem('fg_app_version'); localStorage.setItem('fg_app_version',APP_VERSION);
-   if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=36').then(r=>r.update()).catch(()=>{}));}
+   if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=38').then(r=>r.update()).catch(()=>{}));}
    if(old && old!==APP_VERSION){const b=document.createElement('div');b.className='updateBanner show';b.innerHTML='<div><b>V36 yüklendi</b><div class="small">Yeni anlatımlı antrenman ekranları hazır.</div></div><button onclick="location.reload()">Aç</button>';document.body.appendChild(b)}
  }catch(e){}
 })();
