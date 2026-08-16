@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0f172a">
 <link rel="manifest" href="manifest.webmanifest">
-<title>Futbolcu Gelişim V34</title>
+<title>Futbolcu Gelişim V35</title>
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#f3f5f7;color:#111827}
 .app{max-width:520px;margin:auto;min-height:100vh;padding-bottom:78px}
@@ -359,6 +359,41 @@ button:active{transform:scale(.985)}
 .updateBanner{display:none;position:fixed;left:50%;bottom:78px;transform:translateX(-50%);width:min(486px,calc(100% - 28px));padding:12px 14px;background:#11281a;border:1px solid #4b7c36;border-radius:16px;z-index:70;box-shadow:0 12px 30px #0008}
 .updateBanner.show{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .updateBanner b{color:#b8f98f}
+</style>
+
+
+<style id="v35-team-scenes">
+.teamScene{height:390px;border-radius:20px;overflow:hidden;position:relative;background:linear-gradient(#8bb4d3 0 35%,#287947 35%);border:1px solid #315068;box-shadow:0 14px 30px #0007}
+.teamScene:before{content:"";position:absolute;left:5%;right:5%;top:39%;bottom:6%;border:2px solid #ffffffaa;border-radius:5px}
+.teamScene .tsTitle{position:absolute;left:10px;top:10px;z-index:20;background:#07131fee;padding:8px 11px;border-radius:999px;font-weight:900;font-size:12px}
+.teamScene .tsBadge{position:absolute;right:10px;top:10px;z-index:20;background:#72db2b;color:#071205;padding:8px 11px;border-radius:999px;font-weight:900;font-size:11px}
+.p2{position:absolute;width:48px;height:48px;border-radius:50%;z-index:7;border:4px solid #fff;box-shadow:0 7px 10px #0007}
+.p2:after{content:"";position:absolute;left:9px;top:42px;width:22px;height:34px;border-radius:7px;background:inherit;border:3px solid #fff}
+.p2.blue{background:#1688ff}.p2.yellow{background:#ffd51f}.p2.red{background:#f04e4e}
+.p2 b{position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:16px;text-shadow:0 2px 2px #000}
+.teamBall{position:absolute;width:25px;height:25px;border-radius:50%;background:#fff;border:3px solid #111;z-index:10;box-shadow:0 5px 6px #0007}
+.passLine{position:absolute;height:4px;border-top:4px dashed #fff;z-index:5;transform-origin:left center;opacity:.9}
+.passLine:after{content:"➤";position:absolute;right:-8px;top:-18px;color:#b8ff7e;font-size:26px}
+.miniGoal{position:absolute;width:58px;height:50px;border:4px solid #fff;border-bottom:0;z-index:4}
+.teamCone{position:absolute;font-size:32px;z-index:4}
+.teamCaption{position:absolute;left:10px;right:10px;bottom:10px;z-index:20;background:#07131fe8;border:1px solid #365269;border-radius:13px;padding:10px;text-align:center;font-weight:800}
+@keyframes pass2v2{0%,100%{left:28%;top:64%}48%{left:64%;top:52%}52%{left:64%;top:52%}}
+@keyframes supportA{0%,100%{left:18%;top:52%}50%{left:27%;top:43%}}
+@keyframes supportB{0%,100%{left:68%;top:45%}50%{left:73%;top:55%}}
+@keyframes pressY{0%,100%{left:49%;top:58%}50%{left:56%;top:53%}}
+@keyframes attackBall{0%{left:38%;top:63%}100%{left:79%;top:56%}}
+@keyframes attackP{0%{left:31%;top:54%}100%{left:70%;top:48%}}
+@keyframes transitionBall{0%{left:58%;top:60%}45%{left:48%;top:57%}100%{left:25%;top:48%}}
+@keyframes triBall{0%,100%{left:26%;top:64%}33%{left:68%;top:62%}66%{left:49%;top:43%}}
+.teamScene.possession .teamBall{animation:pass2v2 2s infinite ease-in-out}.teamScene.possession .blue.a{animation:supportA 2s infinite ease-in-out}.teamScene.possession .blue.b{animation:supportB 2s infinite ease-in-out}.teamScene.possession .yellow.a{animation:pressY 1.8s infinite ease-in-out}
+.teamScene.attack .teamBall{animation:attackBall 1.8s infinite ease-in-out}.teamScene.attack .blue.a{animation:attackP 1.8s infinite ease-in-out}
+.teamScene.transition .teamBall{animation:transitionBall 1.6s infinite ease-in-out}
+.teamScene.triangle .teamBall{animation:triBall 2.7s infinite ease-in-out}
+.oneVoneScene .blue.a{left:23%;top:58%}.oneVoneScene .yellow.a{left:62%;top:54%}.oneVoneScene .teamBall{left:34%;top:67%}
+@keyframes duelBall{0%{left:34%;top:67%}50%{left:49%;top:56%}100%{left:73%;top:48%}}
+@keyframes duelAtt{0%{left:23%;top:58%}50%{left:39%;top:52%}100%{left:65%;top:43%}}
+@keyframes duelDef{0%,100%{left:62%;top:54%}50%{left:55%;top:53%}}
+.oneVoneScene .teamBall{animation:duelBall 1.8s infinite ease-in-out}.oneVoneScene .blue.a{animation:duelAtt 1.8s infinite ease-in-out}.oneVoneScene .yellow.a{animation:duelDef 1.8s infinite ease-in-out}
 </style>
 
 </head>
@@ -1935,13 +1970,13 @@ function shareFeedback(){
  const type=(fbType.value||'Sorun').trim();
  const text=(fbText.value||'').trim();
  if(!text){alert('Kısa bir açıklama yaz.');return}
- const msg=`⚽ Futbolcu Gelişim V34 Test Geri Bildirimi\nKonu: ${type}\nDetay: ${text}\nSürüm: V34`;
+ const msg=`⚽ Futbolcu Gelişim V35 Test Geri Bildirimi\nKonu: ${type}\nDetay: ${text}\nSürüm: V34`;
  if(navigator.share)navigator.share({title:'Futbolcu Gelişim Test',text:msg});
  else navigator.clipboard?.writeText(msg).then(()=>alert('Geri bildirim kopyalandı.'));
 }
 
 function exportMyData(){
- const payload=JSON.stringify({exportedAt:new Date().toISOString(),app:'Futbolcu Gelişim',version:'v34',data:s},null,2);
+ const payload=JSON.stringify({exportedAt:new Date().toISOString(),app:'Futbolcu Gelişim',version:'v35',data:s},null,2);
  const blob=new Blob([payload],{type:'application/json'});const url=URL.createObjectURL(blob);
  const a=document.createElement('a');a.href=url;a.download='futbolcu-gelisim-verilerim.json';a.click();URL.revokeObjectURL(url);
 }
@@ -2159,17 +2194,56 @@ const stageVideoPages={
 'change':{title:'Yön Değiştirme',url:'https://www.pexels.com/video/football-players-practicing-6077698/'},
 'ballsprint':{title:'Topla Sprint',url:'https://www.pexels.com/video/man-training-soccer-on-a-soccer-field-7187046/'}
 };
+function teamPlayer(team,cls,left,top,n){return `<div class="p2 ${team} ${cls}" style="left:${left}%;top:${top}%"><b>${n}</b></div>`}
+function teamSceneHTML(workoutName,title){
+ const is2=workoutName.includes('2v2'), is3=workoutName.includes('3v3');
+ if(is2){
+   let mode=title.includes('topa sahip')?'possession':title.includes('Kapıya')?'attack':'transition';
+   let extra=mode==='attack'?'<div class="miniGoal" style="right:4%;top:48%"></div><div class="miniGoal" style="right:4%;top:68%"></div>':'';
+   return `<div class="teamScene ${mode}">
+    <div class="tsTitle">2v2 DAR ALAN</div><div class="tsBadge">4 OYUNCU</div>
+    ${teamPlayer('blue','a',18,52,1)}${teamPlayer('blue','b',68,45,2)}
+    ${teamPlayer('yellow','a',49,58,1)}${teamPlayer('yellow','b',76,68,2)}
+    <div class="teamBall" style="left:28%;top:64%"></div>
+    <div class="passLine" style="left:29%;top:63%;width:36%;transform:rotate(-15deg)"></div>${extra}
+    <div class="teamCaption">${title} — 2 mavi + 2 sarı oyuncu, top ve gerçek pas/koşu yönleri.</div>
+   </div>`;
+ }
+ if(is3){
+   let mode=title.includes('destek')?'triangle':title.includes('Yön')?'possession':'transition';
+   return `<div class="teamScene ${mode}">
+    <div class="tsTitle">3v3 KARAR OYUNU</div><div class="tsBadge">6 OYUNCU</div>
+    ${teamPlayer('blue','a',18,62,1)}${teamPlayer('blue','b',50,42,2)}${teamPlayer('blue','c',76,65,3)}
+    ${teamPlayer('yellow','a',34,54,1)}${teamPlayer('yellow','b',61,56,2)}${teamPlayer('yellow','c',48,72,3)}
+    <div class="teamBall" style="left:26%;top:64%"></div>
+    <div class="passLine" style="left:28%;top:63%;width:39%;transform:rotate(0deg)"></div>
+    <div class="teamCaption">${title} — 3 mavi + 3 sarı oyuncu. Üçgen, destek ve geçiş hareketleri sahnede gösterilir.</div>
+   </div>`;
+ }
+ return '';
+}
+function oneVoneHTML(workoutName,title){
+ if(!(workoutName.includes('1v1')))return '';
+ return `<div class="teamScene oneVoneScene">
+  <div class="tsTitle">${workoutName.toUpperCase()}</div><div class="tsBadge">1v1</div>
+  ${teamPlayer('blue','a',23,58,1)}${teamPlayer('yellow','a',62,54,1)}
+  <div class="teamBall"></div><div class="miniGoal" style="right:4%;top:50%"></div>
+  <div class="teamCaption">${title} — hücumcu ve savunmacı karşı karşıya; topun ve oyuncuların yönü ayrı gösterilir.</div>
+ </div>`;
+}
 function sceneHTML(type,title,workoutName=''){
+ const team=teamSceneHTML(workoutName,title); if(team)return team;
+ const duel=oneVoneHTML(workoutName,title); if(duel)return duel;
  const names={inside:'AYAK İÇİ',sole:'TABAN ÇEKME',inout:'İÇ-DIŞ',vdrag:'V ÇEKİŞ',slalom:'SLALOM',
  rightpass:'SAĞ AYAK PAS',leftpass:'SOL AYAK PAS',controlpass:'KONTROL + PAS',onetouch:'TEK DOKUNUŞ',
  sidefeet:'YAN ADIM',ready:'HAZIR POZİSYON',burst:'PATLAYICI ÇIKIŞ',change:'YÖN DEĞİŞTİRME',ballsprint:'TOPLA SPRINT'};
  let extra='';
  if(type==='slalom')extra='<div class="cone3d" style="left:28%">🔶</div><div class="cone3d" style="left:45%">🔶</div><div class="cone3d" style="left:62%">🔶</div><div class="cone3d" style="left:79%">🔶</div>';
- if(['rightpass','leftpass','controlpass','onetouch'].includes(type))extra='<div class="wall3d"></div><div class="path3d"></div>';
+ if(['rightpass','leftpass','controlpass','onetouch'].includes(type)&&workoutName.includes('Duvar'))extra='<div class="wall3d"></div><div class="path3d"></div>';
+ if(['rightpass','leftpass','controlpass','onetouch'].includes(type)&&!workoutName.includes('Duvar'))extra='<div class="path3d"></div>';
  if(type==='burst')extra='<div class="cone3d" style="left:18%">🔶</div><div class="cone3d" style="right:14%">🔶</div>';
  if(type==='change')extra='<div class="cone3d" style="left:34%">🔶</div><div class="cone3d" style="left:67%">🔶</div>';
  if(type==='ballsprint')extra='<div class="cone3d" style="right:14%">🔶</div><div class="path3d"></div>';
- if(workoutName.includes('1v1')||workoutName.includes('2v2')||workoutName.includes('3v3'))extra+='<div class="def3d">🧍</div>';
  if(workoutName.includes('Bitiricilik')||workoutName.includes('Duran Top')||workoutName.includes('Orta +'))extra+='<div class="goal3d"></div>';
  return `<div class="sceneV34 ${type}">
   <div class="sceneLabel">${names[type]||title}</div><div class="sceneStep">HAREKETLİ</div>
@@ -2210,7 +2284,7 @@ function show(id,b){showRaw(id);document.querySelectorAll('.nav button').forEach
 function showRaw(id){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');scrollTo(0,0)}
 render();renderTrainingLibrary();renderProPlan();initCoach();initTrainerHistory();
 
-const APP_VERSION='v34-20260816-1220';
+const APP_VERSION='v35-20260816-1230';
 (function ensureFreshApp(){
  try{
    const old=localStorage.getItem('fg_app_version');
