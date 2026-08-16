@@ -396,6 +396,19 @@ button:active{transform:scale(.985)}
 .oneVoneScene .teamBall{animation:duelBall 1.8s infinite ease-in-out}.oneVoneScene .blue.a{animation:duelAtt 1.8s infinite ease-in-out}.oneVoneScene .yellow.a{animation:duelDef 1.8s infinite ease-in-out}
 </style>
 
+
+<style id="v36-infographic">
+:root{--lime:#8be52f;--ink:#07111c;--panel:#0c1925;--line:#294050}
+#detail{color:#eef4f7}#detail>.card{background:#07111c;border:1px solid #223747;padding:14px;box-shadow:none}
+#detail .secondary{background:#152431;color:#fff}#detail h2{font-size:25px;margin:14px 0 3px}
+.drillBoard{margin:14px 0;border:1px solid var(--line);border-radius:18px;background:#09141e;overflow:hidden}
+.drillTabs{display:flex;border-bottom:1px solid var(--line);background:#0b1721}.drillTabs span{padding:11px 15px;font-size:12px;font-weight:900;color:#91a1ad}.drillTabs span:first-child{color:var(--lime);border-bottom:2px solid var(--lime)}
+.stageCard{display:grid;grid-template-columns:150px 1fr;gap:10px;padding:10px;border-bottom:1px solid #203543}.stageCard:last-child{border:0}.stageCopy{padding:7px}.stageTitle{display:flex;gap:8px;align-items:center;font-weight:950;font-size:14px}.stageNum{width:29px;height:29px;border-radius:50%;display:grid;place-items:center;background:#55b81b;color:#fff}.stageDesc{font-size:12px;line-height:1.42;color:#d8e1e7;margin:9px 0}.stageTip{font-size:11px;line-height:1.35;padding:8px;border:1px solid #314957;border-radius:10px;color:#dfe8ed}.stageTip b{color:var(--lime)}
+.pitchInfo{position:relative;min-height:190px;border-radius:13px;overflow:hidden;background:repeating-linear-gradient(90deg,#28783c 0 44px,#2d8442 44px 88px);border:2px solid #426f3e}.pitchInfo:before{content:'';position:absolute;inset:8%;border:2px dashed #ffffffc0}.pitchInfo .miniLabel{position:absolute;left:9px;top:8px;background:#07131ed9;color:#fff;border-radius:8px;padding:5px 7px;font-size:10px;font-weight:900;z-index:10}.pitchInfo .p2{transform:scale(.72);transform-origin:center}.pitchInfo .teamBall{transform:scale(.72)}.pitchInfo .miniGoal{transform:scale(.72)}
+.stageMeta{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}.stageMeta span{font-size:10px;padding:5px 7px;border-radius:999px;background:#122330;color:#cbd6dd}.stageMeta b{color:var(--lime)}
+#techniqueBox{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}#techniqueBox .info{margin:0;padding:11px}#techniqueBox .small{line-height:1.4}
+@media(max-width:520px){.stageCard{grid-template-columns:1fr}.pitchInfo{min-height:205px}.stageCopy{padding:3px 2px}.stageDesc{font-size:13px}.drillTabs span{flex:1;text-align:center;padding:10px 4px}.drillTabs span:nth-child(2),.drillTabs span:nth-child(3){display:block}#techniqueBox{grid-template-columns:1fr}.timer{font-size:46px}}
+</style>
 </head>
 <body>
 <div id="onboarding" class="onboarding" style="display:none">
@@ -905,9 +918,9 @@ button:active{transform:scale(.985)}
 </div>
 
 <script>
-const K='futbolcu_v31';
+const K='futbolcu_v36';
 let old=JSON.parse(localStorage.getItem('futbolcu_v20')||'null')||JSON.parse(localStorage.getItem('futbolcu_v19')||'null')||JSON.parse(localStorage.getItem('futbolcu_v18')||'null')||JSON.parse(localStorage.getItem('futbolcu_v17')||'null')||JSON.parse(localStorage.getItem('futbolcu_v16')||'null')||JSON.parse(localStorage.getItem('futbolcu_v15')||'null')||JSON.parse(localStorage.getItem('futbolcu_v14')||'null')||JSON.parse(localStorage.getItem('futbolcu_v13')||'null')||JSON.parse(localStorage.getItem('futbolcu_v12_2')||'null')||JSON.parse(localStorage.getItem('futbolcu_v12_1')||'null')||JSON.parse(localStorage.getItem('futbolcu_v12')||'null')||JSON.parse(localStorage.getItem('futbolcu_v11')||'null')||JSON.parse(localStorage.getItem('futbolcu_v10')||'null')||JSON.parse(localStorage.getItem('futbolcu_v9')||'null')||JSON.parse(localStorage.getItem('futbolcu_v8')||'null')||JSON.parse(localStorage.getItem('futbolcu_v7')||'null');
-let s=JSON.parse(localStorage.getItem(K)||'null')||JSON.parse(localStorage.getItem('futbolcu_v30')||'null')||JSON.parse(localStorage.getItem('futbolcu_v29')||'null')||JSON.parse(localStorage.getItem('futbolcu_v28')||'null')||JSON.parse(localStorage.getItem('futbolcu_v27_1')||'null')||JSON.parse(localStorage.getItem('futbolcu_v27')||'null')||JSON.parse(localStorage.getItem('futbolcu_v26')||'null')||old||{name:'Yeni Oyuncu',age:12,pos:'Orta Saha',xp:0,done:[],totalE:0,totalM:0,days:1,pro:false};
+let s=JSON.parse(localStorage.getItem(K)||'null')||JSON.parse(localStorage.getItem('futbolcu_v31')||'null')||JSON.parse(localStorage.getItem('futbolcu_v30')||'null')||JSON.parse(localStorage.getItem('futbolcu_v29')||'null')||JSON.parse(localStorage.getItem('futbolcu_v28')||'null')||JSON.parse(localStorage.getItem('futbolcu_v27_1')||'null')||JSON.parse(localStorage.getItem('futbolcu_v27')||'null')||JSON.parse(localStorage.getItem('futbolcu_v26')||'null')||old||{name:'Yeni Oyuncu',age:12,pos:'Orta Saha',xp:0,done:[],totalE:0,totalM:0,days:1,pro:false};
 if(!s.proPlan)s.proPlan=null;if(!s.streak)s.streak=1;if(!s.coachHistory)s.coachHistory=[];if(!s.coachPlan)s.coachPlan=[];if(!s.teamCoachHistory)s.teamCoachHistory=[];if(!s.teamPlans)s.teamPlans=[];if(!s.testResults)s.testResults=[];
 
 function st(name,sec,desc,good,bad,tip,anim){return [name,sec,desc,good,bad,tip,anim]}
@@ -2231,25 +2244,19 @@ function oneVoneHTML(workoutName,title){
   <div class="teamCaption">${title} — hücumcu ve savunmacı karşı karşıya; topun ve oyuncuların yönü ayrı gösterilir.</div>
  </div>`;
 }
+function stagePitchHTML(w, q, idx){
+ const title=q[0], type=q[6], n=(w.name+' '+title).toLocaleLowerCase('tr-TR');
+ const two=n.includes('2v2'), three=n.includes('3v3'), duel=n.includes('1v1')||n.includes('adam eksilt')||n.includes('savunma');
+ let players='', ball='<div class="teamBall" style="left:29%;top:65%"></div>', extras='';
+ if(two){players=teamPlayer('blue','a',18,55,1)+teamPlayer('blue','b',68,43,2)+teamPlayer('yellow','a',45,52,1)+teamPlayer('yellow','b',72,66,2); extras='<div class="passLine" style="left:28%;top:64%;width:38%;transform:rotate(-18deg)"></div>'; if(idx===1)extras+='<div class="miniGoal" style="right:4%;top:38%"></div>';}
+ else if(three){players=teamPlayer('blue','a',15,60,1)+teamPlayer('blue','b',48,38,2)+teamPlayer('blue','c',76,62,3)+teamPlayer('yellow','a',32,50,1)+teamPlayer('yellow','b',60,52,2)+teamPlayer('yellow','c',48,70,3); extras='<div class="passLine" style="left:25%;top:64%;width:43%;transform:rotate(-9deg)"></div>';}
+ else if(duel){players=teamPlayer('blue','a',22,58,1)+teamPlayer('yellow','a',62,52,1);extras='<div class="passLine" style="left:31%;top:64%;width:38%;transform:rotate(-16deg)"></div><div class="miniGoal" style="right:3%;top:38%"></div>';}
+ else {players=teamPlayer('blue','a',25,58,1); if(['rightpass','leftpass','controlpass','onetouch'].includes(type))players+=teamPlayer('yellow','a',70,49,2); extras='<div class="passLine" style="left:31%;top:63%;width:40%;transform:rotate(-12deg)"></div>'; if(n.includes('şut')||n.includes('bitir')||n.includes('orta')||n.includes('duran'))extras+='<div class="miniGoal" style="right:3%;top:38%"></div>';}
+ return `<div class="pitchInfo"><div class="miniLabel">${w.name.toUpperCase()}</div>${players}${ball}${extras}</div>`;
+}
 function sceneHTML(type,title,workoutName=''){
- const team=teamSceneHTML(workoutName,title); if(team)return team;
- const duel=oneVoneHTML(workoutName,title); if(duel)return duel;
- const names={inside:'AYAK İÇİ',sole:'TABAN ÇEKME',inout:'İÇ-DIŞ',vdrag:'V ÇEKİŞ',slalom:'SLALOM',
- rightpass:'SAĞ AYAK PAS',leftpass:'SOL AYAK PAS',controlpass:'KONTROL + PAS',onetouch:'TEK DOKUNUŞ',
- sidefeet:'YAN ADIM',ready:'HAZIR POZİSYON',burst:'PATLAYICI ÇIKIŞ',change:'YÖN DEĞİŞTİRME',ballsprint:'TOPLA SPRINT'};
- let extra='';
- if(type==='slalom')extra='<div class="cone3d" style="left:28%">🔶</div><div class="cone3d" style="left:45%">🔶</div><div class="cone3d" style="left:62%">🔶</div><div class="cone3d" style="left:79%">🔶</div>';
- if(['rightpass','leftpass','controlpass','onetouch'].includes(type)&&workoutName.includes('Duvar'))extra='<div class="wall3d"></div><div class="path3d"></div>';
- if(['rightpass','leftpass','controlpass','onetouch'].includes(type)&&!workoutName.includes('Duvar'))extra='<div class="path3d"></div>';
- if(type==='burst')extra='<div class="cone3d" style="left:18%">🔶</div><div class="cone3d" style="right:14%">🔶</div>';
- if(type==='change')extra='<div class="cone3d" style="left:34%">🔶</div><div class="cone3d" style="left:67%">🔶</div>';
- if(type==='ballsprint')extra='<div class="cone3d" style="right:14%">🔶</div><div class="path3d"></div>';
- if(workoutName.includes('Bitiricilik')||workoutName.includes('Duran Top')||workoutName.includes('Orta +'))extra+='<div class="goal3d"></div>';
- return `<div class="sceneV34 ${type}">
-  <div class="sceneLabel">${names[type]||title}</div><div class="sceneStep">HAREKETLİ</div>
-  <div class="player3d">🏃</div><div class="ball3d">⚽</div>${extra}
-  <div class="sceneCaption">${title}</div>
- </div>`;
+ const w=plan[active];
+ return `<div class="drillBoard"><div class="drillTabs"><span>AŞAMALAR</span><span>BİLGİLER</span><span>KAZANIMLAR</span></div>${w.steps.map((q,i)=>`<div class="stageCard"><div class="stageCopy"><div class="stageTitle"><span class="stageNum">${i+1}</span>${q[0].toUpperCase()}</div><div class="stageDesc">${q[2]}</div><div class="stageTip"><b>💡 İpucu:</b> ${q[5]}</div><div class="stageMeta"><span><b>${Math.round(q[1]/60*10)/10}</b> dk</span><span>Doğru: ${q[3]}</span></div></div>${stagePitchHTML(w,q,i)}</div>`).join('')}</div>`;
 }
 function toggleScene(){
  const v=document.getElementById('drillVideo');
@@ -2284,24 +2291,12 @@ function show(id,b){showRaw(id);document.querySelectorAll('.nav button').forEach
 function showRaw(id){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');scrollTo(0,0)}
 render();renderTrainingLibrary();renderProPlan();initCoach();initTrainerHistory();
 
-const APP_VERSION='v35-20260816-1230';
+const APP_VERSION='v36-20260816-0315';
 (function ensureFreshApp(){
  try{
-   const old=localStorage.getItem('fg_app_version');
-   if(old!==APP_VERSION){
-     localStorage.setItem('fg_app_version',APP_VERSION);
-     if(old){
-       const b=document.createElement('div');b.className='updateBanner show';
-       b.innerHTML='<div><b>Yeni sürüm hazır</b><div class="small">Uygulama V34 olarak güncellendi.</div></div><button onclick="location.reload(true)">Yenile</button>';
-       document.body.appendChild(b);
-     }
-   }
-   if('caches' in window){
-     caches.keys().then(keys=>Promise.all(keys.map(k=>caches.delete(k))));
-   }
-   if('serviceWorker' in navigator){
-     navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister()));
-   }
+   const old=localStorage.getItem('fg_app_version'); localStorage.setItem('fg_app_version',APP_VERSION);
+   if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=36').then(r=>r.update()).catch(()=>{}));}
+   if(old && old!==APP_VERSION){const b=document.createElement('div');b.className='updateBanner show';b.innerHTML='<div><b>V36 yüklendi</b><div class="small">Yeni anlatımlı antrenman ekranları hazır.</div></div><button onclick="location.reload()">Aç</button>';document.body.appendChild(b)}
  }catch(e){}
 })();
 
